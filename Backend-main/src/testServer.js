@@ -73,6 +73,42 @@ app.get('/databases', function(request, response){
   response.json(masterDBList);
 });
 
+//setInterval(deleteServers, 1000 * 60 * 60, masterServerList);
+//setInterval(console.log, 1000 * 60 * 60, masterServerList);
+setInterval(deleteServers, 25000, masterServerList);
+setInterval(console.log, 30000, 'Array outside function: ');
+setInterval(console.log, 30000, masterServerList);
 
+//runs through hyperVisorList and deleted any item with LastCheckInTime older than reference time
+function deleteServers(array){
+  console.log('function deleteServers runs');
+  //gets current time, sets reference time to 24 hours before current time
+  var curTime = new Date();
+  var referenceTime = new Date();
+
+  referenceTime.setHours(curTime.getHours()-28);
+  referenceTime = referenceTime.toISOString().split('.')[0];
+  console.log('Reference time: ' + referenceTime);
+  //same idea, less time difference for testing
+
+
+  var toDelete = [];
+  //iterates through hyperVisorList and deleted any item with LastCheckInTime older than reference time
+  array.forEach((item, index) => {
+    console.log(item.VMName + ': ' + item.LastCheckInTime)
+    if(item.LastCheckInTime < referenceTime){
+        toDelete.push(index)
+        console.log('Outdated, deleting: ' + item.VMName);
+    } else if(item.LastCheckInTime > referenceTime){
+        console.log('Current, keeping: ' + item.VMName);
+    }else{
+      console.log('this is broken');
+    }
+  });
+  toDelete.reverse();
+  toDelete.forEach((val, _) => {
+    masterServerList.pop(val);
+  });
+}
 
 app.listen(6285);
