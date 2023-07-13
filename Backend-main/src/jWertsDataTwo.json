@@ -1,0 +1,65 @@
+{
+
+    "Host":  {
+
+                 "ExecutionTime":  "2023-06-29T10:29:42",
+
+                 "Hostname":  "jwerts",
+
+                 "GuestCount":  3
+
+             },
+
+    "Servers":  [
+
+                    {
+
+                        "Status":  "Offline",
+
+                        "IP":  null,
+
+                        "LastCheckInTime":  "2023-06-29T10:29:42",
+
+                        "VMName":  "Fahd",
+
+                        "HyperVisor":  "jwerts",
+
+                        "Hostname":  null
+
+                    },
+
+                    {
+
+                        "Status":  "Offline",
+
+                        "IP":  null,
+
+                        "LastCheckInTime":  "2023-06-29T10:29:42",
+
+                        "VMName":  "Timmy 2.0",
+
+                        "HyperVisor":  "jwerts",
+
+                        "Hostname":  null
+
+                    },
+
+                    {
+
+                        "Status":  "Running",
+
+                        "IP":  "172.17.47.177",
+
+                        "LastCheckInTime":  "2023-06-29T10:29:42",
+
+                        "VMName":  "Ubuntu 22.04 LTS",
+
+                        "HyperVisor":  "jwerts",
+
+                        "Hostname":  "jared-Virtual-Machine.mshome.net"
+
+                    }
+
+                ]
+
+}

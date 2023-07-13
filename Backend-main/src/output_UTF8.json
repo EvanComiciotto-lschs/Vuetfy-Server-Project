@@ -1,0 +1,32 @@
+{
+	"Host": {
+		"ExecutionTime": "2023-06-29T13:59:57",
+		"Hostname": "EPakuris",
+		"GuestCount": 3
+	},
+	"Servers": [{
+			"Status": "Running",
+			"IP": "192.168.38.138",
+			"LastCheckInTime": "2023-06-29T13:59:55",
+			"VMName": "CLAIM-51",
+			"HyperVisor": "EPakuris",
+			"Hostname": "DESKTOP-9HTOM0H.mshome.net"
+		},
+		{
+			"Status": "Running",
+			"IP": null,
+			"LastCheckInTime": "2023-06-29T13:59:57",
+			"VMName": "ip_database",
+			"HyperVisor": "EPakuris",
+			"Hostname": null
+		},
+		{
+			"Status": "Offline",
+			"IP": null,
+			"LastCheckInTime": "2023-06-29T13:59:57",
+			"VMName": "Lenny",
+			"HyperVisor": "EPakuris",
+			"Hostname": null
+		}
+	]
+}

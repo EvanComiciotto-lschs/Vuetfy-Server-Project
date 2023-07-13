@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="C:\Users\jwerts\Documents\GitHub\Backend\src\AISHQVHS14_output.json"></script>
+        <script src="C:\Users\jwerts\Documents\GitHub\Backend\src\src/demo-output.json"></script>
+        <script type="text/javascript"></script>
+
+    <script>  
+        function encodeJSON(file, t) {
+            JSONData += 'var ' + file.name.split('.')[0] + ' = ' + t.result + '\n';
+        }
+
+        function processFiles() {
+            var filelist = document.getElementById('files').files;
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                for(let i=0; i<filelist.length; i++) {
+                encodeJSON(filelist[i], e.target)
+            }
+            var blob = new Blob([JSONData], {type: "text/plain;charset=utf-8"});
+            saveAs(blob, 'encoded.js');
+            }
+            reader.readAsText(filelist[0], 'UTF-8')
+        }
+        </script>
+    </head>
+</html>
