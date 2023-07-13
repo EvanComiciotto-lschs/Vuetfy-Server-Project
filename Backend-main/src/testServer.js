@@ -7,7 +7,6 @@ app.use(express.json());
 //declare the main lists so they can be accesssed between functions
 let masterServerList = [];
 let masterDBList = [];
-
 //input function (post requests to /servers)
 app.post('/servers', function(request, response){
   var reqData = (request.body);     //store the request body
@@ -48,26 +47,32 @@ app.post('/databases', function(request, response){
   reqData.forEach(function(db){
     // check if the database is already in the list
     if (masterDBList.some(existingDB => existingDB.database_id === db.database_id)){
-      console.log(db.name + " is already in the masterDBList");
-      
       // find the matching database in masterDBList
       var matchDB = masterDBList.find(existingDB => existingDB.database_id === db.database_id);
-      
+
+      console.log(db.name + " is already in the masterDBList");
+      matchDB.paths.push(db.path);
+      console.log(matchDB.paths);
       // combine the sizes
       matchDB.size += db.size;
     } else {
-      masterDBList.push(db);
+      masterDBList.push({
+        database_id: db.database_id,
+        name: db.name,
+        paths: [db.path],
+        size: db.size
+      });
     }
   });
-  
+
   console.log(masterDBList.length);
   
 });
 
 app.get('/databases', function(request, response){
-  response.json(databases);
+  response.json(masterDBList);
 });
 
 
 
-app.listen(6284);
+app.listen(6285);
