@@ -57,7 +57,7 @@ var databases = ref(null);
 var showServersTable = ref(true);
 
 onMounted(() => {
-  fetch('http://jwerts.aiscorp.local:6284/servers')
+  fetch('http://jwerts.aiscorp.local:3000/servers')
     .then(response => response.json())
     .then(data => {
       servers.value = data;
@@ -66,7 +66,7 @@ onMounted(() => {
       console.error('Error fetching server data:', error);
     });
 
-  fetch('http://jwerts.aiscorp.local:6284/databases')
+  fetch('http://fkhan.aiscorp.local:6285/databases')
     .then(response => response.json())
     .then(data => {
       databases.value = data;
