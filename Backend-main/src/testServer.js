@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 //express.js api server
 var express = require('express');
 var cors = require('cors');
