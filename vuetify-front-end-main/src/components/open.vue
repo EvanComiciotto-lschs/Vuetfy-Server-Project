@@ -5,7 +5,31 @@
         <input class="form-check-input" type="checkbox" id="tableSwitch" v-model="showServersTable" />
         <label class="form-check-label" for="tableSwitch">Show Servers Table</label>
       </div>
+<div class="checkbox-container">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="removeOnlineCheckbox"
+            v-model="removeOnline"
+          />
+          <label class="form-check-label" for="removeOnlineCheckbox">
+            Remove Online
+          </label>
+        </div>
 
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="removeOfflineCheckbox"
+            v-model="removeOffline"
+          />
+          <label class="form-check-label" for="removeOfflineCheckbox">
+            Remove Offline
+          </label>
+        </div>
+      </div>
       <table v-if="showServersTable" class="table">
         <thead>
           <tr>
@@ -18,7 +42,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="server in servers" :key="server.VMName">
+          <tr v-for="server in filteredServers" :key="server.VMName">
             <td>{{ server.VMName }}</td>
             <td>{{ server.Status }}</td>
             <td>{{ server.IP }}</td>
@@ -50,14 +74,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 var servers = ref(null);
 var databases = ref(null);
 var showServersTable = ref(true);
+var removeOnline = ref(false);
+var removeOffline = ref(false);
 
 onMounted(() => {
-  fetch('http://jwerts.aiscorp.local:3000/servers')
+  fetch('http://fkhan.aiscorp.local:6285/servers')
     .then(response => response.json())
     .then(data => {
       servers.value = data;
@@ -75,6 +101,23 @@ onMounted(() => {
       console.error('Error fetching database data:', error);
     });
 });
+
+const filteredServers = computed(() => {
+  if (!Servers.value) {
+    return [];
+  }
+  if (removeOnline.value && removeOffline.value) {
+    return [];
+  }
+  if (removeOnline.value) {
+    return Servers.value.filter(server => server.Status === 'Offline');
+  }
+  if (removeOffline.value) {
+    return Servers.value.filter(server => server.Status === 'Running');
+  }
+  return Servers.value;
+});
+
 </script>
 
 <style scoped>
