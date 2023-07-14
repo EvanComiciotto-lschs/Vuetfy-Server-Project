@@ -44,7 +44,7 @@ app.get('/servers', (req, res) => {
 app.post('/databases', function(request, response){
   var reqData = (request.body); // store the request body
   response.send("data received");
-  
+  masterDBList = [];
   reqData.forEach(function(db){
     // check if the database is already in the list
     if (masterDBList.some(existingDB => existingDB.database_id === db.database_id)){
