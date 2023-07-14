@@ -75,6 +75,7 @@ onMounted(() => {
       console.error('Error fetching database data:', error);
     });
 });
+
 </script>
 
 <style scoped>
