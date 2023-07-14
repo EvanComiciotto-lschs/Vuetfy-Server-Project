@@ -44,7 +44,7 @@
             <td>{{ database.path }}</td>
           </tr>
         </tbody>
-      </table>
+      </table>  
     </div>
   </div>
 </template>
@@ -66,7 +66,7 @@ onMounted(() => {
       console.error('Error fetching server data:', error);
     });
 
-  fetch('http://fkhan.aiscorp.local:6285/databases')
+  fetch('http://jwerts.aiscorp.local:3000/databases')
     .then(response => response.json())
     .then(data => {
       databases.value = data;
