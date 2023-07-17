@@ -19,7 +19,6 @@
   
   <script>
   import axios from 'axios';
-  //import { SET_AUTHENTICATION, SET_USERNAME } from "../store/storeconstants";
 
   export default {
     name: 'LoginView',
@@ -35,18 +34,21 @@
     methods: {
       async login() {
         try {
-          const response = await axios.post('http://localhost:4000/login', {
-            username: this.input.username,
-            password: this.input.password,
-          });
+            if(this.input.username == 'aiscorp.local' && this.input.password == 'Fahd'){
+                const response = await axios.post('http://strezza.aiscorp.local:4000/login', {
+                    username: this.input.username,
+                    password: this.input.password,
+                });
 
-          const token = response.data.token;
+                const token = response.data.token;
 
-          console.log(token);
+                //console.log(token);
 
-          // Store the JWT securely (e.g., in localStorage)
-          localStorage.setItem('jwt', token);
-          // Redirect or perform other actions after successful login
+                // Store the JWT securely (e.g., in localStorage)
+                localStorage.setItem('jwt', token);
+                // Redirect or perform other actions after successful login
+                this.$router.push('/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJldXdpcmx3amVoZ2Z5a2FiayxjIiwicGFzc3dvcmQiOiJwYm9pZHRuamhlZ3ZkaGprZ2ZkIiwiaWF0IjoxNTE2MjM5MDIyfQ.zWXb9VM9Bxe-amtInmae7lJ7_1dx7pbfW3VONolyqsc')
+        }
         } catch (error) {
           // Handle login error
           //console.error('Error: ', error);
