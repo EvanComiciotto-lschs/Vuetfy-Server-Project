@@ -5,7 +5,7 @@
         <input class="form-check-input" type="checkbox" id="tableSwitch" v-model="showServersTable" />
         <label class="form-check-label" for="tableSwitch">Show Servers Table</label>
       </div>
-<div class="checkbox-container">
+      <div class="checkbox-container">
         <div class="form-check">
           <input
             class="form-check-input"
@@ -103,19 +103,19 @@ onMounted(() => {
 });
 
 const filteredServers = computed(() => {
-  if (!Servers.value) {
+  if (!servers.value) {
     return [];
   }
   if (removeOnline.value && removeOffline.value) {
     return [];
   }
   if (removeOnline.value) {
-    return Servers.value.filter(server => server.Status === 'Offline');
+    return servers.value.filter(server => server.Status === 'Offline');
   }
   if (removeOffline.value) {
-    return Servers.value.filter(server => server.Status === 'Running');
+    return servers.value.filter(server => server.Status === 'Running');
   }
-  return Servers.value;
+  return servers.value;
 });
 
 </script>
