@@ -7,8 +7,8 @@ import {showServersTable} from './open.vue'
             return {collapsed, toggleSidebar, sidebarWidth, showServersTable, toggleDataTable ,toggleServersTable}
         }
     }
-    const toggleServersTable = ()=> (showServersTable.value = true)
-    const toggleDataTable = ()=> (showServersTable.value = false)
+    const toggleServersTable = ()=> (showServersTable.value = ref(true))
+    const toggleDataTable = ()=> (showServersTable.value = ref(false))
 </script>
 
 <template>
