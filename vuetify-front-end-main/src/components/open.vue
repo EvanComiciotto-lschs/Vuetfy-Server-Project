@@ -1,6 +1,10 @@
 <template>
   <div class="card text-center m-3">
     <div class="card-body">
+      <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" id="tableSwitch" v-model="showServersTable" />
+        <label class="form-check-label" for="tableSwitch">Show Servers Table</label>
+      </div>
       <div class="checkbox-container">
         <div class="form-check">
           <input
@@ -26,10 +30,7 @@
           </label>
         </div>
       </div>
-      <div>
-        <input type="text" id="myInput" onkeyup= 'myFunction()' placeholder="Search for names.." title="Type in a name">
-      </div>
-      <table class="table">
+      <table v-if="showServersTable" class="table">
         <thead>
           <tr>
             <th>VM Name</th>
@@ -51,6 +52,23 @@
           </tr>
         </tbody>
       </table>
+
+      <table v-else class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Size in GB</th>
+            <th>Path</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="database in databases" :key="database.name">
+            <td>{{ database.name }}</td>
+            <td>{{ database['size in GB'] }}</td>
+            <td>{{ database.path }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -58,56 +76,48 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 
-var Servers = ref(null);
+var servers = ref(null);
+var databases = ref(null);
+var showServersTable = ref(true);
 var removeOnline = ref(false);
 var removeOffline = ref(false);
 
 onMounted(() => {
-  fetch('http://jwerts.aiscorp.local:3000/servers')
+  fetch('http://fkhan.aiscorp.local:6285/servers')
     .then(response => response.json())
     .then(data => {
-      Servers.value = data;
+      servers.value = data;
     })
     .catch(error => {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching server data:', error);
+    });
+
+  fetch('http://fkhan.aiscorp.local:6285/databases')
+    .then(response => response.json())
+    .then(data => {
+      databases.value = data;
+    })
+    .catch(error => {
+      console.error('Error fetching database data:', error);
     });
 });
 
 const filteredServers = computed(() => {
-  if (!Servers.value) {
+  if (!servers.value) {
     return [];
   }
   if (removeOnline.value && removeOffline.value) {
     return [];
   }
   if (removeOnline.value) {
-    return Servers.value.filter(server => server.Status === 'Offline');
+    return servers.value.filter(server => server.Status === 'Offline');
   }
   if (removeOffline.value) {
-    return Servers.value.filter(server => server.Status === 'Running');
+    return servers.value.filter(server => server.Status === 'Running');
   }
-  return Servers.value;
+  return servers.value;
 });
 
-
-function myFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("table");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
 </script>
 
 <style scoped>
