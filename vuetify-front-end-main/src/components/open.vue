@@ -5,18 +5,6 @@
         <input class="form-check-input" type="checkbox" id="tableSwitch" v-model="showServersTable" />
         <label class="form-check-label" for="tableSwitch">Show Servers Table</label>
       </div>-->
-      <div class="checkbox-container">
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="removeOnlineCheckbox"
-            v-model="removeOnline"
-          />
-          <label class="form-check-label" for="removeOnlineCheckbox">
-            Remove Online
-          </label>
-        </div>
 
       <table v-if="showServersTable" class="table">
         <thead>
@@ -59,7 +47,6 @@
       </table>  
     </div>
   </div>
-  </div>
 </template>
 
 
@@ -90,22 +77,6 @@ onMounted(() => {
     .catch(error => {
       console.error('Error fetching database data:', error);
     });
-});
-
-const filteredServers = computed(() => {
-  if (!servers.value) {
-    return [];
-  }
-  if (removeOnline.value && removeOffline.value) {
-    return [];
-  }
-  if (removeOnline.value) {
-    return servers.value.filter(server => server.Status === 'Offline');
-  }
-  if (removeOffline.value) {
-    return servers.value.filter(server => server.Status === 'Running');
-  }
-  return servers.value;
 });
 
 </script>
