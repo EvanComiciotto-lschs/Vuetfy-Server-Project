@@ -83,7 +83,7 @@ var removeOnline = ref(false);
 var removeOffline = ref(false);
 
 onMounted(() => {
-  fetch('http://fkhan.aiscorp.local:6285/servers')
+  fetch('http://jwerts.aiscorp.local:3000/servers')
     .then(response => response.json())
     .then(data => {
       servers.value = data;
@@ -92,7 +92,7 @@ onMounted(() => {
       console.error('Error fetching server data:', error);
     });
 
-  fetch('http://fkhan.aiscorp.local:6285/databases')
+  fetch('http://jwerts.aiscorp.local:3000/databases')
     .then(response => response.json())
     .then(data => {
       databases.value = data;
