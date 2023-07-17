@@ -1,12 +1,14 @@
 <script>
 import {collapsed, toggleSidebar, sidebarWidth} from './state'
-//import {showServersTable} from './open.vue'
+import {showServersTable} from './open.vue'
     export default{
         props: {},
         setup () {
-            return {collapsed, toggleSidebar, sidebarWidth}
+            return {collapsed, toggleSidebar, sidebarWidth, showServersTable, toggleDataTable ,toggleServersTable}
         }
     }
+    const toggleServersTable = ()=> (showServersTable.value = true)
+    const toggleDataTable = ()=> (showServersTable.value = false)
 </script>
 
 <template>
@@ -14,9 +16,12 @@ import {collapsed, toggleSidebar, sidebarWidth} from './state'
     <span class="collapse-icon" @click="toggleSidebar">
         <img class ="pic" src = "https://www.iotone.com/files/vendor/aegis-software_8.jpg">
     </span>
-  <!-- <span class="item" @click="showServersTable">
-        <img class = "vmach" src="https://th.bing.com/th/id/R.de9f93de1dcf4db07c44f7c5d476f1ce?rik=0oESb6sMiR%2bntQ&riu=http%3a%2f%2ffindicons.com%2ffiles%2ficons%2f2711%2ffree_icons_for_windows8_metro%2f512%2fvirtual_machine.png&ehk=mvrMmkq1MxXm2OEahSa8s6d4xm9%2fwWxSfqfocTQOZEA%3d&risl=&pid=ImgRaw&r=0">
-    </span> -->
+    <span class="item" @click="toggleServersTable">
+        <img class = "pic" src="https://th.bing.com/th/id/R.de9f93de1dcf4db07c44f7c5d476f1ce?rik=0oESb6sMiR%2bntQ&riu=http%3a%2f%2ffindicons.com%2ffiles%2ficons%2f2711%2ffree_icons_for_windows8_metro%2f512%2fvirtual_machine.png&ehk=mvrMmkq1MxXm2OEahSa8s6d4xm9%2fwWxSfqfocTQOZEA%3d&risl=&pid=ImgRaw&r=0">
+    </span> 
+    <span class="item" id="dt" @click="toggleDataTable">
+        <img class = "pic" src="https://cdn2.iconfinder.com/data/icons/text-editing-glyph-black/614/3819_-_Insert_Table-512.png">
+    </span>
     </div>
 </template>
 
@@ -48,16 +53,23 @@ import {collapsed, toggleSidebar, sidebarWidth} from './state'
         top: 0;
         padding: 0.75em;
     }
+    .collapse-icon:hover {
+        transform: scale(115%);
+    }
     .pic {
         height: 50px;
         width: 50px;
     }
     .item{
         position: absolute;
-        top: 100;
+        top: 300px;
         padding: 0.75em;
     }
     .item:hover{
         transform: scale(115%);
+        transition: ease 0.2s;
+    }
+    #dt{
+        top: 375px;
     }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div class="card text-center m-3">
     <div class="card-body">
-      <div class="form-check form-switch mb-3">
+     <!-- <div class="form-check form-switch mb-3">
         <input class="form-check-input" type="checkbox" id="tableSwitch" v-model="showServersTable" />
         <label class="form-check-label" for="tableSwitch">Show Servers Table</label>
-      </div>
+      </div>-->
 
       <table v-if="showServersTable" class="table">
         <thead>
@@ -49,12 +49,15 @@
   </div>
 </template>
 
+
+
 <script setup>
 import { ref, onMounted } from 'vue';
 
 var servers = ref(null);
 var databases = ref(null);
 var showServersTable = ref(true);
+
 
 onMounted(() => {
   fetch('http://jwerts.aiscorp.local:3000/servers')
@@ -76,6 +79,10 @@ onMounted(() => {
     });
 });
 
+</script>
+
+<script>
+  export let showServersTable;
 </script>
 
 <style scoped>
