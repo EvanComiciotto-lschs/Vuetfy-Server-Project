@@ -1,34 +1,6 @@
 <template>
   <div class="card text-center m-3">
     <div class="card-body">
-      <div class="form-check form-switch mb-3">
-        <input class="form-check-input" type="checkbox" id="tableSwitch" v-model="showServersTable" />
-        <label class="form-check-label" for="tableSwitch">Show Servers Table</label>
-      </div>
-      <div class="checkbox-container">
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="removeOnlineCheckbox"
-            v-model="removeOnline"
-          />
-          <label class="form-check-label" for="removeOnlineCheckbox">
-            Remove Online
-          </label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="removeOfflineCheckbox"
-            v-model="removeOffline"
-          />
-          <label class="form-check-label" for="removeOfflineCheckbox">
-            Remove Offline
-          </label>
-        </div>
-      </div>
       <div class="search-bar">
         <input
           type="text"
@@ -37,7 +9,8 @@
           v-model="searchTerm"
         />
       </div>
-      <table v-if="showServersTable" class="table">
+
+      <table v-if="toggleDataTable.value" class="table">
         <thead>
           <tr>
             <th>VM Name</th>
@@ -80,15 +53,19 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted, computed } from 'vue';
 
+
+<script setup>
+import { ref, onMounted, inject} from 'vue';
+import toggleDataTable from './state.js';
+//import { toggleDataTable } from './sidebar.vue';
 var servers = ref(null);
 var databases = ref(null);
 var showServersTable = ref(true);
 var removeOnline = ref(false);
 var removeOffline = ref(false);
 var searchTerm = ref('');
+
 
 onMounted(() => {
   fetch('http://fkhan.aiscorp.local:6285/servers')
@@ -100,7 +77,7 @@ onMounted(() => {
       console.error('Error fetching server data:', error);
     });
 
-  fetch('http://jwerts.aiscorp.local:3000/databases')
+  fetch('http://fkhan.aiscorp.local:6285/databases')
     .then(response => response.json())
     .then(data => {
       databases.value = data;
@@ -110,24 +87,8 @@ onMounted(() => {
     });
 });
 
-const filteredServers = computed(() => {
-  if (!servers.value) {
-    return [];
-  }
-  if (removeOnline.value && removeOffline.value) {
-    return [];
-  }
-  if (removeOnline.value) {
-    return servers.value.filter(server => server.Status === 'Offline');
-  }
-  if (removeOffline.value) {
-    return servers.value.filter(server => server.Status === 'Running');
-  }
-  return servers.value.filter(server => {
-    return server.VMName.toLowerCase().includes(searchTerm.value.toLowerCase());
-  });
-});
 </script>
+
 
 <style scoped>
 .table {
