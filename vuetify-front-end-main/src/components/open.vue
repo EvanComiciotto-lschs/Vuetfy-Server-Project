@@ -29,12 +29,14 @@
           </label>
         </div>
       </div>
-      <input
-        type="text"
-        class="form-control mb-3"
-        placeholder="Search VM Name"
-        v-model="searchTerm"
-      />
+      <div class="search-bar">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search VM Name"
+          v-model="searchTerm"
+        />
+      </div>
       <table v-if="showServersTable" class="table">
         <thead>
           <tr>
@@ -162,5 +164,11 @@ tr:hover {
 
 .form-check {
   margin-right: 10px;
+}
+
+.search-bar {
+  text-align: left;
+  margin-bottom: 10px;
+  margin-left: 10px; 
 }
 </style>
