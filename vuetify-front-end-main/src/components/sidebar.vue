@@ -1,14 +1,57 @@
 <script>
-import {collapsed, toggleSidebar, sidebarWidth} from './state'
-import {showServersTable} from './open.vue'
-    export default{
-        props: {},
-        setup () {
-            return {collapsed, toggleSidebar, sidebarWidth, showServersTable, toggleDataTable ,toggleServersTable}
-        }
+import { ref, provide } from 'vue';
+import { collapsed, toggleSidebar, sidebarWidth } from './state';
+
+
+
+
+export default {
+
+  props: {},
+
+  setup() {
+
+   
+
+    const toggleDataTable = ref(true);
+
+
+
+
+ 
+
+    function sidebarServers() {
+
+      toggleDataTable.value = true;
+
+      console.log('sidebarServers function called');
+
     }
-    const toggleServersTable = ()=> (showServersTable.value = ref(true))
-    const toggleDataTable = ()=> (showServersTable.value = ref(false))
+
+
+
+
+    function sidebarDataTable() {
+
+      toggleDataTable.value = false;
+
+    }
+
+
+
+
+
+    provide('sharedVariable', toggleDataTable);
+    return {
+      collapsed,
+      toggleSidebar,
+      sidebarWidth,
+      sidebarServers,
+      sidebarDataTable
+    };
+  }
+};
+
 </script>
 
 <template>
@@ -16,10 +59,10 @@ import {showServersTable} from './open.vue'
     <span class="collapse-icon" @click="toggleSidebar">
         <img class ="pic" src = "https://www.iotone.com/files/vendor/aegis-software_8.jpg">
     </span>
-    <span class="item" @click="toggleServersTable">
+    <span class="item" @click="sidebarServers()">
         <img class = "pic" src="https://th.bing.com/th/id/R.de9f93de1dcf4db07c44f7c5d476f1ce?rik=0oESb6sMiR%2bntQ&riu=http%3a%2f%2ffindicons.com%2ffiles%2ficons%2f2711%2ffree_icons_for_windows8_metro%2f512%2fvirtual_machine.png&ehk=mvrMmkq1MxXm2OEahSa8s6d4xm9%2fwWxSfqfocTQOZEA%3d&risl=&pid=ImgRaw&r=0">
     </span> 
-    <span class="item" id="dt" @click="toggleDataTable">
+    <span class="item" id="dt" @click="sidebarDataTable()">
         <img class = "pic" src="https://cdn2.iconfinder.com/data/icons/text-editing-glyph-black/614/3819_-_Insert_Table-512.png">
     </span>
     </div>

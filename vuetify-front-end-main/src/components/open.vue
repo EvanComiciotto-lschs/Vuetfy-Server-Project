@@ -1,12 +1,12 @@
 <template>
   <div class="card text-center m-3">
     <div class="card-body">
-     <!-- <div class="form-check form-switch mb-3">
-        <input class="form-check-input" type="checkbox" id="tableSwitch" v-model="showServersTable" />
+      <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" id="tableSwitch" v-model="sharedVariable" />
         <label class="form-check-label" for="tableSwitch">Show Servers Table</label>
-      </div>-->
+      </div>
 
-      <table v-if="showServersTable" class="table">
+      <table v-if="sharedVariable" class="table">
         <thead>
           <tr>
             <th>VM Name</th>
@@ -52,15 +52,16 @@
 
 
 <script setup>
-import { ref, onMounted } from 'vue';
-
+import { ref, onMounted, inject} from 'vue';
+//import { toggleDataTable } from './sidebar.vue';
 var servers = ref(null);
 var databases = ref(null);
-var showServersTable = ref(true);
+var sharedVariable = inject('toggleDataTable');
+console.log(sharedVariable);
 
 
 onMounted(() => {
-  fetch('http://jwerts.aiscorp.local:3000/servers')
+  fetch('http://fkhan.aiscorp.local:6285/servers')
     .then(response => response.json())
     .then(data => {
       servers.value = data;
@@ -69,7 +70,7 @@ onMounted(() => {
       console.error('Error fetching server data:', error);
     });
 
-  fetch('http://jwerts.aiscorp.local:3000/databases')
+  fetch('http://fkhan.aiscorp.local:6285/databases')
     .then(response => response.json())
     .then(data => {
       databases.value = data;
@@ -81,9 +82,6 @@ onMounted(() => {
 
 </script>
 
-<script>
-  export let showServersTable;
-</script>
 
 <style scoped>
 .table {
