@@ -4,6 +4,9 @@
 
       <h1 class="header" v-if="toggleDataTable.value">Servers</h1>
       <h1 class="header" v-else>Database</h1>
+      <div class="search-bar">
+        <input type="text" v-model="searchKeyword" placeholder="Search VM Name" />
+      </div>
       <table v-if="toggleDataTable.value" class="table">
         <thead>
           <tr>
@@ -16,7 +19,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="server in servers" :key="server.VMName">
+          <tr v-for="server in filteredServers" :key="server.VMName">
             <td>{{ server.VMName }}</td>
             <td>{{ server.Status }}</td>
             <td>{{ server.IP }}</td>
@@ -50,13 +53,11 @@
 
 
 <script setup>
-import { ref, onMounted, inject} from 'vue';
+import { ref, onMounted, computed} from 'vue';
 import toggleDataTable from './state.js';
-//import { toggleDataTable } from './sidebar.vue';
+const searchKeyword = ref('');
 var servers = ref(null);
 var databases = ref(null);
-//var toggleDataTable = inject('toggleDataTable', false)
-//console.log('toggle data table variable ' + toggleDataTable);
 
 
 onMounted(() => {
@@ -77,6 +78,15 @@ onMounted(() => {
     .catch(error => {
       console.error('Error fetching database data:', error);
     });
+});
+
+const filteredServers = computed(() => {
+  if (!searchKeyword.value) {
+    return servers.value;
+  }
+
+  const keyword = searchKeyword.value.toLowerCase();
+  return servers.value.filter(server => server.VMName.toLowerCase().includes(keyword));
 });
 
 </script>
@@ -120,5 +130,9 @@ tr:hover {
 
 .form-check {
   margin-right: 10px;
+}
+.search-bar {
+  margin-left: 10px;
+  text-align: left;
 }
 </style>
