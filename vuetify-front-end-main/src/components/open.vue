@@ -1,12 +1,9 @@
 <template>
   <div class="card text-center m-3">
     <div class="card-body">
-      <div class="form-check form-switch mb-3">
-        <input class="form-check-input" type="checkbox" id="tableSwitch" v-model="toggleDataTable" />
-        <label class="form-check-label" for="tableSwitch">Show Servers Table</label>
-      </div>
 
-      <table v-if="toggleDataTable" class="table">
+
+      <table v-if="toggleDataTable.value" class="table">
         <thead>
           <tr>
             <th>VM Name</th>
@@ -53,11 +50,12 @@
 
 <script setup>
 import { ref, onMounted, inject} from 'vue';
+import toggleDataTable from './state.js';
 //import { toggleDataTable } from './sidebar.vue';
 var servers = ref(null);
 var databases = ref(null);
-const toggleDataTable = inject('toggleDataTable', ref(null))
-console.log(toggleDataTable);
+//var toggleDataTable = inject('toggleDataTable', false)
+//console.log('toggle data table variable ' + toggleDataTable);
 
 
 onMounted(() => {
