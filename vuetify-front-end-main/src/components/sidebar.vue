@@ -29,14 +29,22 @@ export default {
 
 <template>
     <div class ="sidebar" :style="{width:sidebarWidth}">
-    <span class="collapse-icon" @click="toggleSidebar">
-        <img class ="pic" src = "https://www.iotone.com/files/vendor/aegis-software_8.jpg">
+    <span class="collapse-icon" @click="toggleSidebar" >
+        <img class ="pic" src = "https://i.ibb.co/SwX2N5z/Aegis-Logo-Transparent-Backgrounds.png">
     </span>
-    <span class="item" @click="sidebarServers()">
+    <span class="item" @click="sidebarServers()" v-if ="collapsed">
         <img class = "pic" src="https://th.bing.com/th/id/R.de9f93de1dcf4db07c44f7c5d476f1ce?rik=0oESb6sMiR%2bntQ&riu=http%3a%2f%2ffindicons.com%2ffiles%2ficons%2f2711%2ffree_icons_for_windows8_metro%2f512%2fvirtual_machine.png&ehk=mvrMmkq1MxXm2OEahSa8s6d4xm9%2fwWxSfqfocTQOZEA%3d&risl=&pid=ImgRaw&r=0">
     </span> 
-    <span class="item" id="dt" @click="sidebarDataTable()">
+    <span v-else class = "item" @click="sidebarServers()">
+        <img class = "pic" src="https://th.bing.com/th/id/R.de9f93de1dcf4db07c44f7c5d476f1ce?rik=0oESb6sMiR%2bntQ&riu=http%3a%2f%2ffindicons.com%2ffiles%2ficons%2f2711%2ffree_icons_for_windows8_metro%2f512%2fvirtual_machine.png&ehk=mvrMmkq1MxXm2OEahSa8s6d4xm9%2fwWxSfqfocTQOZEA%3d&risl=&pid=ImgRaw&r=0">
+        Servers
+    </span>
+    <span class="item" id="dt" @click="sidebarDataTable()" v-if="collapsed">
         <img class = "pic" src="https://cdn2.iconfinder.com/data/icons/text-editing-glyph-black/614/3819_-_Insert_Table-512.png">
+    </span>
+    <span v-else class = "item" id = "dataLabel"  @click="sidebarDataTable()">
+        <img class = "pic" src="https://cdn2.iconfinder.com/data/icons/text-editing-glyph-black/614/3819_-_Insert_Table-512.png">
+        Databases
     </span>
     </div>
 </template>
@@ -86,6 +94,9 @@ export default {
         transition: ease 0.2s;
     }
     #dt{
+        top: 375px;
+    }
+    #dataLabel{
         top: 375px;
     }
 </style>
