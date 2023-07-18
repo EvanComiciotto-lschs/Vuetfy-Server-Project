@@ -1,47 +1,20 @@
 <script>
 import { ref, provide } from 'vue';
 import { collapsed, toggleSidebar, sidebarWidth } from './state';
-
-
-
-
 export default {
-
   props: {},
-
   setup() {
-
-   
-
     const toggleDataTable = ref(true);
-
-
-
-
- 
-
     function sidebarServers() {
-
       toggleDataTable.value = true;
-
       console.log('sidebarServers function called');
-
     }
-
-
-
-
     function sidebarDataTable() {
 
       toggleDataTable.value = false;
 
     }
-
-
-
-
-
-    provide('sharedVariable', toggleDataTable);
+    provide('toggleDataTable', toggleDataTable);
     return {
       collapsed,
       toggleSidebar,
