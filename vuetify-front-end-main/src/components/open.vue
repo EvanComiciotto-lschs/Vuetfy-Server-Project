@@ -5,7 +5,7 @@
       <h1 class="header" v-if="toggleDataTable.value">Servers</h1>
       <h1 class="header" v-else>Database</h1>
       <div class="search-bar">
-        <input type="text" v-model="searchKeyword" placeholder="Search VM Name" />
+        <input type="text" v-model="searchKeyword" placeholder="Search Name" />
       </div>
       <table v-if="toggleDataTable.value" class="table">
         <thead>
@@ -39,7 +39,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="database in databases" :key="database.name">
+          <tr v-for="database in filteredDatabases" :key="database.name">
             <td>{{ database.name }}</td>
             <td>{{ database['size in GB'] }}</td>
             <td>{{ database.path }}</td>
@@ -87,6 +87,15 @@ const filteredServers = computed(() => {
 
   const keyword = searchKeyword.value.toLowerCase();
   return servers.value.filter(server => server.VMName.toLowerCase().includes(keyword));
+});
+
+
+const filteredDatabases = computed(() => {
+  if (!searchKeyword.value) {
+    return databases.value;
+  }
+  const keywordTwo = searchKeyword.value.toLowerCase();
+  return databases.value.filter(databases => databases.name.toLowerCase().includes(keywordTwo));
 });
 
 </script>
