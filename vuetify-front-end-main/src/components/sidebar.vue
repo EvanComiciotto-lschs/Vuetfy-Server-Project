@@ -41,7 +41,7 @@ export default {
     </span> 
     <span v-else class = "item" @click="sidebarServers()">
         <img class = "pic" src="https://i.ibb.co/hgFvjn2/Server-Logo-Final.png">
-        <p class = "textLabel" v-if="toggleDataTable.value">Servers</p>
+        <p class = "textLabel">Servers</p>
     </span>
     <span class="item" id="dt" @click="sidebarDataTable()" v-if="collapsed">
         <img class = "pic" src="https://i.ibb.co/6ZG0jFk/Databse-Final-Second-Try.png%22">
