@@ -1,10 +1,7 @@
 <template>
   <div class="card text-center m-3">
     <div class="card-body">
-      <div class="form-check form-switch mb-3">
-        <input class="form-check-input" type="checkbox" id="tableSwitch" v-model="showServersTable" />
-        <label class="form-check-label" for="tableSwitch">Show Servers Table</label>
-      </div>
+      
       <div class="checkbox-container">
         <div class="form-check">
           <input
@@ -37,7 +34,7 @@
           v-model="searchTerm"
         />
       </div>
-      <table v-if="showServersTable" class="table">
+      <table v-if="toggleDataTable.value" class="table">
         <thead>
           <tr>
             <th>VM Name</th>
@@ -49,7 +46,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="server in filteredServers" :key="server.VMName">
+          <tr v-for="server in servers" :key="server.VMName">
             <td>{{ server.VMName }}</td>
             <td>{{ server.Status }}</td>
             <td>{{ server.IP }}</td>
@@ -75,13 +72,14 @@
             <td>{{ database.path }}</td>
           </tr>
         </tbody>
-      </table>
+      </table>  
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
+import toggleDataTable from './state.js';
 
 var servers = ref(null);
 var databases = ref(null);
