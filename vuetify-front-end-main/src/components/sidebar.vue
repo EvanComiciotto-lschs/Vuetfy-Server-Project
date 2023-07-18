@@ -29,22 +29,26 @@ export default {
 
 <template>
     <div class ="sidebar" :style="{width:sidebarWidth}">
-    <span class="collapse-icon" @click="toggleSidebar" >
+    <span class="collapse-icon" @click="toggleSidebar" v-if="collapsed">
         <img class ="pic" src = "https://i.ibb.co/SwX2N5z/Aegis-Logo-Transparent-Backgrounds.png">
+    </span>
+    <span class="collapse-icon" @click="toggleSidebar" v-else>
+        <img class ="pic" src = "https://i.ibb.co/SwX2N5z/Aegis-Logo-Transparent-Backgrounds.png">
+        
     </span>
     <span class="item" @click="sidebarServers()" v-if ="collapsed">
         <img class = "pic" src="https://i.ibb.co/hgFvjn2/Server-Logo-Final.png">
     </span> 
     <span v-else class = "item" @click="sidebarServers()">
         <img class = "pic" src="https://i.ibb.co/hgFvjn2/Server-Logo-Final.png">
-        Servers
+        <p class = "textLabel" v-if="toggleDataTable.value">Servers</p>
     </span>
     <span class="item" id="dt" @click="sidebarDataTable()" v-if="collapsed">
-        <img class = "pic" src="https://cdn2.iconfinder.com/data/icons/text-editing-glyph-black/614/3819_-_Insert_Table-512.png">
+        <img class = "pic" src="https://i.ibb.co/6ZG0jFk/Databse-Final-Second-Try.png%22">
     </span>
     <span v-else class = "item" id = "dataLabel"  @click="sidebarDataTable()">
-        <img class = "pic" src="https://cdn2.iconfinder.com/data/icons/text-editing-glyph-black/614/3819_-_Insert_Table-512.png">
-        Databases
+        <img class = "pic" src="https://i.ibb.co/6ZG0jFk/Databse-Final-Second-Try.png%22">
+        <p class = "textLabel" id="databasesLabel">Databases</p>
     </span>
     </div>
 </template>
@@ -89,6 +93,7 @@ export default {
         top: 300px;
         padding: 0.75em;
         color: white;
+        
     }
     .item:hover{
         transform: scale(115%);
@@ -99,5 +104,15 @@ export default {
     }
     #dataLabel{
         top: 375px;
+    }
+    .textLabel{
+        display: inline-block;
+        bottom:  25px;
+        left: 75px;
+        position: absolute;
+    }
+    #databasesLabel{
+        bottom: 32px;
+        position: absolute;
     }
 </style>

@@ -3,7 +3,7 @@
     <div class="card-body">
 
       <h1 class="header" v-if="toggleDataTable.value">Servers</h1>
-      <h1 class="header" v-else>Database</h1>
+      <h1 class="header" v-else>Databases</h1>
       <table v-if="toggleDataTable.value" class="table">
         <thead>
           <tr>
