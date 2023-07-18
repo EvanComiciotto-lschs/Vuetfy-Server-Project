@@ -2,7 +2,8 @@
   <div class="card text-center m-3">
     <div class="card-body">
 
-
+      <h1 class="header" v-if="toggleDataTable.value">Servers</h1>
+      <h1 class="header" v-else>Database</h1>
       <table v-if="toggleDataTable.value" class="table">
         <thead>
           <tr>
@@ -113,7 +114,9 @@ tr:hover {
   font-weight: bold;
   margin-bottom: 10px;
 }
-
+.header{
+  font-weight: bold;
+}
 
 .form-check {
   margin-right: 10px;
