@@ -3,17 +3,36 @@ import { ref, provide } from 'vue';
 import { collapsed, toggleSidebar, sidebarWidth, } from './state';
 import toggleDataTable from './state';
 export default {
-  props: {},
+  props: { },
   setup() {
+    function updateIcons() {
+        [...document.getElementsByClassName("server-icon")].forEach(element => {
+            if (toggleDataTable.value) {
+                element.classList.add("active");
+            } else {
+                element.classList.remove("active");
+            }
+        });
+        [...document.getElementsByClassName("datatable-icon")].forEach(element => {
+            if (!toggleDataTable.value) {
+                element.classList.add("active");
+            } else {
+                element.classList.remove("active");
+            }
+        });
+    }
     function sidebarServers() {
-      toggleDataTable.value = true;
-      console.log('sidebarServers function called');
-      console.log(toggleDataTable.value);
+        toggleDataTable.value = true;
+        console.log('sidebarServers function called');
+        console.log(toggleDataTable.value);
+        updateIcons();
     }
     function sidebarDataTable() {
       toggleDataTable.value = false;
       console.log(toggleDataTable.value);
+        updateIcons();
     }
+    updateIcons();
     provide('toggleDataTable', toggleDataTable);
     return {
       collapsed,
@@ -28,24 +47,23 @@ export default {
 </script>
 
 <template>
-    <div class ="sidebar" :style="{width:sidebarWidth}">
-    <span class="collapse-icon" @click="toggleSidebar" >
-        <img class ="pic" src = "https://i.ibb.co/SwX2N5z/Aegis-Logo-Transparent-Backgrounds.png">
-    </span>
-    <span class="item" @click="sidebarServers()" v-if ="collapsed">
-        <img class = "pic" src="https://th.bing.com/th/id/R.de9f93de1dcf4db07c44f7c5d476f1ce?rik=0oESb6sMiR%2bntQ&riu=http%3a%2f%2ffindicons.com%2ffiles%2ficons%2f2711%2ffree_icons_for_windows8_metro%2f512%2fvirtual_machine.png&ehk=mvrMmkq1MxXm2OEahSa8s6d4xm9%2fwWxSfqfocTQOZEA%3d&risl=&pid=ImgRaw&r=0">
-    </span> 
-    <span v-else class = "item" @click="sidebarServers()">
-        <img class = "pic" src="https://th.bing.com/th/id/R.de9f93de1dcf4db07c44f7c5d476f1ce?rik=0oESb6sMiR%2bntQ&riu=http%3a%2f%2ffindicons.com%2ffiles%2ficons%2f2711%2ffree_icons_for_windows8_metro%2f512%2fvirtual_machine.png&ehk=mvrMmkq1MxXm2OEahSa8s6d4xm9%2fwWxSfqfocTQOZEA%3d&risl=&pid=ImgRaw&r=0">
-        Servers
-    </span>
-    <span class="item" id="dt" @click="sidebarDataTable()" v-if="collapsed">
-        <img class = "pic" src="https://cdn2.iconfinder.com/data/icons/text-editing-glyph-black/614/3819_-_Insert_Table-512.png">
-    </span>
-    <span v-else class = "item" id = "dataLabel"  @click="sidebarDataTable()">
-        <img class = "pic" src="https://cdn2.iconfinder.com/data/icons/text-editing-glyph-black/614/3819_-_Insert_Table-512.png">
-        Databases
-    </span>
+    <div class ="sidebar" :style="{width:sidebarWidth}" style="display: flex; flex-direction: column;">
+        <div class="collapse-icon" @click="toggleSidebar" v-if="collapsed">
+            <img class ="pic" src = "https://i.ibb.co/SwX2N5z/Aegis-Logo-Transparent-Backgrounds.png">
+        </div>
+        <div class="collapse-icon" @click="toggleSidebar" v-else>
+            <img class ="pic" src = "https://i.ibb.co/SwX2N5z/Aegis-Logo-Transparent-Backgrounds.png">
+        </div>
+        <div class="spacer"></div>
+        <div class="item" @click="sidebarServers()" style="display: flex; flex-direction: row;">
+            <i class="bi bi-motherboard-fill server-icon"></i>
+            <span v-if="!collapsed"><p class = "label-DONTBREAK">Servers</p></span>
+        </div>
+        <div class="item" @click="sidebarDataTable()" style="display: flex; flex-direction: row;">
+            <i class="bi bi-database-fill datatable-icon active"></i>
+            <span v-if="!collapsed"><p class = "label-DONTBREAK">Databases</p></span>
+        </div>
+        <div class="spacer"></div>
     </div>
 </template>
 
@@ -58,6 +76,33 @@ export default {
 </style>
 
 <style scoped>
+.server-icon {
+    font-size: 4rem;
+    color: #708490;
+}
+.server-icon.active {
+    color: #ef3b32;
+}
+.datatable-icon {
+    font-size: 4rem;
+    color: #708490;
+}
+.datatable-icon.active {
+    color: #ef3b32;
+}
+.icon {
+    height: 4rem;
+    width: 4rem;
+}
+.spacer {
+    flex-grow: 10;
+}
+.label-DONTBREAK {
+    color: lightgray;
+    padding-top: 2rem;
+    padding-left: 1rem;
+}
+
     .sidebar {
         color: #708490;
         background-color: var(--sidebar-bg-color);
@@ -84,19 +129,31 @@ export default {
         height: 50px;
         width: 50px;
     }
-    .item{
+    /* .item{
         position: absolute;
         top: 300px;
         padding: 0.75em;
+        color: white;
+        
     }
     .item:hover{
         transform: scale(115%);
         transition: ease 0.2s;
-    }
+    } */
     #dt{
         top: 375px;
     }
     #dataLabel{
         top: 375px;
+    }
+    .textLabel{
+        display: inline-block;
+        bottom:  25px;
+        left: 75px;
+        position: absolute;
+    }
+    #databasesLabel{
+        bottom: 32px;
+        position: absolute;
     }
 </style>

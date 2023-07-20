@@ -3,7 +3,7 @@
     <div class="card-body">
 
       <h1 class="header" v-if="toggleDataTable.value">Servers</h1>
-      <h1 class="header" v-else>Database</h1>
+      <h1 class="header" v-else>Databases</h1>
       <div class="search-bar">
         <input type="text" v-model="searchKeyword" placeholder="Search Name" />
       </div>
@@ -84,8 +84,6 @@ const filteredServers = computed(() => {
   if (!searchKeyword.value) {
     return servers.value;
   }
-
-  const keyword = searchKeyword.value.toLowerCase();
   return servers.value.filter(server => server.VMName.toLowerCase().includes(keyword));
 });
 
