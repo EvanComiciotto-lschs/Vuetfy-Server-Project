@@ -28,7 +28,7 @@ export default {
     }
     function sidebarServers() {
         toggleDataTable.value = false;
-        console.log('sidebarServers function called');
+        console.log('hello random person who decided to open the console');
         console.log(toggleDataTable.value);
         updateIcons();
     }
