@@ -3,7 +3,7 @@
   <div :style="{'margin-left':sidebarWidth}">
   <v-app>
     <v-main>
-      <img style="height: 15%;" src="/src/assets/aegislogo.png">
+      <img height="150" src="/src/assets/aegislogo.png">
       <dare/>
     </v-main>
   </v-app>
