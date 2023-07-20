@@ -38,7 +38,7 @@ export default {
   methods: {
     async login() {
       try {
-        if(this.input.username == 'aiscorp.local' && this.input.password == 'Fahd'){
+        if(this.input.username == 'aiscorp.local' && this.input.password == 'SDFKKENFenfakj34j2@$#M$34j234$j32$#@K%NGREKFHGlerjitete%$tjie4k4t4$%J$TK$t4kngkgrnss48592035AF3/#@KJ$324m34gh4234'){
           const response = await axios.post('http://strezza.aiscorp.local:4000/login', {
             username: this.input.username,
             password: this.input.password,
