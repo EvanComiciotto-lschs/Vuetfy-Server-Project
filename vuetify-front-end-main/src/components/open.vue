@@ -60,7 +60,7 @@ var databases = ref(null);
 
 
 onMounted(() => {
-  fetch('http://fkhan.aiscorp.local:6285/servers')
+  fetch('http://4.246.161.216:3000/servers')
     .then(response => response.json())
     .then(data => {
       servers.value = data;
@@ -69,7 +69,7 @@ onMounted(() => {
       console.error('Error fetching server data:', error);
     });
 
-  fetch('http://fkhan.aiscorp.local:6285/databases')
+  fetch('http://4.246.161.216:3000/databases')
     .then(response => response.json())
     .then(data => {
       databases.value = data;
