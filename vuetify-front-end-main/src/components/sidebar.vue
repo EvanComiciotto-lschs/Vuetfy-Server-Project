@@ -66,8 +66,9 @@ export default {
             <span v-if="!collapsed"><p class = "label-DONTBREAK">Databases</p></span>
         </div>
         <div class="spacer"></div>
-        <div class="item" @click="toggleSidebar">
+        <div class="item" @click="toggleSidebar" style="display: flex; flex-direction: row;">
             <i class="bi bi-layout-sidebar sidebar-toggler"></i>
+            <span v-if="!collapsed"><p class = "label-DONTBREAK2">Collapse</p></span>
         </div>
     </div>
 </template>
@@ -109,6 +110,11 @@ export default {
 .label-DONTBREAK {
     color: lightgray;
     padding-top: 2rem;
+    padding-left: 1rem;
+}
+.label-DONTBREAK2 {
+    color: lightgray;
+    padding-top: 1.5rem;
     padding-left: 1rem;
 }
 
