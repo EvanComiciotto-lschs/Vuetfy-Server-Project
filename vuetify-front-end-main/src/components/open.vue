@@ -84,7 +84,7 @@ const filteredServers = computed(() => {
   if (!searchKeyword.value) {
     return servers.value;
   }
-  return servers.value.filter(server => server.VMName.toLowerCase().includes(keyword));
+  return servers.value.filter(server => server.VMName.toLowerCase().includes(searchKeyword.value.toLowerCase()));
 });
 
 
