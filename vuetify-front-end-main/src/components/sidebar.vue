@@ -3,17 +3,36 @@ import { ref, provide } from 'vue';
 import { collapsed, toggleSidebar, sidebarWidth, } from './state';
 import toggleDataTable from './state';
 export default {
-  props: {},
+  props: { },
   setup() {
+    function updateIcons() {
+        [...document.getElementsByClassName("server-icon")].forEach(element => {
+            if (toggleDataTable.value) {
+                element.classList.add("active");
+            } else {
+                element.classList.remove("active");
+            }
+        });
+        [...document.getElementsByClassName("datatable-icon")].forEach(element => {
+            if (!toggleDataTable.value) {
+                element.classList.add("active");
+            } else {
+                element.classList.remove("active");
+            }
+        });
+    }
     function sidebarServers() {
-      toggleDataTable.value = true;
-      console.log('sidebarServers function called');
-      console.log(toggleDataTable.value);
+        toggleDataTable.value = true;
+        console.log('sidebarServers function called');
+        console.log(toggleDataTable.value);
+        updateIcons();
     }
     function sidebarDataTable() {
       toggleDataTable.value = false;
       console.log(toggleDataTable.value);
+        updateIcons();
     }
+    updateIcons();
     provide('toggleDataTable', toggleDataTable);
     return {
       collapsed,
@@ -28,28 +47,23 @@ export default {
 </script>
 
 <template>
-    <div class ="sidebar" :style="{width:sidebarWidth}">
-    <span class="collapse-icon" @click="toggleSidebar" v-if="collapsed">
-        <img class ="pic" src = "https://i.ibb.co/SwX2N5z/Aegis-Logo-Transparent-Backgrounds.png">
-    </span>
-    <span class="collapse-icon" @click="toggleSidebar" v-else>
-        <img class ="pic" src = "https://i.ibb.co/SwX2N5z/Aegis-Logo-Transparent-Backgrounds.png">
-        
-    </span>
-    <span class="item" @click="sidebarServers()" v-if ="collapsed">
-        <img class = "pic" src="https://i.ibb.co/hgFvjn2/Server-Logo-Final.png">
-    </span> 
-    <span v-else class = "item" @click="sidebarServers()">
-        <img class = "pic" src="https://i.ibb.co/hgFvjn2/Server-Logo-Final.png">
-        <p class = "textLabel">Servers</p>
-    </span>
-    <span class="item" id="dt" @click="sidebarDataTable()" v-if="collapsed">
-        <img class = "pic" src="https://i.ibb.co/6ZG0jFk/Databse-Final-Second-Try.png%22">
-    </span>
-    <span v-else class = "item" id = "dataLabel"  @click="sidebarDataTable()">
-        <img class = "pic" src="https://i.ibb.co/6ZG0jFk/Databse-Final-Second-Try.png%22">
-        <p class = "textLabel" id="databasesLabel">Databases</p>
-    </span>
+    <div class ="sidebar" :style="{width:sidebarWidth}" style="display: flex; flex-direction: column;">
+        <div class="collapse-icon" @click="toggleSidebar" v-if="collapsed">
+            <img class ="pic" src = "https://i.ibb.co/SwX2N5z/Aegis-Logo-Transparent-Backgrounds.png">
+        </div>
+        <div class="collapse-icon" @click="toggleSidebar" v-else>
+            <img class ="pic" src = "https://i.ibb.co/SwX2N5z/Aegis-Logo-Transparent-Backgrounds.png">
+        </div>
+        <div class="spacer"></div>
+        <div class="item" @click="sidebarServers()" style="display: flex; flex-direction: row;">
+            <i class="bi bi-motherboard-fill server-icon"></i>
+            <span v-if="!collapsed"><p class = "label-DONTBREAK">Servers</p></span>
+        </div>
+        <div class="item" @click="sidebarDataTable()" style="display: flex; flex-direction: row;">
+            <i class="bi bi-database-fill datatable-icon active"></i>
+            <span v-if="!collapsed"><p class = "label-DONTBREAK">Databases</p></span>
+        </div>
+        <div class="spacer"></div>
     </div>
 </template>
 
@@ -62,6 +76,33 @@ export default {
 </style>
 
 <style scoped>
+.server-icon {
+    font-size: 4rem;
+    color: #708490;
+}
+.server-icon.active {
+    color: #ef3b32;
+}
+.datatable-icon {
+    font-size: 4rem;
+    color: #708490;
+}
+.datatable-icon.active {
+    color: #ef3b32;
+}
+.icon {
+    height: 4rem;
+    width: 4rem;
+}
+.spacer {
+    flex-grow: 10;
+}
+.label-DONTBREAK {
+    color: lightgray;
+    padding-top: 2rem;
+    padding-left: 1rem;
+}
+
     .sidebar {
         color: #708490;
         background-color: var(--sidebar-bg-color);
@@ -88,7 +129,7 @@ export default {
         height: 50px;
         width: 50px;
     }
-    .item{
+    /* .item{
         position: absolute;
         top: 300px;
         padding: 0.75em;
@@ -98,7 +139,7 @@ export default {
     .item:hover{
         transform: scale(115%);
         transition: ease 0.2s;
-    }
+    } */
     #dt{
         top: 375px;
     }
