@@ -22,6 +22,7 @@ import axios from 'axios';
 
 var strike = 1;
 var x = 0;
+localStorage.setItem('brotha', x);
 
 export default {
   name: 'LoginView',
@@ -44,12 +45,11 @@ export default {
           });
           
           const token = response.data.token;
-
-          x = 547893467;
-          //console.log(token);
+          const res = await axios.post('http://strezza.aiscorp.local:4000/auth', {});
+          const word = res.data.code;
 
           //local storages
-          localStorage.setItem('brotha', x);
+          localStorage.setItem('brotha', word);
           localStorage.setItem('jwt', token);
 
           // Redirect or perform other actions after successful login
