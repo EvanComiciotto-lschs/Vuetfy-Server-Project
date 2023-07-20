@@ -53,8 +53,9 @@ export default {
 
 <template>
     <div class ="sidebar" :style="{width:sidebarWidth}" style="display: flex; flex-direction: column;">
-        <div class="collapse-icon" @click="reloadPage">
+        <div class="collapse-icon" @click="reloadPage" style="display: flex; flex-direction: row;">
             <img class ="pic" src = "/src/assets/Aegis-Logo-Transparent-Backgrounds.png">
+            <span v-if="!collapsed"><p class = "label-DONTBREAK0">ITS</p></span>
         </div>
         <div class="spacer"></div>
         <div class="item" @click="sidebarServers()" style="display: flex; flex-direction: row;">
@@ -116,6 +117,12 @@ export default {
     color: lightgray;
     padding-top: 1.5rem;
     padding-left: 1rem;
+}
+.label-DONTBREAK0 {
+    color: lightgray;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    font-weight: bold;
 }
 
     .sidebar {
