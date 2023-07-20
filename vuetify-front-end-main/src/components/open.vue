@@ -97,7 +97,6 @@ const filteredDatabases = computed(() => {
 
 </script>
 
-
 <style scoped>
 .table {
   width: 100%;
