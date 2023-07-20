@@ -2,12 +2,12 @@
   <div class="card text-center m-3">
     <div class="card-body">
 
-      <h1 class="header" v-if="toggleDataTable.value">Servers</h1>
+      <h1 class="header" v-if="!toggleDataTable.value">Servers</h1>
       <h1 class="header" v-else>Databases</h1>
       <div class="search-bar">
         <input type="text" v-model="searchKeyword" placeholder="Search Name" />
       </div>
-      <table v-if="toggleDataTable.value" class="table">
+      <table v-if="!toggleDataTable.value" class="table">
         <thead>
           <tr>
             <th>VM Name</th>

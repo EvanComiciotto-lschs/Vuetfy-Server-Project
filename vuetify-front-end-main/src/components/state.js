@@ -9,6 +9,6 @@ export const sidebarWidth = computed(
     () => `${collapsed.value ? SIDEBAR_WIDTH_COLLAPSED:SIDEBAR_WIDTH}px`
 )
 const toggleDataTable = reactive({
-  myBoolean: false
+  myBoolean: true
 });
 export default toggleDataTable;

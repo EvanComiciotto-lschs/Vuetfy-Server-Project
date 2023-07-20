@@ -3,7 +3,7 @@
   <div :style="{'margin-left':sidebarWidth}">
   <v-app>
     <v-main>
-      <img src="https://th.bing.com/th/id/R.b139cbac71658605b146179bcb889b98?rik=d4I%2b8FPfCNlboA&riu=http%3a%2f%2fztechservices.com%2fimages%2faegis-logo-2019.png&ehk=NyJDg0fkvIUfeLNHM0x1FNAE3lbfJmJgcZUkRk2%2fKAg%3d&risl=&pid=ImgRaw&r=0">
+      <img style="height: 15%;" src="/src/assets/aegislogo.png">
       <dare/>
     </v-main>
   </v-app>
@@ -17,9 +17,6 @@
 </script>
 
 <style>
-  body {
-    background-color: black;
-  }
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
