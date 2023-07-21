@@ -41,7 +41,7 @@
         <tbody>
           <tr v-for="database in filteredDatabases" :key="database.name">
             <td>{{ database.name }}</td>
-            <td>{{ database.database_id }}</td>
+            <td>{{ database.size }}</td>
             <td>{{ database.paths }}</td>
           </tr>
         </tbody>
