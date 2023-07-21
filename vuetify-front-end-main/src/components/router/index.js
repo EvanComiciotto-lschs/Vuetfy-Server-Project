@@ -6,7 +6,7 @@ import { createWebHistory, createRouter } from "vue-router";
     component: () => import('../LoginView.vue'),
   },
   {
-    path: "/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJldXdpcmx3amVoZ2Z5a2FiayxjIiwicGFzc3dvcmQiOiJwYm9pZHRuamhlZ3ZkaGprZ2ZkIiwiaWF0IjoxNTE2MjM5MDIyfQ.zWXb9VM9Bxe-amtInmae7lJ7_1dx7pbfW3VONolyqsc",
+    path: "/home",
     component: () => import('../open.vue'),
   },
 
