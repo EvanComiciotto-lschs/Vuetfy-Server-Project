@@ -4,14 +4,15 @@
   <v-app>
     <v-main>
       <img style="height: 15%;" src="/src/assets/aegislogo.png">
-      <dare/>
+      <!--<dare/>-->
+      <RouterView/>
     </v-main>
   </v-app>
   </div>
 </template>
 
 <script setup lang="js">
-  import dare from './components/open.vue'
+  //import dare from './components/open.vue'
   import sidebar from './components/sidebar.vue'
   import {sidebarWidth} from './components/state.js'
 </script>

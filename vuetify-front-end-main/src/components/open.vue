@@ -57,28 +57,32 @@ import toggleDataTable from './state.js';
 const searchKeyword = ref('');
 var servers = ref(null);
 var databases = ref(null);
+const ong = localStorage.getItem('brotha');
+//const token = localStorage.getItem('jwt');
+//console.log(token);
 
+if(ong == 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJfvZi8DO7pTghhHHTHkWdbyCvngkmXiY5ZXbsjl0XxnPGlwkVkgVo7kCgbknRN991FMdjeY6SeSf6ImylDy0DXIyfkKYclpvmWrCr2aiYaT0w6pVZAvxj1IDHKnuSMmUOQ4jHdE5qMKpvfepe5o2VDYDixXGMAYGpvNc7TdKyUUK7y3n0qiJ2AE8IGD5RdYKd2W0cpuOHwAeBZ44j1E75joAXoGl8UCaMGzLiZtMgcVvDlbCmLKfZnJEDc5tVTj0waoqYxTzzbXwCSo8QZLH2Aevt2rj'){
+  console.log('hello');
+  onMounted(() => {
+    fetch('http://fkhan.aiscorp.local:6285/servers')
+      .then(response => response.json())
+      .then(data => {
+        servers.value = data;
+      })
+      .catch(error => {
+        console.error('Error fetching server data:', error);
+      });
 
-onMounted(() => {
-  fetch('http://fkhan.aiscorp.local:6285/servers')
-    .then(response => response.json())
-    .then(data => {
-      servers.value = data;
-    })
-    .catch(error => {
-      console.error('Error fetching server data:', error);
-    });
-
-  fetch('http://fkhan.aiscorp.local:6285/databases')
-    .then(response => response.json())
-    .then(data => {
-      databases.value = data;
-    })
-    .catch(error => {
-      console.error('Error fetching database data:', error);
-    });
-});
-
+    fetch('http://fkhan.aiscorp.local:6285/databases')
+      .then(response => response.json())
+      .then(data => {
+        databases.value = data;
+      })
+      .catch(error => {
+        console.error('Error fetching database data:', error);
+      });
+  });
+}
 const filteredServers = computed(() => {
   if (!searchKeyword.value) {
     return servers.value;

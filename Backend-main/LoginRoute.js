@@ -20,7 +20,7 @@ app.post('/login', (req, res) => {
 
 });
 
-app.post('/auth', (req, res) => {
+app.post('/auth', (res) => {
 
     var code = 547893467;
 
@@ -31,6 +31,6 @@ app.post('/auth', (req, res) => {
     res.json({ code });
 })
 
-app.listen(4000, () => {
-  console.log('Server is running on port 4000');
+app.listen(4444, () => {
+  console.log('Server is running on port 4444');
 });
