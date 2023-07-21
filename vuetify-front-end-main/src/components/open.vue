@@ -1,35 +1,37 @@
 <template>
   <div class="card text-center m-3">
     <div class="card-body">
-      <div class="checkbox-container">
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="removeOnlineCheckbox"
-            v-model="removeOnline"
-          />
-          <label class="form-check-label" for="removeOnlineCheckbox">
-            Remove Online
-          </label>
-        </div>
 
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="removeOfflineCheckbox"
-            v-model="removeOffline"
-          />
-          <label class="form-check-label" for="removeOfflineCheckbox">
-            Remove Offline
-          </label>
-        </div>
+      <h1 class="header" v-if="toggleDataTable.value == 'about'">About</h1>
+      <h1 class="header" v-else-if="toggleDataTable.value =='database'">Databases</h1>
+      <h1 class="header" v-else>Servers</h1>
+      <div class="search-bar" v-if="toggleDataTable.value != 'about'">
+        <input type="text" v-model="searchKeyword" placeholder="Search Name" />
       </div>
-      <div>
-        <input type="text" id="myInput" onkeyup= 'myFunction()' placeholder="Search for names.." title="Type in a name">
+      <div v-if="toggleDataTable.value == 'about'">
+        <p>about page</p>
+        <!--ABOUT PAGE CAN BE BUILT HERE
+            OR DESIGNED IN ANOTHER COMPONENT AND IMPORTED-->
       </div>
-      <table class="table">
+
+      <table v-else-if="toggleDataTable.value == 'database'" class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Size in GB</th>
+            <th>Path</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="database in filteredDatabases" :key="database.name">
+            <td>{{ database.name }}</td>
+            <td>{{ database['size in GB'] }}</td>
+            <td>{{ database.path }}</td>
+          </tr>
+        </tbody>
+      </table>  
+
+      <table v-else="toggleDataTable.value=='server'" class="table">
         <thead>
           <tr>
             <th>VM Name</th>
@@ -55,59 +57,52 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted, computed } from 'vue';
 
-var Servers = ref(null);
-var removeOnline = ref(false);
-var removeOffline = ref(false);
+<script setup>
+import { ref, onMounted, computed} from 'vue';
+import toggleDataTable from './state.js';
+const searchKeyword = ref('');
+var servers = ref(null);
+var databases = ref(null);
+console.log(toggleDataTable.value);
+
 
 onMounted(() => {
-  fetch('http://jwerts.aiscorp.local:3000/servers')
+  fetch('http://4.246.161.216:3000/servers')
     .then(response => response.json())
     .then(data => {
-      Servers.value = data;
+      servers.value = data;
     })
     .catch(error => {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching server data:', error);
+    });
+
+  fetch('http://4.246.161.216:3000/databases')
+    .then(response => response.json())
+    .then(data => {
+      databases.value = data;
+    })
+    .catch(error => {
+      console.error('Error fetching database data:', error);
     });
 });
 
 const filteredServers = computed(() => {
-  if (!Servers.value) {
-    return [];
+  if (!searchKeyword.value) {
+    return servers.value;
   }
-  if (removeOnline.value && removeOffline.value) {
-    return [];
-  }
-  if (removeOnline.value) {
-    return Servers.value.filter(server => server.Status === 'Offline');
-  }
-  if (removeOffline.value) {
-    return Servers.value.filter(server => server.Status === 'Running');
-  }
-  return Servers.value;
+  return servers.value.filter(server => server.VMName.toLowerCase().includes(searchKeyword.value.toLowerCase()));
 });
 
 
-function myFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("table");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
+const filteredDatabases = computed(() => {
+  if (!searchKeyword.value) {
+    return databases.value;
   }
-}
+  const keywordTwo = searchKeyword.value.toLowerCase();
+  return databases.value.filter(databases => databases.name.toLowerCase().includes(keywordTwo));
+});
+
 </script>
 
 <style scoped>
@@ -142,9 +137,15 @@ tr:hover {
   font-weight: bold;
   margin-bottom: 10px;
 }
-
+.header{
+  font-weight: bold;
+}
 
 .form-check {
   margin-right: 10px;
+}
+.search-bar {
+  margin-left: 10px;
+  text-align: left;
 }
 </style>
