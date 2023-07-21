@@ -2,12 +2,36 @@
   <div class="card text-center m-3">
     <div class="card-body">
 
-      <h1 class="header" v-if="!toggleDataTable.value">Servers</h1>
-      <h1 class="header" v-else>Databases</h1>
-      <div class="search-bar">
+      <h1 class="header" v-if="toggleDataTable.value == 'about'">About</h1>
+      <h1 class="header" v-else-if="toggleDataTable.value =='database'">Databases</h1>
+      <h1 class="header" v-else>Servers</h1>
+      <div class="search-bar" v-if="toggleDataTable.value != 'about'">
         <input type="text" v-model="searchKeyword" placeholder="Search Name" />
       </div>
-      <table v-if="!toggleDataTable.value" class="table">
+      <div v-if="toggleDataTable.value == 'about'">
+        <p>about page</p>
+        <!--ABOUT PAGE CAN BE BUILT HERE
+            OR DESIGNED IN ANOTHER COMPONENT AND IMPORTED-->
+      </div>
+
+      <table v-else-if="toggleDataTable.value == 'database'" class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Size in GB</th>
+            <th>Path</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="database in filteredDatabases" :key="database.name">
+            <td>{{ database.name }}</td>
+            <td>{{ database['size in GB'] }}</td>
+            <td>{{ database.path }}</td>
+          </tr>
+        </tbody>
+      </table>  
+
+      <table v-else="toggleDataTable.value=='server'" class="table">
         <thead>
           <tr>
             <th>VM Name</th>
@@ -29,23 +53,6 @@
           </tr>
         </tbody>
       </table>
-
-      <table v-else class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Size in GB</th>
-            <th>Path</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="database in filteredDatabases" :key="database.name">
-            <td>{{ database.name }}</td>
-            <td>{{ database['size in GB'] }}</td>
-            <td>{{ database.path }}</td>
-          </tr>
-        </tbody>
-      </table>  
     </div>
   </div>
 </template>
@@ -57,6 +64,7 @@ import toggleDataTable from './state.js';
 const searchKeyword = ref('');
 var servers = ref(null);
 var databases = ref(null);
+console.log(toggleDataTable.value);
 
 
 onMounted(() => {
