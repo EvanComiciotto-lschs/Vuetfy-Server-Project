@@ -72,12 +72,8 @@ app.post('/databases', function(request, response){
 app.get('/databases', function(request, response){
   response.json(masterDBList);
 });
-deleteServers(masrer)
-//setInterval(deleteServers, 1000 * 60 * 60, masterServerList);
-//setInterval(console.log, 1000 * 60 * 60, masterServerList);
-//setInterval(console.log, 60000, 'Array outside function: ');
-//setInterval(console.log, 30000, masterServerList);
-setInterval(deleteServers, 60000 * 2, masterServerList);
+
+setInterval(deleteServers, 1000 * 60 * 60, masterServerList);
 
 //runs through hyperVisorList and deleted any item with LastCheckInTime older than reference time
 function deleteServers(array){
