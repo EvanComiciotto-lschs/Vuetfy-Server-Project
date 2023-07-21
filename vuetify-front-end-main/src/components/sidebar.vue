@@ -12,14 +12,21 @@ export default {
   setup() {
     function updateIcons() {
         [...document.getElementsByClassName("server-icon")].forEach(element => {
-            if (!toggleDataTable.value) {
+            if (toggleDataTable.value == 'server') {
                 element.classList.add("active");
             } else {
                 element.classList.remove("active");
             }
         });
         [...document.getElementsByClassName("datatable-icon")].forEach(element => {
-            if (toggleDataTable.value) {
+            if (toggleDataTable.value == 'database') {
+                element.classList.add("active");
+            } else {
+                element.classList.remove("active");
+            }
+        });
+        [...document.getElementsByClassName("about-icon")].forEach(element => {
+            if (toggleDataTable.value == 'about') {
                 element.classList.add("active");
             } else {
                 element.classList.remove("active");
@@ -27,13 +34,18 @@ export default {
         });
     }
     function sidebarServers() {
-        toggleDataTable.value = false;
+        toggleDataTable.value = 'server';
         console.log('hello random person who decided to open the console');
         console.log(toggleDataTable.value);
         updateIcons();
     }
     function sidebarDataTable() {
-      toggleDataTable.value = true;
+      toggleDataTable.value = 'database';
+      console.log(toggleDataTable.value);
+        updateIcons();
+    }
+    function sidebarAbout() {
+      toggleDataTable.value = 'about';
       console.log(toggleDataTable.value);
         updateIcons();
     }
@@ -44,7 +56,8 @@ export default {
       toggleSidebar,
       sidebarWidth,
       sidebarServers,
-      sidebarDataTable
+      sidebarDataTable,
+      sidebarAbout
     };
   }
 };
@@ -66,6 +79,10 @@ export default {
             <i class="bi bi-database-fill datatable-icon"></i>
             <span v-if="!collapsed"><p class = "label-DONTBREAK">Databases</p></span>
         </div>
+        <div class="item" @click="sidebarAbout()" style="display: flex; flex-direction: row;">
+            <i class="bi bi-chat-square-text-fill about-icon"></i>
+            <span v-if="!collapsed"><p class = "label-DONTBREAK">About</p></span>
+        </div>
         <div class="spacer"></div>
         <div class="item" @click="toggleSidebar" style="display: flex; flex-direction: row;">
             <i class="bi bi-layout-sidebar sidebar-toggler"></i>
@@ -76,7 +93,7 @@ export default {
 
 <style>
     :root {
-        --sidebar-bg-color: black;
+        --sidebar-bg-color: #27272d;
         --sidebar-item-hover: white;
         --sidebar-item-active: #ef3b32;
     }
@@ -99,6 +116,13 @@ export default {
     color: #708490;
 }
 .datatable-icon.active {
+    color: #ef3b32;
+}
+.about-icon {
+    font-size: 4rem;
+    color: #708490;
+}
+.about-icon.active {
     color: #ef3b32;
 }
 .icon {
