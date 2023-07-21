@@ -74,11 +74,7 @@ app.get('/databases', function(request, response){
   response.json(masterDBList);
 });
 
-//setInterval(deleteServers, 1000 * 60 * 60, masterServerList);
-//setInterval(console.log, 1000 * 60 * 60, masterServerList);
-setInterval(deleteServers, 25000, masterServerList);
-setInterval(console.log, 30000, 'Array outside function: ');
-setInterval(console.log, 30000, masterServerList);
+setInterval(deleteServers, 1000 * 60 * 60, masterServerList);
 
 //runs through hyperVisorList and deleted any item with LastCheckInTime older than reference time
 function deleteServers(array){
@@ -87,7 +83,9 @@ function deleteServers(array){
   var curTime = new Date();
   var referenceTime = new Date();
 
-  referenceTime.setHours(curTime.getHours()-28);
+  //referenceTime.setHours(curTime.getHours()-28);
+  referenceTime.setHours(curTime.getHours()-4);
+  referenceTime.setMinutes(curTime.getMinutes()-10);
   referenceTime = referenceTime.toISOString().split('.')[0];
   console.log('Reference time: ' + referenceTime);
   //same idea, less time difference for testing
