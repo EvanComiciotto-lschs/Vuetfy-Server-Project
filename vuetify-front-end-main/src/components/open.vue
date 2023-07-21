@@ -2,12 +2,36 @@
   <div class="card text-center m-3">
     <div class="card-body">
 
-      <h1 class="header" v-if="!toggleDataTable.value">Servers</h1>
-      <h1 class="header" v-else>Databases</h1>
-      <div class="search-bar">
+      <h1 class="header" v-if="toggleDataTable.value == 'about'">About</h1>
+      <h1 class="header" v-else-if="toggleDataTable.value =='database'">Databases</h1>
+      <h1 class="header" v-else>Servers</h1>
+      <div class="search-bar" v-if="toggleDataTable.value != 'about'">
         <input type="text" v-model="searchKeyword" placeholder="Search Name" />
       </div>
-      <table v-if="!toggleDataTable.value" class="table">
+      <div v-if="toggleDataTable.value == 'about'">
+        <p>about page</p>
+        <!--ABOUT PAGE CAN BE BUILT HERE
+            OR DESIGNED IN ANOTHER COMPONENT AND IMPORTED-->
+      </div>
+
+      <table v-else-if="toggleDataTable.value == 'database'" class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Size in GB</th>
+            <th>Path</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="database in filteredDatabases" :key="database.name">
+            <td>{{ database.name }}</td>
+            <td>{{ database.size }}</td>
+            <td>{{ database.paths }}</td>
+          </tr>
+        </tbody>
+      </table>  
+
+      <table v-else="toggleDataTable" class="table">
         <thead>
           <tr>
             <th>VM Name</th>
@@ -29,23 +53,6 @@
           </tr>
         </tbody>
       </table>
-
-      <table v-else class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Size in GB</th>
-            <th>Path</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="database in filteredDatabases" :key="database.name">
-            <td>{{ database.name }}</td>
-            <td>{{ database['size in GB'] }}</td>
-            <td>{{ database.path }}</td>
-          </tr>
-        </tbody>
-      </table>  
     </div>
   </div>
 </template>
@@ -57,6 +64,7 @@ import toggleDataTable from './state.js';
 const searchKeyword = ref('');
 var servers = ref(null);
 var databases = ref(null);
+console.log(toggleDataTable.value);
 
 //localStorages
 const ong = localStorage.getItem('brotha');
@@ -66,7 +74,7 @@ const auth = localStorage.getItem('header');
 if(ong == 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJfvZi8DO7pTghhHHTHkWdbyCvngkmXiY5ZXbsjl0XxnPGlwkVkgVo7kCgbknRN991FMdjeY6SeSf6ImylDy0DXIyfkKYclpvmWrCr2aiYaT0w6pVZAvxj1IDHKnuSMmUOQ4jHdE5qMKpvfepe5o2VDYDixXGMAYGpvNc7TdKyUUK7y3n0qiJ2AE8IGD5RdYKd2W0cpuOHwAeBZ44j1E75joAXoGl8UCaMGzLiZtMgcVvDlbCmLKfZnJEDc5tVTj0waoqYxTzzbXwCSo8QZLH2Aevt2rj' && auth == 'Bearer ' + token){
   console.log('hello');
   onMounted(() => {
-    fetch('http://fkhan.aiscorp.local:6285/servers')
+    fetch('http://4.246.161.216:3000/servers')
       .then(response => response.json())
       .then(data => {
         servers.value = data;
@@ -75,7 +83,7 @@ if(ong == 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJf
         console.error('Error fetching server data:', error);
       });
 
-    fetch('http://fkhan.aiscorp.local:6285/databases')
+    fetch('http://4.246.161.216:3000/databases')
       .then(response => response.json())
       .then(data => {
         databases.value = data;
