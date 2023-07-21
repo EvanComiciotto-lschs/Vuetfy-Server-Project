@@ -93,7 +93,7 @@ export default {
 
 <style>
     :root {
-        --sidebar-bg-color: black;
+        --sidebar-bg-color: #27272d;
         --sidebar-item-hover: white;
         --sidebar-item-active: #ef3b32;
     }

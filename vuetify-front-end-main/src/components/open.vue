@@ -25,13 +25,13 @@
         <tbody>
           <tr v-for="database in filteredDatabases" :key="database.name">
             <td>{{ database.name }}</td>
-            <td>{{ database['size in GB'] }}</td>
-            <td>{{ database.path }}</td>
+            <td>{{ database.size }}</td>
+            <td>{{ database.paths }}</td>
           </tr>
         </tbody>
       </table>  
 
-      <table v-else="toggleDataTable.value=='server'" class="table">
+      <table v-else="toggleDataTable" class="table">
         <thead>
           <tr>
             <th>VM Name</th>
@@ -53,23 +53,6 @@
           </tr>
         </tbody>
       </table>
-
-      <table v-else class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Size in GB</th>
-            <th>Path</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="database in filteredDatabases" :key="database.name">
-            <td>{{ database.name }}</td>
-            <td>{{ database.size }}</td>
-            <td>{{ database.paths }}</td>
-          </tr>
-        </tbody>
-      </table>  
     </div>
   </div>
 </template>
