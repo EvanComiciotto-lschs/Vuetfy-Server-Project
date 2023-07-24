@@ -9,7 +9,7 @@
         <input type="text" v-model="searchKeyword" placeholder="Search Name" />
       </div>
       <div v-if="toggleDataTable.value == 'about'">
-        <p>about page</p>
+        <aboutPage></aboutPage>
         <!--ABOUT PAGE CAN BE BUILT HERE
             OR DESIGNED IN ANOTHER COMPONENT AND IMPORTED-->
       </div>
@@ -61,6 +61,7 @@
 <script setup>
 import { ref, onMounted, computed} from 'vue';
 import toggleDataTable from './state.js';
+import aboutPage from "./aboutPage.vue";
 const searchKeyword = ref('');
 var servers = ref(null);
 var databases = ref(null);

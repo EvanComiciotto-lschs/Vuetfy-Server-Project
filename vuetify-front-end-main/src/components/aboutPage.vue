@@ -11,8 +11,7 @@
 #groupPhoto{
     width: 20rem;
     height: auto;
-    top: -1rem;
-    left: 2 rem;
+    align: auto;
 }
 #flowchart{
     width: 20rem;
