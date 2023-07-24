@@ -20,7 +20,7 @@ app.post('/login', (req, res) => {
 
 });
 
-app.post('/auth', (res) => {
+app.post('/auth', (req, res) => {
 
     var code = 547893467;
 
