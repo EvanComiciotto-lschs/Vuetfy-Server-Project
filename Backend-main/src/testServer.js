@@ -122,4 +122,4 @@ app.get('/messages', function(request, response){
   response.status(200).send(notificationMessage);
 });
 
-app.listen(5000);
+app.listen(3000);
