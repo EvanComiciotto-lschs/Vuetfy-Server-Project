@@ -2,6 +2,8 @@
   <img class="space" height="150" src="/src/assets/aegislogo.png">
   <form name="login-form">
     <div class="mb-3">
+      <br/>
+      <br/>
       <label for="username">Username </label>
       <input class='user' type="text" id="username" v-model="input.username" />
     </div>
@@ -40,13 +42,13 @@ export default {
     async login() {
       try {
         if(this.input.username == 'aiscorp.local' && this.input.password == 'Fahd'){
-          const response = await axios.post('http://4.246.161.216:3000/login', {
+          const response = await axios.post('http://localhost:4444/login', {
             username: this.input.username,
             password: this.input.password,
           });
           
           const token = response.data.token;
-          const res = await axios.post('http://4.246.161.216:3000/auth', {});
+          const res = await axios.post('http://localhost:4444/auth', {});
           const word = res.data.code; 
           const authHeader = `Bearer ${token}`;
 
@@ -58,6 +60,22 @@ export default {
           ///eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJldXdpcmx3amVoZ2Z5a2FiayxjIiwicGFzc3dvcmQiOiJwYm9pZHRuamhlZ3ZkaGprZ2ZkIiwiaWF0IjoxNTE2MjM5MDIyfQ.zWXb9VM9Bxe-amtInmae7lJ7_1dx7pbfW3VONolyqsc
           // Redirect or perform other actions after successful login
           this.$router.push('/home')
+        } else if (this.input.username == 'aiscorp.local' && this.input.password == 'Steve'){
+          const response = await axios.post('http://localhost:4444/login', {
+            username: this.input.username,
+            password: this.input.password,
+          });
+          
+          const token = response.data.token;
+          const authHeader = `Bearer ${token}`;
+
+          //local storages
+          localStorage.setItem('jwt', token);
+          localStorage.setItem('header', authHeader);
+
+          ///eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJldXdpcmx3amVoZ2Z5a2FiayxjIiwicGFzc3dvcmQiOiJwYm9pZHRuamhlZ3ZkaGprZ2ZkIiwiaWF0IjoxNTE2MjM5MDIyfQ.zWXb9VM9Bxe-amtInmae7lJ7_1dx7pbfW3VONolyqsc
+          // Redirect or perform other actions after successful login
+          this.$router.push('/messages')
         } else {
           this.output = 'Put in valid username & password';
           if(strike == 3){

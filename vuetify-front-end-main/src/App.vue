@@ -15,7 +15,6 @@
   //import dare from './components/open.vue'
   import sidebar from './components/sidebar.vue'
   import {sidebarWidth} from './components/state.js'
-  import notification from './components/notification.vue'
 </script>
 
 <style>

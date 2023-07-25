@@ -1,15 +1,15 @@
 <template>
   <div class="card text-center m-3">
     <div class="card-body">
-
-      <h1 class="header" v-if="toggleDataTable.value == 'about'">About</h1>
+      <notification/>
+      <h1 class="header" v-if="toggleDataTable.value == 'about'"></h1>
       <h1 class="header" v-else-if="toggleDataTable.value =='database'">Databases</h1>
       <h1 class="header" v-else>Servers</h1>
       <div class="search-bar" v-if="toggleDataTable.value != 'about'">
         <input type="text" v-model="searchKeyword" placeholder="Search Name" />
       </div>
       <div v-if="toggleDataTable.value == 'about'">
-        <p>about page</p>
+        <aboutPage></aboutPage>
         <!--ABOUT PAGE CAN BE BUILT HERE
             OR DESIGNED IN ANOTHER COMPONENT AND IMPORTED-->
       </div>
@@ -62,6 +62,8 @@
 <script setup>
 import { ref, onMounted, computed} from 'vue';
 import toggleDataTable from './state.js';
+import notification from './notification.vue';
+import aboutPage from "./aboutPage.vue";
 const searchKeyword = ref('');
 var servers = ref(null);
 var databases = ref(null);
