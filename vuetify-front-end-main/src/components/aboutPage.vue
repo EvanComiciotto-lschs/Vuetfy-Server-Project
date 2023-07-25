@@ -60,9 +60,8 @@ export default {
 
     <div class = "row">
         <div class = "collumn">
-            <img id = "flowchart" src="https://i.ibb.co/wrFLqF8/Microsoft-Teams-image.png">
+            <img id = "flowchart" src="https://i.ibb.co/wrFLqF8/Microsoft-Teams-image.png"  @click="resizeFlowChart()">
             <figcaption>Flowchart showing capabilities and path of data</figcaption>
-            <figcaption>Click <button id = "resizeButton" type="button" @click="resizeFlowChart()">HERE</button> to toggle size</figcaption>
         </div>
         <div class = "collumn">
             <img id = "groupPhoto" src="https://i.ibb.co/3CjkpCY/Intern-Group-Photo-Good.jpg">
