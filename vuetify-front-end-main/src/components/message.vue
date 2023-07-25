@@ -29,8 +29,8 @@
 
 <template>
     <div>
-        <input class="in" type="text" v-model="message">
-        <button @click="fill()">Submit</button>
+        <input class="in" type="text" v-model="message" placeholder="Send a message">
+        <button @click="fill()" style="border: 2px solid; padding: 5px"> Submit </button>
     </div>
     <div>
         <p>{{ sendMsg }}</p>
