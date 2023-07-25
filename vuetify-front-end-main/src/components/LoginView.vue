@@ -1,4 +1,5 @@
 <template>
+  <img class="space" height="150" src="/src/assets/aegislogo.png">
   <form name="login-form">
     <div class="mb-3">
       <label for="username">Username </label>
@@ -75,3 +76,30 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+
+.pass{
+  border: 1px solid rgb(183, 183, 214);
+  background-color: rgb(247, 251, 253);
+}
+
+.user{
+  border: 1px solid rgb(183, 183, 214);
+  background-color: rgb(247, 251, 253);
+}
+
+.btn{
+  width: 200px;
+  background-color: rgb(247, 244, 244);
+  border: 1px solid rgb(197, 197, 197);
+}
+
+.btn:hover{
+  color: grey;
+  scale: 105%;
+  transition: ease 0.5s;
+}
+
+
+</style>
