@@ -2,7 +2,7 @@
   <div class="card text-center m-3">
     <div class="card-body">
 
-      <h1 class="header" v-if="toggleDataTable.value == 'about'">About</h1>
+      <h1 class="header" v-if="toggleDataTable.value == 'about'"></h1>
       <h1 class="header" v-else-if="toggleDataTable.value =='database'">Databases</h1>
       <h1 class="header" v-else>Servers</h1>
       <div class="search-bar" v-if="toggleDataTable.value != 'about'">
@@ -110,8 +110,8 @@ const filteredDatabases = computed(() => {
 .table {
   width: 100%;
   border: 1px solid;
-  background-color: #708490;
   font-family: HKGrotesk-regular; 
+  background-color: #708490;
   color: white;
 }
 
@@ -126,7 +126,6 @@ td {
   border: 1px solid #000000;
   border-bottom: 1px solid #000000;
 }
-
 tr:hover {
   background-color: #9dafb9;
 }

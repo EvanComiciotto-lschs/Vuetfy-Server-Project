@@ -1,34 +1,179 @@
+<script>
+export default {
+    methods: {
+        resizeFlowChart() {
+            document.getElementById("flowchart").classList.toggle("big-img");
+        }
+    }
+};
+</script>
+
 <template>
-    <p>Core functionality: Gathers server and database information from various hosts, compiles them, and displays them on a webpage.</p>
-    <p> </p>
-    <p>Backend: Gathers data from a series of automated Powershell scripts that collect the data and send it to a set host in a json file. The host runs a series of programs that compile each set of data into separate lists, checking for outdated information and deleting it. The backend then utilizes the get and post APIs in order to store and transmit the data to the frontend. </p>
+    <p id = "heading">2023 IT Asset Project</p>
+    <div> </div>
+    <table id = "descriptions">
+        <tr>
+            <th id = "tableHeading" colspan = "4">Core functionality: Gathers server and database information from various hosts, compiles them, and displays them on a webpage.</th>
+        </tr>
+        <tr id = "headerLabels">
+            <th class = "tableLabel">Backend</th>
+            <th class = "tableLabel">Authentication</th>
+            <th class = "tableLabel">Frontend</th>
+            <th class = "talbeLabel">Distribution</th>
+        </tr>
+        <tr>
+            <td class = "description">Gathers data from a series of automated Powershell scripts that collect the data and send it to a set host in json format. The host runs a series of programs that compile each set of data into separate lists, checking for outdated information and deleting it. The backend then utilizes the get and post APIs in order to store and transmit the data to the frontend.</td>
+            <td class = "description">Something with tokens and stuff. Requires a valid username and password  to ensure information is only accessed by the intended users.</td>
+            <td class = "description">Utilizes Vue3 and fetch APIs to retrieve the data from the set host. The data is then displayed in a series of table which can be filtered through the collapsable sidebar and searched as desired.</td>
+            <td class = "description">The code is all compiled in Docker containers that are hosted and stored on a virtual server in Azure to ensure the programs can run constantly and be accessed as needed.</td>
+        </tr>
+        <tr>
+            <td class = "people">Jared, Fahd, Ethan</td>
+            <td class = "people">Stephen</td>
+            <td class = "people">Evan, Ian, Stephen, Ethan</td>
+            <td class = "people">Jared</td>
+        </tr>
+    </table>
 
-    <p>Authentication: Something with tokens and stuff. Requires a valid username and password  to ensure information is only accessed by the intended users. </p>
+    <!--<div id = "backendDescription">Backend: Gathers data from a series of automated Powershell scripts that collect the data and send it to a set host in a json file. The host runs a series of programs that compile each set of data into separate lists, checking for outdated information and deleting it. The backend then utilizes the get and post APIs in order to store and transmit the data to the frontend. </div>
 
-    <p>Frontend: Utilizes the fetch API to retrieve the data from the set host. The data is then displayed in a series of tables. The tables can be filtered with search functionality. </p>
+        <div id = authDescription>Authentication: Something with tokens and stuff. Requires a valid username and password  to ensure information is only accessed by the intended users. </div>
 
-    <p>Distribution: The code is all compiled and stored in a container that is hosted on a virtual server so the programs can run constantly and be accessed as needed.</p>
+        <div id = frontendDescription>Frontend: Utilizes the fetch API to retrieve the data from the set host. The data is then displayed in a series of tables. The tables can be filtered with search functionality. </div>
 
+        <div>Distribution: The code is all compiled and stored in a container that is hosted on a virtual server so the programs can run constantly and be accessed as needed.</div>-->
 
-    <img id = "flowchart" src="https://i.ibb.co/wrFLqF8/Microsoft-Teams-image.png">
+    <!--<figure>
+        <img id = "flowchart" src="https://i.ibb.co/wrFLqF8/Microsoft-Teams-image.png">
+        <figcaption>Flowchart showing capabilities and path of data</figcaption>
+        <figcaption>Click <button id = "resizeButton" type="button" @click="resizeFlowChart()">HERE</button> to enlarge</figcaption>
+    </figure>
+    
 
-
+    <p></p>
+        
+    
     <img id = "groupPhoto" src="https://i.ibb.co/3CjkpCY/Intern-Group-Photo-Good.jpg">
-    <p>2023 IT Asset Project</p>
     <p>Designed by La Salle College High School class of 2024 summer interns</p>
-    <p>Members: Ethan Pakuris, Jared Werts, Ian Whitaker, Evan Comiciotto, Fahd Khan, Steve Trezza</p>
-    <p>(From left to right as pictured)</p>
-    <!--ABOUT PAGE CAN BE BUILT HERE
-        OR DESIGNED IN ANOTHER COMPONENT AND IMPORTED-->
+    <p>Members: Ethan Pakuris, Jared Werts, Ian Whitaker, Evan Comiciotto, Fahd Khan, and <a id = "partyModeLink" href="partymode=true">Stephen Trezza</a></p>
+    <p>(From left to right as pictured)</p>-->
+
+    <div class = "row">
+        <div class = "collumn">
+            <img id = "flowchart" src="https://i.ibb.co/wrFLqF8/Microsoft-Teams-image.png">
+            <figcaption>Flowchart showing capabilities and path of data</figcaption>
+            <figcaption>Click <button id = "resizeButton" type="button" @click="resizeFlowChart()">HERE</button> to toggle size</figcaption>
+        </div>
+        <div class = "collumn">
+            <img id = "groupPhoto" src="https://i.ibb.co/3CjkpCY/Intern-Group-Photo-Good.jpg">
+            <p>Designed by La Salle College High School class of 2024 summer interns</p>
+            <p class="internList">Members: Ethan Pakuris, Jared Werts, Ian Whitaker, Evan Comiciotto, Fahd Khan, and <a id = "stName" href="partymode=true">Stephen Trezza</a></p>
+            <p class = "finePrint">(From left to right as pictured)</p>
+        </div>
+    </div>
+
+
 </template>
 
+
 <style scoped>
-#groupPhoto{
-    width: 20rem;
-    height: auto;
+
+table{
+    width: 80%;
+    height:auto;
 }
+table, td, th{
+    padding: 2px;
+    width: 26%;
+    vertical-align: top;
+    border: 1px solid;
+    border-collapse:collapse;
+}
+#heading{
+    font-weight:bold;
+    font-size:xx-large;
+
+    padding-top: 10px;
+    padding-bottom: 50px;
+}
+#headerLabels{
+  background-color: #708490;
+  color: #27272d;
+}
+#descriptions{
+    text-align: center;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 10px;
+    width: 80%;
+    margin: auto;
+    table-layout: fixed;
+}
+
+th{
+    font-size:large;
+}
+#tableHeading{
+    background-color: white;
+    color: #27272d;
+    background-color: #ef3b32;
+    font-size: larger;
+}
+
+.people{
+    border-top: none;
+    padding-top: 10px;
+}
+.description{
+    border-bottom: none;
+}
+#stName{
+    color: black;
+    text-decoration: none;
+    
+}
+p{
+    color: black;
+}
+
+.collumn{
+    float: left;
+    width: 50%;
+    padding: 5px;
+}
+.row::after{
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
 #flowchart{
-    width: 20rem;
+    width: 40%;
     height: auto;
+    margin-right: auto;
+    margin-left: auto;
 }
+figcaption{
+    font-size: small;
+    margin-right: auto;
+}
+.big-img {
+    width: 80% !important;
+    margin-left: auto;
+    margin-right: 0px;
+}
+
+#groupPhoto{
+    width: 50%;
+    height: auto;
+    padding-top: 10px;
+}
+.internList{
+    font-size: small;
+}
+.finePrint{
+    font-size: x-small;
+}
+
 </style>

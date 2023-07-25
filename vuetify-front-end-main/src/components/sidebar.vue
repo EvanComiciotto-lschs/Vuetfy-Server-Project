@@ -7,6 +7,7 @@ export default {
   methods: {
     reloadPage(){
         window.location.reload();
+
     }
   },
   setup() {
@@ -67,8 +68,8 @@ export default {
 <template>
     <div class ="sidebar" :style="{width:sidebarWidth}" style="display: flex; flex-direction: column;">
         <div class="collapse-icon" @click="reloadPage" style="display: flex; flex-direction: row;">
-            <img class ="pic" src = "/src/assets/Aegis-Logo-Transparent-Backgrounds.png">
-            <span v-if="!collapsed"><p class = "label-DONTBREAK0">ITS</p></span>
+            <a href="/home"><img class ="pic" src = "/src/assets/Aegis-Logo-Transparent-Backgrounds.png"></a>
+            <span v-if="!collapsed"><p class = "label-DONTBREAK0">IT Assets</p></span>
         </div>
         <div class="spacer"></div>
         <div class="item" @click="sidebarServers()" style="display: flex; flex-direction: row;">
