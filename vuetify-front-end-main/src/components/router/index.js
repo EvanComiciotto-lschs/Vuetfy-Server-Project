@@ -9,11 +9,11 @@ import { createWebHistory, createRouter } from "vue-router";
     path: "/home",
     component: () => import('../open.vue'),
   },
-//   {
-//     path: "/partymode=true",
-//     component: () => import('../party'),
-//   },
-  ]
+  {
+     path: "/messages",
+     component: () => import('../message.vue'),
+  },
+]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

@@ -110,4 +110,16 @@ function deleteServers(array){
   });
 }
 
-app.listen(6285);
+let notificationMessage = "";
+
+
+app.post('/messages', function(request, response){
+  notificationMessage = (request.body.message);
+  response.status(200).send("Success");
+  });
+
+app.get('/messages', function(request, response){
+  response.status(200).send(notificationMessage);
+});
+
+app.listen(5000);

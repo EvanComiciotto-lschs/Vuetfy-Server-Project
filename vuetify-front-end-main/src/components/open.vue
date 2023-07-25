@@ -1,7 +1,7 @@
 <template>
   <div class="card text-center m-3">
     <div class="card-body">
-
+      <notification/>
       <h1 class="header" v-if="toggleDataTable.value == 'about'">About</h1>
       <h1 class="header" v-else-if="toggleDataTable.value =='database'">Databases</h1>
       <h1 class="header" v-else>Servers</h1>
@@ -61,6 +61,7 @@
 <script setup>
 import { ref, onMounted, computed} from 'vue';
 import toggleDataTable from './state.js';
+import notification from './notification.vue';
 const searchKeyword = ref('');
 var servers = ref(null);
 var databases = ref(null);

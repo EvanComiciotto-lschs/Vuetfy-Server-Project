@@ -3,7 +3,6 @@
   <div :style="{'margin-left':sidebarWidth}">
   <v-app>
     <v-main>
-      <notification/>
       <img height="150" src="/src/assets/aegislogo.png">
         <!--<dare/>-->
         <RouterView/>
@@ -16,7 +15,6 @@
   //import dare from './components/open.vue'
   import sidebar from './components/sidebar.vue'
   import {sidebarWidth} from './components/state.js'
-  import notification from './components/notification.vue'
 </script>
 
 <style>
