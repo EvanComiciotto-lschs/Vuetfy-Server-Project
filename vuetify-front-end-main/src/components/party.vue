@@ -1,7 +1,4 @@
 <template>
-<div>
-  <img id="spin" src="src/assets/parent.webp">
-</div>  
   <div class="card text-center m-3">
     <div class="card-body">
       <h1 class="header" v-if="toggleDataTable.value == 'about'">About</h1>
