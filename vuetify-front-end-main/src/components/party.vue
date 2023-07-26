@@ -1,4 +1,10 @@
 <template>
+<div>
+  <audio id="play">
+    <source src="src/assets/TrezzaVienna.mp3" type="audio/mpeg">
+  </audio>
+  <img id="spin" src="src/assets/parent.webp">
+</div>  
   <div class="card text-center m-3">
     <div class="card-body">
       <h1 class="header" v-if="toggleDataTable.value == 'about'">About</h1>
