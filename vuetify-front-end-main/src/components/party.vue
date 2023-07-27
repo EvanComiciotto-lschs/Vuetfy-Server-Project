@@ -50,7 +50,10 @@
         <tbody>
           <tr v-for="server in filteredServers" :key="server.VMName">
             <td>{{ server.VMName }}</td>
-            <td>{{ server.Status }}</td>
+            <td>
+              <div class="running" v-if="server.Status=='Running'"></div>
+              <div class="offline" v-else></div>
+            </td>
             <td>{{ server.IP }}</td>
             <td>{{ server.LastCheckInTime }}</td>
             <td>{{ server.HyperVisor }}</td>
@@ -144,10 +147,22 @@ const filteredDatabases = computed(() => {
 
 }
 
+.running {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.5rem;
+  background-color: lime;
+  /*border: 1px solid black;*/
+  margin: auto;
+}
+
 .offline {
-    background-color: #b12828;
-    color: #ffffff;
-    text-align: left;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.5rem;
+  background-color: red;
+  /*border: 1px solid black;*/
+  margin: auto;
 }
 
 .styled-table thead tr {
