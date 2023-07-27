@@ -2,7 +2,8 @@
 //express.js api server
 var express = require('express');
 var cors = require('cors');
-var jwt = require('jsonwebtoken')
+var jwt = require('jsonwebtoken');
+const { json } = require('body-parser');
 var app = express();
 app.use(cors());
 app.use(express.json());
@@ -139,15 +140,17 @@ function deleteServers(array){
 }
 
 let notificationMessage = "";
-
+let notificationTime = "";
 
 app.post('/messages', function(request, response){
-  notificationMessage = (request.body.message);
+  // console.log(request.body);
+  notificationMessage = request.body.message;
+  notificationTime = request.body.timestamp;
   response.status(200).send("Success");
   });
 
 app.get('/messages', function(request, response){
-  response.status(200).send(notificationMessage);
+  response.status(200).send(JSON.stringify({message: notificationMessage, timestamp: notificationTime }));
 });
 
 app.listen(3000);
