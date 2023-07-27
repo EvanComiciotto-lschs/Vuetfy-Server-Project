@@ -35,9 +35,9 @@ ssh jared@4.246.161.216 "rm /tmp/*.tar"
 scp ./backend.tar jared@4.246.161.216:/tmp
 scp ./frontend.tar jared@4.246.161.216:/tmp
 echo "Deploying Backend..."
-ssh jared@4.246.161.216 "docker rm backend_ctr --force ; docker image rm backend ; docker load -i /tmp/backend.tar ; docker run -d -p 3000:3000 --name backend_ctr backend:latest"
+ssh jared@4.246.161.216 "docker rm backend_ctr --force ; docker image rm backend ; docker load -i /tmp/backend.tar ; docker run -d -p 3030:3000 --name backend_ctr backend:latest"
 echo "Deploying Frontend..."
-ssh jared@4.246.161.216 "docker rm frontend_ctr --force ; docker image rm frontend ; docker load -i /tmp/frontend.tar ; docker run -d -p 80:80 --name frontend_ctr frontend:latest"
+ssh jared@4.246.161.216 "docker rm frontend_ctr --force ; docker image rm frontend ; docker load -i /tmp/frontend.tar ; docker run -d -p 8080:80 --name frontend_ctr frontend:latest"
 # Reset Changes to Dockerfiles
 echo "Reverting Dockerfile Changes"
 cd ~/Documents/GitHub/Vuetfy-Server-Project/
