@@ -45,4 +45,5 @@ git fetch origin
 git reset --hard origin/main
 git pull
 # Done
+cd ~/Documents/GitHub/Vuetfy-Server-Project/builders
 echo "DONE!"
