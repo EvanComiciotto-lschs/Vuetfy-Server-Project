@@ -68,6 +68,7 @@ import { ref, onMounted, computed} from 'vue';
 import toggleDataTable from './state.js';
 import notification from './notification.vue';
 import aboutPage from "./aboutPage.vue";
+import router from './router/index.js';
 const searchKeyword = ref('');
 var servers = ref(null);
 var databases = ref(null);
@@ -99,6 +100,8 @@ if(ong == 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJf
         console.error('Error fetching database data:', error);
       });
   });
+} else {
+  router.push('/')
 }
 const filteredServers = computed(() => {
   if (!searchKeyword.value) {

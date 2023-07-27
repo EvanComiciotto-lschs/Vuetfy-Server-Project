@@ -10,29 +10,34 @@ app.use(express.json());
 //declare the main lists so they can be accesssed between functions
 let masterServerList = [];
 let masterDBList = [];
+//let token = "6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t";
+const token = localStorage.getItem('jwt');
 //input function (post requests to /servers)
 app.post('/servers', function(request, response){
-  var reqData = (request.body);     //store the request body
-  response.send("data received");
-    reqData.Servers.forEach(function(server){
-      //check if the VM is already in the list
-    if (masterServerList.some(existingServer => existingServer.VMName === server.VMName)){
-        console.log(server.VMName + " already exists in masterServerList");
-        //check if the last check in time is newer
-       var curServer = masterServerList.find(existingServer => existingServer.VMName === server.VMName);
-        if (server.LastCheckInTime > curServer.LastCheckInTime){
-          console.log(server.VMName + " has a newer check in time. Updating its attributes.");
-          //update masterServerList with newer attributes
-          curServer.LastCheckInTime = server.LastCheckInTime;
-          curServer.IP = server.IP;
-          curServer.HyperVisor = server.HyperVisor;
-          curServer.Hostname = server.Hostname;
-        }
-      } 
-    else {
+  var reqData = (request.body);   //store the request body
+  if(request.header.auth == token){
+    response.send("data received");
+      reqData.Servers.forEach(function(server){
+        //check if the VM is already in the list
+      if (masterServerList.some(existingServer => existingServer.VMName === server.VMName)){
+          console.log(server.VMName + " already exists in masterServerList");
+          //check if the last check in time is newer
+        var curServer = masterServerList.find(existingServer => existingServer.VMName === server.VMName);
+          if (server.LastCheckInTime > curServer.LastCheckInTime){
+            console.log(server.VMName + " has a newer check in time. Updating its attributes.");
+            //update masterServerList with newer attributes
+            curServer.LastCheckInTime = server.LastCheckInTime;
+            curServer.IP = server.IP;
+            curServer.HyperVisor = server.HyperVisor;
+            curServer.Hostname = server.Hostname;
+          }
+      } else {
         masterServerList.push(server);
       }
-  });
+    });
+  } else {
+    response.send("not authenticated");
+  }
   
   console.log(masterServerList);
   console.log("the masterServerList has " + masterServerList.length + " servers.");

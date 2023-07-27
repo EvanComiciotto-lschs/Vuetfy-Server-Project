@@ -1,5 +1,5 @@
 <template>
-  <img class="space" height="150" src="/src/assets/aegislogo.png">
+  <img height="150" src="/src/assets/aegislogo.png">
   <form name="login-form">
     <div class="mb-3">
       <br/>
@@ -69,7 +69,11 @@ export default {
           const token = response.data.token;
           const authHeader = `Bearer ${token}`;
 
+          const res = await axios.post('http://4.246.161.216:3000/auth', {});
+          const word = res.data.code;
+
           //local storages
+          localStorage.setItem('brotha', word);
           localStorage.setItem('jwt', token);
           localStorage.setItem('header', authHeader);
 
