@@ -1,8 +1,8 @@
 <template>
 <div>
-  <audio controls>
-    <source src="/src/assets/TrezzaVienna.mp3" type="audio/mpeg">
-  </audio>
+  <!--<audio id="play">
+    <source src="./src/assets/TrezzaVienna.mp3" type="audio/mpeg">
+  </audio>-->
   <img id="spin" src="/src/assets/parent.webp">
 </div>  
   <div class="card text-center m-3">

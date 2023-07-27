@@ -1,29 +1,45 @@
 <script>
-    import {ref} from 'vue';
-    
-    export default {
-        data(){
-            return {
-                message : ref(''),
-                sendMsg: ""
-            }
-        },
-        methods: {
-            async fill() {
-                let resp = await fetch("http://4.246.161.216:3000/messages/", {
-                    method: "post",
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
+import { ref } from 'vue';
 
-                    //make sure to serialize your JSON body
-                    body: JSON.stringify({
-                        message: this.message
-                    })
-                });
-                this.sendMsg = resp.ok?"Message Sent":"Error sending message!";
-            }
+export default {
+    data() {
+        return {
+            message: ref(''),
+            sendMsg: "",
+            currentTime: ""
+        }
+    },
+
+    methods: {
+        async fill() {
+            let resp = await fetch("http://4.246.161.216:3000/messages/", {
+                method: "post",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+
+                //make sure to serialize your JSON body
+                body: JSON.stringify({
+                    message: this.message,
+                    timestamp: Date.now()
+                })
+            });
+            this.sendMsg = resp.ok ? "Message Sent" : "Error sending message!";
+        },
+        async empty() {
+            let resp = await fetch("http://4.246.161.216:3000/messages/", {
+                method: "post",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: "",
+                    timestamp: ""
+                })
+            });
+        }
     },
 }
 </script>
@@ -32,6 +48,8 @@
     <div>
         <input class="in" type="text" v-model="message" placeholder="Send a message">
         <button @click="fill()" style="border: 2px solid; padding: 5px"> Submit </button>
+        <br/>
+        <button @click="empty()" style="border: 2px solid; padding: 5px"> Remove Message</button>
     </div>
     <div>
         <p>{{ sendMsg }}</p>

@@ -2,7 +2,10 @@
 export default {
     methods: {
         resizeFlowChart() {
-            document.getElementById("flowchart").classList.toggle("big-img");
+            document.getElementById("flowchart").classList.toggle("big-chart");
+        },
+        resizePhoto() {
+            document.getElementById("groupPhoto").classList.toggle("big-photo");
         }
     }
 };
@@ -64,7 +67,7 @@ export default {
             <figcaption>Flowchart showing capabilities and path of data</figcaption>
         </div>
         <div class = "collumn">
-            <img id = "groupPhoto" src="https://i.ibb.co/3CjkpCY/Intern-Group-Photo-Good.jpg">
+            <img id = "groupPhoto" src="https://i.ibb.co/3CjkpCY/Intern-Group-Photo-Good.jpg" @click="resizePhoto">
             <p>Designed by La Salle College High School class of 2024 summer interns</p>
             <p class="internList">Members: Ethan Pakuris, Jared Werts, Ian Whitaker, Evan Comiciotto, Fahd Khan, and <a id = "stName" href="partymode=true">Stephen Trezza</a></p>
             <p class = "finePrint">(From left to right as pictured)</p>
@@ -157,12 +160,16 @@ figcaption{
     font-size: small;
     margin-right: auto;
 }
-.big-img {
+.big-chart {
     width: 80% !important;
     margin-left: auto;
     margin-right: 0px;
 }
-
+.big-photo {
+    width: 80% !important;
+    margin-left: 0px;
+    margin-right: auto;
+}
 #groupPhoto{
     width: 50%;
     height: auto;

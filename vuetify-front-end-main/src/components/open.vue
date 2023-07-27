@@ -46,7 +46,11 @@
         <tbody>
           <tr v-for="server in filteredServers" :key="server.VMName">
             <td>{{ server.VMName }}</td>
-            <td>{{ server.Status }}</td>
+            <td>
+              <div class="running" v-if="server.Status=='Running'"></div>
+              <div class="offline" v-else></div>
+            </td>
+            <!-- <td><div class=""></div>{{ server.Status=="Running"?"<div class=\"running\"></div>":"<div class=\"offline\"></div>" }}</td> -->
             <td>{{ server.IP }}</td>
             <td>{{ server.LastCheckInTime }}</td>
             <td>{{ server.HyperVisor }}</td>
@@ -118,6 +122,25 @@ const filteredDatabases = computed(() => {
 </script>
 
 <style scoped>
+
+.running {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.5rem;
+  background-color: lime;
+  border: 1px solid black;
+  margin: auto;
+}
+
+.offline {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.5rem;
+  background-color: red;
+  border: 1px solid black;
+  margin: auto;
+}
+
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
@@ -152,7 +175,12 @@ const filteredDatabases = computed(() => {
 .styled-table tbody tr:nth-of-type(even):focus {
     background-color: #f3f3f3;
 }
-
+.styled-table tbody tr:hover{
+  background-color: #9c9c9c;
+}
+.styled-table tbody tr:nth-of-type(even):hover{
+  background-color: #9c9c9c;
+}
 .styled-table th,
 .styled-table td {
     padding: 12px 15px;
