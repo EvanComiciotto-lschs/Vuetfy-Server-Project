@@ -20,36 +20,39 @@ export default {
         console.error('Error fetching data:', error);
       }
     });
-    function hideMessage() {
-        messageCheck = ref(false);
-        console.log(messageCheck.value);
-      }
-
-
     return {
       messages,
       messageTime,
       messageCheck,
-      hideMessage
     };
   },
+  methods: {
+    hideMessage() {
+        this.messageCheck = false;
+      }
+
+  }
 };
 
 </script>
 
 <template>
-  <div class="message" v-if="messageCheck">
+  <div class="messageDisplay" v-if="messageCheck">
     <p><b>{{ messageTime }} : {{ messages }}</b></p>
-    <button @click="hideMessage()">X</button>
-    
+    <button @click="hideMessage()" class="Xbutton"><b>x</b></button>
   </div>
   <div v-else></div>
 </template>
 
 <style>
-.message {
+.messageDisplay {
   width: 100%;
   background-color: #00bbbb;
   color: white;
+  display: flex;
+}
+.Xbutton{
+  float: right;
+  padding-left: 84%;
 }
 </style>
