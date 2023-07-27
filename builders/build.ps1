@@ -2,7 +2,7 @@
 echo Updating Repo
 cd ~/Documents/GitHub/Vuetfy-Server-Project/
 git fetch origin
-git reset --hard origin/master
+git reset --hard origin/main
 git pull
 # Clear Old
 echo Clearing Old Images
