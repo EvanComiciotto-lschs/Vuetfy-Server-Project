@@ -149,7 +149,12 @@ const filteredDatabases = computed(() => {
 .styled-table tbody tr:nth-of-type(even):focus {
     background-color: #f3f3f3;
 }
-
+.styled-table tbody tr:hover{
+  background-color: #9c9c9c;
+}
+.styled-table tbody tr:nth-of-type(even):hover{
+  background-color: #9c9c9c;
+}
 .styled-table th,
 .styled-table td {
     padding: 12px 15px;
