@@ -1,6 +1,6 @@
 <template>
 <div>
-  <audio id="play">
+  <audio controls>
     <source src="/src/assets/TrezzaVienna.mp3" type="audio/mpeg">
   </audio>
   <img id="spin" src="/src/assets/parent.webp">
