@@ -8,7 +8,7 @@ export default {
     var messageCheck = ref(false);
 
     onMounted(async () => {
-      let resp = await fetch('http://4.246.161.216:3000/messages');
+      let resp = await fetch('https://itassets.aiscorp.com:3000/messages');
       if (resp.ok) {
         const data = await resp.json();
         console.log(data)

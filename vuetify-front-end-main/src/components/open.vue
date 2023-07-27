@@ -82,7 +82,7 @@ const auth = localStorage.getItem('header');
 if(ong == 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJfvZi8DO7pTghhHHTHkWdbyCvngkmXiY5ZXbsjl0XxnPGlwkVkgVo7kCgbknRN991FMdjeY6SeSf6ImylDy0DXIyfkKYclpvmWrCr2aiYaT0w6pVZAvxj1IDHKnuSMmUOQ4jHdE5qMKpvfepe5o2VDYDixXGMAYGpvNc7TdKyUUK7y3n0qiJ2AE8IGD5RdYKd2W0cpuOHwAeBZ44j1E75joAXoGl8UCaMGzLiZtMgcVvDlbCmLKfZnJEDc5tVTj0waoqYxTzzbXwCSo8QZLH2Aevt2rj' && auth == 'Bearer ' + token){
   console.log('hello');
   onMounted(() => {
-    fetch('http://4.246.161.216:3000/servers')
+    fetch('https://itassets.aiscorp.com:3000/servers')
       .then(response => response.json())
       .then(data => {
         servers.value = data;
@@ -91,7 +91,7 @@ if(ong == 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJf
         console.error('Error fetching server data:', error);
       });
 
-    fetch('http://4.246.161.216:3000/databases')
+    fetch('https://itassets.aiscorp.com:3000/databases')
       .then(response => response.json())
       .then(data => {
         databases.value = data;
