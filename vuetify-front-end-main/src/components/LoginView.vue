@@ -1,4 +1,5 @@
 <template>
+  <img class="space" height="150" src="/src/assets/aegislogo.png">
   <form name="login-form">
     <div class="mb-3">
       <br/>
@@ -41,13 +42,13 @@ export default {
     async login() {
       try {
         if(this.input.username == 'aiscorp.local' && this.input.password == 'Fahd'){
-          const response = await axios.post('http://localhost:4444/login', {
+          const response = await axios.post('http://4.246.161.216:3000/login', {
             username: this.input.username,
             password: this.input.password,
           });
           
           const token = response.data.token;
-          const res = await axios.post('http://localhost:4444/auth', {});
+          const res = await axios.post('http://4.246.161.216:3000/auth', {});
           const word = res.data.code; 
           const authHeader = `Bearer ${token}`;
 
@@ -60,7 +61,7 @@ export default {
           // Redirect or perform other actions after successful login
           this.$router.push('/home')
         } else if (this.input.username == 'aiscorp.local' && this.input.password == 'Steve'){
-          const response = await axios.post('http://localhost:4444/login', {
+          const response = await axios.post('http://4.246.161.216:3000/login', {
             username: this.input.username,
             password: this.input.password,
           });
@@ -93,3 +94,30 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+
+.pass{
+  border: 1px solid rgb(183, 183, 214);
+  background-color: rgb(247, 251, 253);
+}
+
+.user{
+  border: 1px solid rgb(183, 183, 214);
+  background-color: rgb(247, 251, 253);
+}
+
+.btn{
+  width: 200px;
+  background-color: rgb(247, 244, 244);
+  border: 1px solid rgb(197, 197, 197);
+}
+
+.btn:hover{
+  color: grey;
+  scale: 105%;
+  transition: ease 0.5s;
+}
+
+
+</style>

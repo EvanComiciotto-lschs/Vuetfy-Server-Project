@@ -14,7 +14,7 @@
             OR DESIGNED IN ANOTHER COMPONENT AND IMPORTED-->
       </div>
 
-      <table v-else-if="toggleDataTable.value == 'database'" class="table">
+      <table v-else-if="toggleDataTable.value == 'database'" class="styled-table">
         <thead>
           <tr>
             <th>Name</th>
@@ -29,9 +29,10 @@
             <td>{{ database.paths }}</td>
           </tr>
         </tbody>
+    
       </table>  
 
-      <table v-else="toggleDataTable" class="table">
+      <table v-else="toggleDataTable" class="styled-table">
         <thead>
           <tr>
             <th>VM Name</th>
@@ -114,42 +115,83 @@ const filteredDatabases = computed(() => {
 </script>
 
 <style scoped>
-.table {
-  width: 100%;
-  border: 1px solid;
-  font-family: HKGrotesk-regular; 
-  background-color: #708490;
-  color: white;
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
-th {
-  background-color: #ef3b32;
-  color: white;
+.offline {
+    background-color: #b12828;
+    color: #ffffff;
+    text-align: left;
 }
 
-td {
-  padding: 8px;
-  text-align: left;
-  border: 1px solid #000000;
-  border-bottom: 1px solid #000000;
-}
-tr:hover {
-  background-color: #9dafb9;
+.styled-table thead tr {
+    background-color: #e92e2e;
+    color: #ffffff;
+    text-align: left;
 }
 
-.checkbox-container {
-  display: flex;
-  justify-content: flex-end;
-  font-family: HKGrotesk-Bold;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-.header{
-  font-weight: bold;
+
+.styled-table thead tr:hover {
+    background-color: #af2525;
+    color: #ffffff;
+    text-align: left;
 }
 
-.form-check {
-  margin-right: 10px;
+.styled-table tbody tr:nth-of-type(even):focus {
+    background-color: #f3f3f3;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr:nth-of-type(red) {
+    background-color: #eb9696;
+}
+
+.styled-table tbody tr {
+    background-color:#e0e0e0;
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    background-color: #ffffff;
+    border-bottom: 2px solid #e92e2e;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
 }
 .search-bar {
   margin-left: 10px;

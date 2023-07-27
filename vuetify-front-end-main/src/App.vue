@@ -3,7 +3,7 @@
   <div :style="{'margin-left':sidebarWidth}">
   <v-app>
     <v-main>
-      <img height="150" src="/src/assets/aegislogo.png">
+      <!--<notification/>-->
         <!--<dare/>-->
         <RouterView/>
     </v-main>

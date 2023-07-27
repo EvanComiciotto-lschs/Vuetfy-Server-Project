@@ -10,6 +10,10 @@ import { createWebHistory, createRouter } from "vue-router";
     component: () => import('../open.vue'),
   },
   {
+    path: "/partymode=true",
+    component: () => import('../party.vue'),
+  },
+  {
      path: "/messages",
      component: () => import('../message.vue'),
   },
