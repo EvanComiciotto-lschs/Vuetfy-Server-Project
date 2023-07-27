@@ -7,6 +7,7 @@
 </div>  
   <div class="card text-center m-3">
     <div class="card-body">
+      <notification/>
       <h1 class="header" v-if="toggleDataTable.value == 'about'">About</h1>
       <h1 class="header" v-else-if="toggleDataTable.value =='database'">Databases</h1>
       <h1 class="header" v-else>Servers</h1>
@@ -14,7 +15,7 @@
         <input type="text" v-model="searchKeyword" placeholder="Search Name" />
       </div>
       <div v-if="toggleDataTable.value == 'about'">
-        <p>about page</p>
+        <aboutPage></aboutPage>
         <!--ABOUT PAGE CAN BE BUILT HERE
             OR DESIGNED IN ANOTHER COMPONENT AND IMPORTED-->
       </div>
@@ -68,6 +69,9 @@
 <script setup>
 import { ref, onMounted, computed} from 'vue';
 import toggleDataTable from './state.js';
+import aboutPage from "./aboutPage.vue";
+import notification from './notification.vue';
+import router from './router/index.js';
 const searchKeyword = ref('');
 var servers = ref(null);
 var databases = ref(null);
@@ -99,6 +103,8 @@ if(ong == 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJf
         console.error('Error fetching database data:', error);
       });
   });
+} else {
+  router.push('/')
 }
 const filteredServers = computed(() => {
   if (!searchKeyword.value) {
