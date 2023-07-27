@@ -38,7 +38,8 @@ export default {
 
 <template>
   <div class="messageDisplay" v-if="messageCheck">
-    <p><b>{{ messageTime }} : {{ messages }}</b></p>
+    <p><b style="display:inline-block">{{ messageTime }} :</b></p>
+    <p><b id = "messageBody">{{ messages }}</b></p>
     <button @click="hideMessage()" class="Xbutton"><b>x</b></button>
   </div>
   <div v-else></div>
@@ -53,6 +54,10 @@ export default {
 }
 .Xbutton{
   float: right;
-  padding-left: 84%;
+  padding-left: 79%;
+}
+#messageBody{
+  padding-left: 1rem;
+  display:inline-block;
 }
 </style>
