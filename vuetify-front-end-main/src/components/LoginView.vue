@@ -69,11 +69,7 @@ export default {
           const token = response.data.token;
           const authHeader = `Bearer ${token}`;
 
-          const res = await axios.post('http://4.246.161.216:3000/auth', {});
-          const word = res.data.code;
-
           //local storages
-          localStorage.setItem('brotha', word);
           localStorage.setItem('jwt', token);
           localStorage.setItem('header', authHeader);
 

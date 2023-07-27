@@ -128,7 +128,7 @@ const filteredDatabases = computed(() => {
   height: 1rem;
   border-radius: 0.5rem;
   background-color: lime;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   margin: auto;
 }
 
@@ -137,7 +137,7 @@ const filteredDatabases = computed(() => {
   height: 1rem;
   border-radius: 0.5rem;
   background-color: red;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   margin: auto;
 }
 
@@ -151,12 +151,6 @@ const filteredDatabases = computed(() => {
     margin-left: auto;
     margin-right: auto;
 
-}
-
-.offline {
-    background-color: #b12828;
-    color: #ffffff;
-    text-align: left;
 }
 
 .styled-table thead tr {
