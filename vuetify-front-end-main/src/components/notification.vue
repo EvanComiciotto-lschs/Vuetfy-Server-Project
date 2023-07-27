@@ -39,7 +39,7 @@ export default {
 
 <template>
   <div class="message" v-if="messageCheck">
-    <p>{{ messageTime }}: {{ messages }}</p> 
+    <p><b>{{ messageTime }} : {{ messages }}</b></p>
     <button @click="hideMessage()">X</button>
     
   </div>
@@ -50,7 +50,6 @@ export default {
 .message {
   width: 100%;
   background-color: #00bbbb;
-  border-color: black;
-  border: 1px solid;
+  color: white;
 }
 </style>
