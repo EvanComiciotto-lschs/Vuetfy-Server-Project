@@ -10,8 +10,9 @@ app.use(express.json());
 //declare the main lists so they can be accesssed between functions
 let masterServerList = [];
 let masterDBList = [];
+
 let token = "6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t";
-//const token = localStorage.getItem('jwt');
+
 //input function (post requests to /servers)
 app.post('/servers', function(request, response){
   var reqData = (request.body);   //store the request body
@@ -80,6 +81,23 @@ app.post('/databases', function(request, response){
 app.get('/databases', function(request, response){
   response.json(masterDBList);
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+let users = {
+  "department": {},
+  "position": {}
+}
+
+app.post('/users', (req,res) => {
+  response.status(200).send("Success");
+});
+
+app.get('/users', (req,res) => {
+  response.json(users);
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////
 
 app.post('/auth', (req, res) => {
 
