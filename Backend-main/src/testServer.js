@@ -15,7 +15,7 @@ let token = "6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t";
 //input function (post requests to /servers)
 app.post('/servers', function(request, response){
   var reqData = (request.body);   //store the request body
-  if(request.header.auth == token){
+  //if(request.header.auth == token){
     response.send("data received");
       reqData.Servers.forEach(function(server){
         //check if the VM is already in the list
@@ -35,13 +35,13 @@ app.post('/servers', function(request, response){
         masterServerList.push(server);
       }
     });
-  } else {
-    response.send("not authenticated");
-  }
-  
+  // } else {
+  //   response.send("not authenticated");
+  // }
   console.log(masterServerList);
   console.log("the masterServerList has " + masterServerList.length + " servers.");
 });
+
 //output function (get requests to /servers)
 app.get('/servers', (req, res) => {
   console.log(req.get("User-Agent"));
