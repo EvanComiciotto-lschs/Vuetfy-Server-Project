@@ -8,9 +8,9 @@
   <div class="card text-center m-3">
     <div class="card-body">
       <notification/>
-      <h1 class="header" v-if="toggleDataTable.value == 'about'">About</h1>
-      <h1 class="header" v-else-if="toggleDataTable.value =='database'">Databases</h1>
-      <h1 class="header" v-else>Servers</h1>
+      <h1 class="header" v-if="toggleDataTable.value == 'about'"></h1>
+      <h1 class="header" v-else-if="toggleDataTable.value =='database'"></h1>
+      <h1 class="header" v-else></h1>
       <div class="search-bar" v-if="toggleDataTable.value != 'about'">
         <input type="text" v-model="searchKeyword" placeholder="Search Name" />
       </div>
@@ -141,6 +141,13 @@ const filteredDatabases = computed(() => {
   }
 }
 
+.cursor {
+  /* creates a custom image cursor */
+  cursor: url(router/cheese.gif), auto;
+
+  /*cursor: url(target.svg) 15 15, move;*/
+}
+
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
@@ -172,14 +179,14 @@ const filteredDatabases = computed(() => {
 }
 
 .styled-table thead tr {
-    background-color: #e92e2e;
+    background-color: #2e50e9;
     color: #ffffff;
     text-align: left;
 }
 
 
 .styled-table thead tr:hover {
-    background-color: #af2525;
+    background-color: #3a25af;
     color: #ffffff;
     text-align: left;
 }
@@ -208,7 +215,7 @@ const filteredDatabases = computed(() => {
 
 .styled-table tbody tr:last-of-type {
     background-color: #ffffff;
-    border-bottom: 2px solid #e92e2e;
+    border-bottom: 2px solid #2e50e9;
 }
 
 .styled-table tbody tr.active-row {
@@ -252,7 +259,7 @@ a {
   
   body {
     height: 100vh;
-     background: linear-gradient(90deg,#e52e71,#ff8a00);
+     background: linear-gradient(90deg,#2e5fe5,#a200ff);
   
   }
   
