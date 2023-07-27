@@ -1,5 +1,5 @@
 # Generate new version
-Set-Variable -Name "random" -Value (Get-Random) -Option constant -Scope global
+Set-Variable -Name "random" -Value (Get-Random) -Option constant
 echo ("Generated random number: " + $random)
 Set-Alias -Name sed -Value C:\"Program Files"\Git\usr\bin\sed.exe
 # Pull
