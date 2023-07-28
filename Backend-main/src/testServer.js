@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 //express.js api server
 var express = require('express');
+// cors api
 var cors = require('cors');
+// jsonwebtoken api
 var jwt = require('jsonwebtoken');
 const { json } = require('body-parser');
 var app = express();
@@ -22,6 +24,7 @@ app.post('/servers', function(request, response){
       if (masterServerList.some(existingServer => existingServer.VMName === server.VMName)){
           console.log(server.VMName + " already exists in masterServerList");
           //check if the last check in time is newer
+          // var to make process shorter
         var curServer = masterServerList.find(existingServer => existingServer.VMName === server.VMName);
           if (server.LastCheckInTime > curServer.LastCheckInTime){
             console.log(server.VMName + " has a newer check in time. Updating its attributes.");
@@ -64,6 +67,7 @@ app.post('/databases', function(request, response){
       // combine the sizes
       matchDB.size += db.size;
     } else {
+      // Pushes everything if does not exist
       masterDBList.push({
         database_id: db.database_id,
         name: db.name,
@@ -108,6 +112,7 @@ app.post('/login', (req, res) => {
 
 });
 
+//sets time for deletion
 setInterval(deleteServers, 1000 * 60 * 60, masterServerList);
 
 //runs through hyperVisorList and deleted any item with LastCheckInTime older than reference time
