@@ -12,7 +12,7 @@ app.use(express.json());
 //declare the main lists so they can be accesssed between functions
 let masterServerList = [];
 let masterDBList = [];
-let token = "6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t";
+//let token = "6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t";
 //const token = localStorage.getItem('jwt');
 //input function (post requests to /servers)
 app.post('/servers', function(request, response){

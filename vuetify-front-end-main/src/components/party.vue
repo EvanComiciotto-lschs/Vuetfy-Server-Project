@@ -1,5 +1,6 @@
 <template>
 <div>
+  <notification/>
   <!--<audio id="play">
     <source src="./src/assets/TrezzaVienna.mp3" type="audio/mpeg">
   </audio>-->
@@ -7,7 +8,6 @@
 </div>  
   <div class="card text-center m-3">
     <div class="card-body">
-      <notification/>
       <h1 class="header" v-if="toggleDataTable.value == 'about'"></h1>
       <h1 class="header" v-else-if="toggleDataTable.value =='database'"></h1>
       <h1 class="header" v-else></h1>
@@ -141,13 +141,6 @@ const filteredDatabases = computed(() => {
   }
 }
 
-.cursor {
-  /* creates a custom image cursor */
-  cursor: url(router/cheese.gif), auto;
-
-  /*cursor: url(target.svg) 15 15, move;*/
-}
-
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
@@ -176,6 +169,19 @@ const filteredDatabases = computed(() => {
   background-color: red;
   /*border: 1px solid black;*/
   margin: auto;
+}
+
+.search-bar {
+  border: 1px solid rgb(206, 206, 206);
+  background-color: #f3f5ff;
+  width: 195px;
+  margin-left: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input[type="text"] {
+  text-align: center;
 }
 
 .styled-table thead tr {
