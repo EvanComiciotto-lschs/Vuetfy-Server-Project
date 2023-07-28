@@ -12,7 +12,7 @@ export default {
 
     methods: {
         async fill() {
-            let resp = await fetch("http://4.246.161.216:3000/messages/", {
+            let resp = await fetch("https://itassets.aiscorp.com:3000/messages/", {
                 method: "post",
                 headers: {
                     'Accept': 'application/json',
@@ -28,7 +28,7 @@ export default {
             this.sendMsg = resp.ok ? "Message Sent" : "Error sending message!";
         },
         async empty() {
-            let resp = await fetch("http://4.246.161.216:3000/messages/", {
+            let resp = await fetch("https://itassets.aiscorp.com:3000/messages/", {
                 method: "post",
                 headers: {
                     'Accept': 'application/json',

@@ -42,13 +42,13 @@ export default {
     async login() {
       try {
         if(this.input.username == 'aiscorp.local' && this.input.password == 'Fahd'){
-          const response = await axios.post('http://4.246.161.216:3000/login', {
+          const response = await axios.post('https://itassets.aiscorp.com:3000/login', {
             username: this.input.username,
             password: this.input.password,
           });
           
           const token = response.data.token;
-          const res = await axios.post('http://4.246.161.216:3000/auth', {});
+          const res = await axios.post('https://itassets.aiscorp.com:3000/auth', {});
           const word = res.data.code; 
           const authHeader = `Bearer ${token}`;
 
@@ -61,7 +61,7 @@ export default {
           // Redirect or perform other actions after successful login
           this.$router.push('/home')
         } else if (this.input.username == 'aiscorp.local' && this.input.password == 'Steve'){
-          const response = await axios.post('http://4.246.161.216:3000/login', {
+          const response = await axios.post('https://itassets.aiscorp.com:3000/login', {
             username: this.input.username,
             password: this.input.password,
           });

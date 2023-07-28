@@ -8,7 +8,7 @@ export default {
     var messageCheck = ref(false);
 
     onMounted(async () => {
-      let resp = await fetch('http://4.246.161.216:3000/messages');
+      let resp = await fetch('https://itassets.aiscorp.com:3000/messages');
       if (resp.ok) {
         const data = await resp.json();
         console.log(data)
@@ -20,36 +20,46 @@ export default {
         console.error('Error fetching data:', error);
       }
     });
-    function hideMessage() {
-        messageCheck = ref(false);
-        console.log(messageCheck.value);
-      }
-
-
     return {
       messages,
       messageTime,
       messageCheck,
-      hideMessage
     };
   },
+  methods: {
+    hideMessage() {
+        this.messageCheck = false;
+      }
+
+  }
 };
 
 </script>
 
 <template>
-  <div class="message" v-if="messageCheck">
-    <p><b>{{ messageTime }} : {{ messages }}</b></p>
-    <button @click="hideMessage()">X</button>
-    
+  <div class="messageDisplay" v-if="messageCheck">
+    <p class="time">{{ messageTime }} :</p>
+    <p class="body">{{ messages }}</p>
+    <button @click="hideMessage()"><b>x</b></button>
   </div>
   <div v-else></div>
 </template>
 
 <style>
-.message {
+.messageDisplay {
   width: 100%;
   background-color: #00bbbb;
   color: white;
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  font-weight: bold;
+}
+.time {
+  margin-right: 0.25rem;
+}
+.body {
+  flex-grow: 10;
+  text-align: left;
 }
 </style>
