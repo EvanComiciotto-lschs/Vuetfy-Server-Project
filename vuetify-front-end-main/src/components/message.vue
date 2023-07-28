@@ -1,5 +1,10 @@
 <script>
 import { ref } from 'vue';
+import router from './router/index.js';
+//const token = localStorage.getItem('jwt');
+//const auth = localStorage.getItem('header');
+var t = false;
+
 
 export default {
     data() {
@@ -12,33 +17,43 @@ export default {
 
     methods: {
         async fill() {
-            let resp = await fetch("https://itassets.aiscorp.com:3000/messages/", {
-                method: "post",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
+            if(t == false){
+                router.push('/')
+            } else {
+                let resp = await fetch("https://itassets.aiscorp.com:3000/messages/", {
+                    method: "post",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        auth: '6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t'
+                    },
 
-                //make sure to serialize your JSON body
-                body: JSON.stringify({
-                    message: this.message,
-                    timestamp: Date.now()
-                })
-            });
-            this.sendMsg = resp.ok ? "Message Sent" : "Error sending message!";
+                    //make sure to serialize your JSON body
+                    body: JSON.stringify({
+                        message: this.message,
+                        timestamp: Date.now()
+                    })
+                });
+                this.sendMsg = resp.ok ? "Message Sent" : "Error sending message!";
+            }
         },
         async empty() {
-            let resp = await fetch("https://itassets.aiscorp.com:3000/messages/", {
-                method: "post",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    message: "",
-                    timestamp: ""
-                })
-            });
+            if(t == false){
+                router.push('/')
+            } else {
+                let resp = await fetch("https://itassets.aiscorp.com:3000/messages/", {
+                    method: "post",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        auth: '6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t'
+                    },
+                    body: JSON.stringify({
+                        message: "",
+                        timestamp: ""
+                    })
+                });
+            }
         }
     },
 }

@@ -82,7 +82,11 @@ const auth = localStorage.getItem('header');
 if(ong == 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJfvZi8DO7pTghhHHTHkWdbyCvngkmXiY5ZXbsjl0XxnPGlwkVkgVo7kCgbknRN991FMdjeY6SeSf6ImylDy0DXIyfkKYclpvmWrCr2aiYaT0w6pVZAvxj1IDHKnuSMmUOQ4jHdE5qMKpvfepe5o2VDYDixXGMAYGpvNc7TdKyUUK7y3n0qiJ2AE8IGD5RdYKd2W0cpuOHwAeBZ44j1E75joAXoGl8UCaMGzLiZtMgcVvDlbCmLKfZnJEDc5tVTj0waoqYxTzzbXwCSo8QZLH2Aevt2rj' && auth == 'Bearer ' + token){
   console.log('hello');
   onMounted(() => {
-    fetch('https://itassets.aiscorp.com:3000/servers')
+    fetch('http://itassets.aiscorp.com:4000/servers', {
+      headers: {
+        auth: '6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t'
+      },
+    })
       .then(response => response.json())
       .then(data => {
         servers.value = data;
@@ -91,7 +95,11 @@ if(ong == 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJf
         console.error('Error fetching server data:', error);
       });
 
-    fetch('https://itassets.aiscorp.com:3000/databases')
+    fetch('https://itassets.aiscorp.com:3000/databases', {
+      headers: {
+        auth: '6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t'
+      },
+    })
       .then(response => response.json())
       .then(data => {
         databases.value = data;
@@ -156,26 +164,38 @@ input[type="text"] {
 
 .vm:hover {
   background-color: #af2525;
+  scale: 105%;
+  transition: ease 0.5s;
 }
 
 .stat:hover{
   background-color: #af2525;
+  scale: 105%;
+  transition: ease 0.5s;
 }
 
 .ip:hover{
   background-color: #af2525;
+  scale: 105%;
+  transition: ease 0.5s;
 }
 
 .time:hover{
   background-color: #af2525;
+  scale: 105%;
+  transition: ease 0.5s;
 }
 
 .hv:hover{
   background-color: #af2525;
+  scale: 105%;
+  transition: ease 0.5s;
 }
 
 .host:hover{
   background-color: #af2525;
+  scale: 105%;
+  transition: ease 0.5s;
 }
 
 .styled-table {
@@ -195,9 +215,6 @@ input[type="text"] {
     color: #ffffff;
     text-align: center;
 }
-
-
-
 
 .styled-table tbody tr:nth-of-type(even):focus {
     background-color: #f3f3f3;

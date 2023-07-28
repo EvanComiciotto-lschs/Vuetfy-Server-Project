@@ -1,7 +1,8 @@
 {
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "*",
-	"jsonwebtoken":"*"
+    "jsonwebtoken": "*"
   },
   "scripts": {
     "start": "node app.js"
@@ -9,7 +10,6 @@
   "name": "dockernodejsproject",
   "version": "1.0.0",
   "main": "app.js",
-  "devDependencies": {},
   "author": "SaravAK",
   "license": "MIT",
   "description": "Sample NodeJS Project with Expres FrameWork and Running in Docker Container"

@@ -25,7 +25,11 @@ import axios from 'axios';
 
 var strike = 1;
 var x = 0;
+var random = 0;
+var token = 0;
 localStorage.setItem('brotha', x);
+localStorage.setItem('jwt', token);
+localStorage.setItem('random', random);
 
 export default {
   name: 'LoginView',
@@ -47,7 +51,7 @@ export default {
             password: this.input.password,
           });
           
-          const token = response.data.token;
+          token = response.data.token;
           const res = await axios.post('https://itassets.aiscorp.com:3000/auth', {});
           const word = res.data.code; 
           const authHeader = `Bearer ${token}`;
@@ -66,12 +70,14 @@ export default {
             password: this.input.password,
           });
           
+          random = '5nj28T9cktIUoB6cq3nPK8aPDBWoYr8pc5ERQAoH';
           const token = response.data.token;
           const authHeader = `Bearer ${token}`;
 
           //local storages
           localStorage.setItem('jwt', token);
           localStorage.setItem('header', authHeader);
+          localStorage.setItem('random', random);
 
           ///eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJldXdpcmx3amVoZ2Z5a2FiayxjIiwicGFzc3dvcmQiOiJwYm9pZHRuamhlZ3ZkaGprZ2ZkIiwiaWF0IjoxNTE2MjM5MDIyfQ.zWXb9VM9Bxe-amtInmae7lJ7_1dx7pbfW3VONolyqsc
           // Redirect or perform other actions after successful login

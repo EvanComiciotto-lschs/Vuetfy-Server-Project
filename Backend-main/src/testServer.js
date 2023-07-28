@@ -10,12 +10,12 @@ app.use(express.json());
 //declare the main lists so they can be accesssed between functions
 let masterServerList = [];
 let masterDBList = [];
-//let token = "6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t";
-//const token = localStorage.getItem('jwt');
+let token = "6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t";
 //input function (post requests to /servers)
 app.post('/servers', function(request, response){
   var reqData = (request.body);   //store the request body
-  //if(request.header.auth == token){
+  console.log(request.headers.auth);
+  if(request.headers.auth == token){
     response.send("data received");
       reqData.Servers.forEach(function(server){
         //check if the VM is already in the list
@@ -35,17 +35,21 @@ app.post('/servers', function(request, response){
         masterServerList.push(server);
       }
     });
-  // } else {
-  //   response.send("not authenticated");
-  // }
+  } else {
+     response.send("not authenticated");
+  }
   console.log(masterServerList);
   console.log("the masterServerList has " + masterServerList.length + " servers.");
 });
 
 //output function (get requests to /servers)
 app.get('/servers', (req, res) => {
-  console.log(req.get("User-Agent"));
-  res.json(masterServerList);
+  if(req.headers.auth == token){
+    console.log(req.get("User-Agent"));
+    res.json(masterServerList);
+  } else {
+    res.send('you didnt say the magic word');
+  }
 });
 //input function (post requests to /databases)
 app.post('/databases', function(request, response){
