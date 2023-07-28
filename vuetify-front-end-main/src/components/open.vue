@@ -35,12 +35,12 @@
       <table v-else="toggleDataTable" class="styled-table">
         <thead>
           <tr>
-            <th>VM Name</th>
-            <th>Status</th>
-            <th>IP</th>
-            <th>Last Check-In Time</th>
-            <th>HyperVisor</th>
-            <th>Hostname</th>
+            <th class="vm">VM Name</th>
+            <th class="stat">Status</th>
+            <th class="ip">IP</th>
+            <th class="time">Last Check-In Time</th>
+            <th class="hv">HyperVisor</th>
+            <th class="host">Hostname</th>
           </tr>
         </thead>
         <tbody>
@@ -141,6 +141,43 @@ const filteredDatabases = computed(() => {
   margin: auto;
 }
 
+.search-bar {
+  border: 1px solid rgb(206, 206, 206);
+  background-color: #f3f5ff;
+  width: 195px;
+  margin-left: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input[type="text"] {
+  text-align: center;
+}
+
+.vm:hover {
+  background-color: #af2525;
+}
+
+.stat:hover{
+  background-color: #af2525;
+}
+
+.ip:hover{
+  background-color: #af2525;
+}
+
+.time:hover{
+  background-color: #af2525;
+}
+
+.hv:hover{
+  background-color: #af2525;
+}
+
+.host:hover{
+  background-color: #af2525;
+}
+
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
@@ -156,15 +193,11 @@ const filteredDatabases = computed(() => {
 .styled-table thead tr {
     background-color: #e92e2e;
     color: #ffffff;
-    text-align: left;
+    text-align: center;
 }
 
 
-.styled-table thead tr:hover {
-    background-color: #af2525;
-    color: #ffffff;
-    text-align: left;
-}
+
 
 .styled-table tbody tr:nth-of-type(even):focus {
     background-color: #f3f3f3;
@@ -218,8 +251,5 @@ li {
 a {
   color: #42b983;
 }
-.search-bar {
-  margin-left: 10px;
-  text-align: left;
-}
+
 </style>
