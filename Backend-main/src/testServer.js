@@ -57,36 +57,43 @@ app.get('/servers', (req, res) => {
 //input function (post requests to /databases)
 app.post('/databases', function(request, response){
   var reqData = (request.body); // store the request body
-  response.send("data received");
-  masterDBList = [];
-  reqData.forEach(function(db){
-    // check if the database is already in the list
-    if (masterDBList.some(existingDB => existingDB.database_id === db.database_id)){
-      // find the matching database in masterDBList
-      var matchDB = masterDBList.find(existingDB => existingDB.database_id === db.database_id);
+  if(request.headers.auth){
+    response.send("data received");
+    masterDBList = [];
+    reqData.forEach(function(db){
+      // check if the database is already in the list
+      if (masterDBList.some(existingDB => existingDB.database_id === db.database_id)){
+        // find the matching database in masterDBList
+        var matchDB = masterDBList.find(existingDB => existingDB.database_id === db.database_id);
 
-      console.log(db.name + " is already in the masterDBList");
-      matchDB.paths.push(db.path);
-      console.log(matchDB.paths);
-      // combine the sizes
-      matchDB.size += db.size;
-    } else {
-      // Pushes everything if does not exist
-      masterDBList.push({
-        database_id: db.database_id,
-        name: db.name,
-        paths: [db.path],
-        size: db.size
-      });
-    }
-  });
-
+        console.log(db.name + " is already in the masterDBList");
+        matchDB.paths.push(db.path);
+        console.log(matchDB.paths);
+        // combine the sizes
+        matchDB.size += db.size;
+      } else {
+        // Pushes everything if does not exist
+        masterDBList.push({
+          database_id: db.database_id,
+          name: db.name,
+          paths: [db.path],
+          size: db.size
+        });
+      }
+    });
+  } else {
+    response.send("not authenticated");
+  }
   console.log(masterDBList.length);
   
 });
 
 app.get('/databases', function(request, response){
-  response.json(masterDBList);
+  if(request.headers.auth){
+    response.json(masterDBList);
+  } else {
+    response.send('Naughty');
+  }
 });
 
 app.post('/auth', (req, res) => {
@@ -155,14 +162,22 @@ let notificationMessage = "";
 let notificationTime = "";
 
 app.post('/messages', function(request, response){
-  // console.log(request.body);
-  notificationMessage = request.body.message;
-  notificationTime = request.body.timestamp;
-  response.status(200).send("Success");
-  });
+  if(request.headers.auth){
+    // console.log(request.body);
+    notificationMessage = request.body.message;
+    notificationTime = request.body.timestamp;
+    response.status(200).send("Success");
+  } else {
+    response.send('not authenticated');
+  }
+});
 
 app.get('/messages', function(request, response){
-  response.status(200).send(JSON.stringify({message: notificationMessage, timestamp: notificationTime }));
+  if(request.headers.auth){
+    response.status(200).send(JSON.stringify({message: notificationMessage, timestamp: notificationTime }));
+  } else {
+    response.send('Naughty');
+  }
 });
 
 app.listen(3000);

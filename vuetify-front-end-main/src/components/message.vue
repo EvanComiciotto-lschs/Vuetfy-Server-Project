@@ -1,10 +1,11 @@
 <script>
 import { ref } from 'vue';
 import router from './router/index.js';
-//const token = localStorage.getItem('jwt');
-//const auth = localStorage.getItem('header');
-var t = false;
+const random = localStorage.getItem('random');
 
+if(random != '5nj28T9cktIUoB6cq3nPK8aPDBWoYr8pc5ERQAoH'){
+    router.push('/');
+}
 
 export default {
     data() {
@@ -17,9 +18,9 @@ export default {
 
     methods: {
         async fill() {
-            if(t == false){
-                router.push('/')
-            } else {
+                if(random != '5nj28T9cktIUoB6cq3nPK8aPDBWoYr8pc5ERQAoH'){
+                    router.push('/');
+                }  
                 let resp = await fetch("https://itassets.aiscorp.com:3000/messages/", {
                     method: "post",
                     headers: {
@@ -35,12 +36,12 @@ export default {
                     })
                 });
                 this.sendMsg = resp.ok ? "Message Sent" : "Error sending message!";
-            }
+            
         },
         async empty() {
-            if(t == false){
-                router.push('/')
-            } else {
+            if(random != '5nj28T9cktIUoB6cq3nPK8aPDBWoYr8pc5ERQAoH'){
+                router.push('/');
+            }
                 let resp = await fetch("https://itassets.aiscorp.com:3000/messages/", {
                     method: "post",
                     headers: {
@@ -53,7 +54,7 @@ export default {
                         timestamp: ""
                     })
                 });
-            }
+            
         }
     },
 }
