@@ -117,9 +117,7 @@ function deleteServers(array){
   var curTime = new Date();
   var referenceTime = new Date();
 
-  //referenceTime.setHours(curTime.getHours()-28);
-  referenceTime.setHours(curTime.getHours()-4);
-  referenceTime.setMinutes(curTime.getMinutes()-10);
+  referenceTime.setHours(curTime.getHours()-28);
   referenceTime = referenceTime.toISOString().split('.')[0];
   console.log('Reference time: ' + referenceTime);
   //same idea, less time difference for testing
