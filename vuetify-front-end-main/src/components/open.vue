@@ -5,9 +5,10 @@
       <h1 class="header" v-if="toggleDataTable.value == 'about'"></h1>
       <h1 class="header" v-else-if="toggleDataTable.value =='database'">Databases</h1>
       <h1 class="header" v-else>Servers</h1>
-      <div class="search-bar" v-if="toggleDataTable.value != 'about'">
+      <div class="search-bar" v-if="toggleDataTable.value == 'server'">
         <input type="text" v-model="searchKeyword" placeholder="Search Name" />
       </div>
+      
       <div v-if="toggleDataTable.value == 'about'">
         <aboutPage></aboutPage>
         <!--ABOUT PAGE CAN BE BUILT HERE
@@ -204,6 +205,7 @@ input[type="text"] {
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 400px;
+    max-width: 1000px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     margin-left: auto;
     margin-right: auto;
