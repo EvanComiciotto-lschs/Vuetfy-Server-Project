@@ -1,9 +1,7 @@
 #!/usr/bin/env node
 //express.js api server
 var express = require('express');
-// cors api
 var cors = require('cors');
-// jsonwebtoken api
 var jwt = require('jsonwebtoken');
 const { json } = require('body-parser');
 var app = express();
@@ -13,18 +11,17 @@ app.use(express.json());
 let masterServerList = [];
 let masterDBList = [];
 let token = "6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t";
+//const token = localStorage.getItem('jwt');
 //input function (post requests to /servers)
 app.post('/servers', function(request, response){
   var reqData = (request.body);   //store the request body
-  console.log(request.headers.auth);
-  if(request.headers.auth == token){
+  //if(request.header.auth == token){
     response.send("data received");
       reqData.Servers.forEach(function(server){
         //check if the VM is already in the list
       if (masterServerList.some(existingServer => existingServer.VMName === server.VMName)){
           console.log(server.VMName + " already exists in masterServerList");
           //check if the last check in time is newer
-          // var to make process shorter
         var curServer = masterServerList.find(existingServer => existingServer.VMName === server.VMName);
           if (server.LastCheckInTime > curServer.LastCheckInTime){
             console.log(server.VMName + " has a newer check in time. Updating its attributes.");
@@ -38,62 +35,50 @@ app.post('/servers', function(request, response){
         masterServerList.push(server);
       }
     });
-  } else {
-     response.send("not authenticated");
-  }
+  // } else {
+  //   response.send("not authenticated");
+  // }
   console.log(masterServerList);
   console.log("the masterServerList has " + masterServerList.length + " servers.");
 });
 
 //output function (get requests to /servers)
 app.get('/servers', (req, res) => {
-  if(req.headers.auth == token){
-    console.log(req.get("User-Agent"));
-    res.json(masterServerList);
-  } else {
-    res.send('you didnt say the magic word');
-  }
+  console.log(req.get("User-Agent"));
+  res.json(masterServerList);
 });
 //input function (post requests to /databases)
 app.post('/databases', function(request, response){
   var reqData = (request.body); // store the request body
-  if(request.headers.auth){
-    response.send("data received");
-    masterDBList = [];
-    reqData.forEach(function(db){
-      // check if the database is already in the list
-      if (masterDBList.some(existingDB => existingDB.database_id === db.database_id)){
-        // find the matching database in masterDBList
-        var matchDB = masterDBList.find(existingDB => existingDB.database_id === db.database_id);
+  response.send("data received");
+  masterDBList = [];
+  reqData.forEach(function(db){
+    // check if the database is already in the list
+    if (masterDBList.some(existingDB => existingDB.database_id === db.database_id)){
+      // find the matching database in masterDBList
+      var matchDB = masterDBList.find(existingDB => existingDB.database_id === db.database_id);
 
-        console.log(db.name + " is already in the masterDBList");
-        matchDB.paths.push(db.path);
-        console.log(matchDB.paths);
-        // combine the sizes
-        matchDB.size += db.size;
-      } else {
-        // Pushes everything if does not exist
-        masterDBList.push({
-          database_id: db.database_id,
-          name: db.name,
-          paths: [db.path],
-          size: db.size
-        });
-      }
-    });
-  } else {
-    response.send("not authenticated");
-  }
+      console.log(db.name + " is already in the masterDBList");
+      matchDB.paths.push(db.path);
+      console.log(matchDB.paths);
+      // combine the sizes
+      matchDB.size += db.size;
+    } else {
+      masterDBList.push({
+        database_id: db.database_id,
+        name: db.name,
+        paths: [db.path],
+        size: db.size
+      });
+    }
+  });
+
   console.log(masterDBList.length);
   
 });
 
 app.get('/databases', function(request, response){
-  if(request.headers.auth){
-    response.json(masterDBList);
-  } else {
-    response.send('Naughty');
-  }
+  response.json(masterDBList);
 });
 
 app.post('/auth', (req, res) => {
@@ -123,7 +108,6 @@ app.post('/login', (req, res) => {
 
 });
 
-//sets time for deletion
 setInterval(deleteServers, 1000 * 60 * 60, masterServerList);
 
 //runs through hyperVisorList and deleted any item with LastCheckInTime older than reference time
@@ -133,7 +117,9 @@ function deleteServers(array){
   var curTime = new Date();
   var referenceTime = new Date();
 
-  referenceTime.setHours(curTime.getHours()-28);
+  //referenceTime.setHours(curTime.getHours()-28);
+  referenceTime.setHours(curTime.getHours()-4);
+  referenceTime.setMinutes(curTime.getMinutes()-10);
   referenceTime = referenceTime.toISOString().split('.')[0];
   console.log('Reference time: ' + referenceTime);
   //same idea, less time difference for testing
@@ -162,22 +148,14 @@ let notificationMessage = "";
 let notificationTime = "";
 
 app.post('/messages', function(request, response){
-  if(request.headers.auth){
-    // console.log(request.body);
-    notificationMessage = request.body.message;
-    notificationTime = request.body.timestamp;
-    response.status(200).send("Success");
-  } else {
-    response.send('not authenticated');
-  }
-});
+  // console.log(request.body);
+  notificationMessage = request.body.message;
+  notificationTime = request.body.timestamp;
+  response.status(200).send("Success");
+  });
 
 app.get('/messages', function(request, response){
-  if(request.headers.auth){
-    response.status(200).send(JSON.stringify({message: notificationMessage, timestamp: notificationTime }));
-  } else {
-    response.send('Naughty');
-  }
+  response.status(200).send(JSON.stringify({message: notificationMessage, timestamp: notificationTime }));
 });
 
 app.listen(3000);

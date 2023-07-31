@@ -11,5 +11,5 @@ RUN npm install cors --save
 RUN npm install jsonwebtoken --save
 RUN npm install express --save
 RUN npm install  
-CMD ["node", "testServer.js"]
+CMD ["node", "backend.js"]
 
