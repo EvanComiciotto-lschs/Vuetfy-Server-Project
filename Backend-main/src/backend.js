@@ -46,7 +46,7 @@ app.post('/servers', function(req, res){
 
 //output function (get requests to /servers)
 app.get('/servers', (req, res) => {
-  if(request.headers.auth == token){
+  if(req.headers.auth == token){
   console.log(req.get("User-Agent"));
   res.json(masterServerList);
   }else{
