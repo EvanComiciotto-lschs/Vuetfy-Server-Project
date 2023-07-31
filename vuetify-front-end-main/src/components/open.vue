@@ -110,6 +110,7 @@ if(ong == 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJf
 } else {
   router.push('/')
 }
+
 const filteredServers = computed(() => {
   if (!searchKeyword.value) {
     return servers.value;
