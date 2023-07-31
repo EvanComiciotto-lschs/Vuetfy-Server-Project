@@ -15,7 +15,7 @@
             OR DESIGNED IN ANOTHER COMPONENT AND IMPORTED-->
       </div>
 
-      <table v-else-if="toggleDataTable.value == 'database'" class="styled-table">
+      <table v-else-if="toggleDataTable.value === 'database'" class="styled-table">
         <thead>
           <tr>
             <th>Name</th>
@@ -27,12 +27,11 @@
           <tr v-for="database in filteredDatabases" :key="database.name">
             <td>{{ database.name }}</td>
             <td>{{ database.size }}</td>
-            <td>{{ database.paths }}</td>
+            <td>{{ database.paths.join(', ') }}</td>
           </tr>
         </tbody>
-    
-      </table>  
-
+      </table>
+      
       <table v-else="toggleDataTable" class="styled-table">
         <thead>
           <tr>
