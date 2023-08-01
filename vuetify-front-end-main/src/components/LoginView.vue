@@ -45,7 +45,7 @@ export default {
   methods: {
     async login() {
       try {
-        if(this.input.username == 'aiscorp.local' && this.input.password == 'Fahd'){
+        if(this.input.username == 'aegis' && this.input.password == 'aegis'){
           const response = await axios.post('https://itassets.aiscorp.com:3000/login', {
             username: this.input.username,
             password: this.input.password,
@@ -64,7 +64,7 @@ export default {
           ///eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJldXdpcmx3amVoZ2Z5a2FiayxjIiwicGFzc3dvcmQiOiJwYm9pZHRuamhlZ3ZkaGprZ2ZkIiwiaWF0IjoxNTE2MjM5MDIyfQ.zWXb9VM9Bxe-amtInmae7lJ7_1dx7pbfW3VONolyqsc
           // Redirect or perform other actions after successful login
           this.$router.push('/home')
-        } else if (this.input.username == 'aiscorp.local' && this.input.password == 'Steve'){
+        } else if (this.input.username == 'admin' && this.input.password == 'Interns2023@Aegis'){
           const response = await axios.post('https://itassets.aiscorp.com:3000/login', {
             username: this.input.username,
             password: this.input.password,
