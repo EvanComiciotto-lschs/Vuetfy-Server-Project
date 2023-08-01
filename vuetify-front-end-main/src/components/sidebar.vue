@@ -106,21 +106,21 @@ export default {
     color: #708490;
 }
 .server-icon {
-    font-size: 4rem;
+    font-size: 3rem;
     color: #708490;
 }
 .server-icon.active {
     color: #ef3b32;
 }
 .datatable-icon {
-    font-size: 4rem;
+    font-size: 3rem;
     color: #708490;
 }
 .datatable-icon.active {
     color: #ef3b32;
 }
 .about-icon {
-    font-size: 4rem;
+    font-size: 3rem;
     color: #708490;
 }
 .about-icon.active {

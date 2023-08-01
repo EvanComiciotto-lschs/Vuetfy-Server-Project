@@ -1,15 +1,15 @@
 <template>
   <div class="card text-center m-3">
     <div class="card-body">
-      <notification/>
+      <notification />
       <h1 class="header" v-if="toggleDataTable.value == 'about'"></h1>
-      <h1 class="header" v-else-if="toggleDataTable.value =='database'">Databases</h1>
+      <h1 class="header" v-else-if="toggleDataTable.value === 'database'">Databases</h1>
       <h1 class="header" v-else>Servers</h1>
-      <div id="server-bar" v-if="toggleDataTable.value != 'about' && toggleDataTable.value != 'database'">
+      <div id="server-bar" v-if="toggleDataTable.value !== 'about' && toggleDataTable.value !== 'database'">
         <input type="text" v-model="serverSearchKeyword" placeholder="Search Name" />
       </div>
-      <div id="database-bar" v-if="toggleDataTable.value == 'database' && toggleDataTable.value !='server'">
-        <input type="text" v-model="databaseSearchKeyword" placeholder="Search Name" />
+      <div id="database-bar" v-if="toggleDataTable.value === 'database'">
+        <input type="text" v-model="databaseSearchKeyword" placeholder="Search Name or Path" />
       </div>
       
       <div v-if="toggleDataTable.value == 'about'">
@@ -21,16 +21,18 @@
       <table v-else-if="toggleDataTable.value === 'database'" class="styled-table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Size in GB</th>
-            <th>Path</th>
+            <th class="dName" @click="sortDatabases('name')">Name</th>
+            <th class="dSize" @click="sortDatabases('size')">Size in GB</th>
+            <th class="dPath" @click="sortDatabases('paths')">Path</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="database in filteredDatabases" :key="database.name">
             <td>{{ database.name }}</td>
             <td>{{ database.size }}</td>
-            <td>{{ database.paths.join(', ') }}</td>
+            <td>
+              <span v-for="path in database.paths" :key="path">{{ path }}</span>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -50,10 +52,9 @@
           <tr v-for="server in filteredServers" :key="server.VMName">
             <td>{{ server.VMName }}</td>
             <td>
-              <div class="running" v-if="server.Status=='Running'"></div>
+              <div class="running" v-if="server.Status === 'Running'"></div>
               <div class="offline" v-else></div>
             </td>
-            <!-- <td><div class=""></div>{{ server.Status=="Running"?"<div class=\"running\"></div>":"<div class=\"offline\"></div>" }}</td> -->
             <td>{{ server.IP }}</td>
             <td>{{ server.LastCheckInTime }}</td>
             <td>{{ server.HyperVisor }}</td>
@@ -65,9 +66,8 @@
   </div>
 </template>
 
-
 <script setup>
-import { ref, onMounted, computed} from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import toggleDataTable from './state.js';
 import notification from './notification.vue';
 import aboutPage from "./aboutPage.vue";
@@ -83,7 +83,7 @@ const ong = localStorage.getItem('brotha');
 const token = localStorage.getItem('jwt');
 const auth = localStorage.getItem('header');
 
-if(ong == 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJfvZi8DO7pTghhHHTHkWdbyCvngkmXiY5ZXbsjl0XxnPGlwkVkgVo7kCgbknRN991FMdjeY6SeSf6ImylDy0DXIyfkKYclpvmWrCr2aiYaT0w6pVZAvxj1IDHKnuSMmUOQ4jHdE5qMKpvfepe5o2VDYDixXGMAYGpvNc7TdKyUUK7y3n0qiJ2AE8IGD5RdYKd2W0cpuOHwAeBZ44j1E75joAXoGl8UCaMGzLiZtMgcVvDlbCmLKfZnJEDc5tVTj0waoqYxTzzbXwCSo8QZLH2Aevt2rj' && auth == 'Bearer ' + token){
+if (ong === 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJfvZi8DO7pTghhHHTHkWdbyCvngkmXiY5ZXbsjl0XxnPGlwkVkgVo7kCgbknRN991FMdjeY6SeSf6ImylDy0DXIyfkKYclpvmWrCr2aiYaT0w6pVZAvxj1IDHKnuSMmUOQ4jHdE5qMKpvfepe5o2VDYDixXGMAYGpvNc7TdKyUUK7y3n0qiJ2AE8IGD5RdYKd2W0cpuOHwAeBZ44j1E75joAXoGl8UCaMGzLiZtMgcVvDlbCmLKfZnJEDc5tVTj0waoqYxTzzbXwCSo8QZLH2Aevt2rj' && auth === 'Bearer ' + token) {
   console.log('hello');
   onMounted(() => {
     fetch('https://itassets.aiscorp.com:3000/servers', {
@@ -113,7 +113,7 @@ if(ong == 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJf
       });
   });
 } else {
-  router.push('/')
+  router.push('/');
 }
 
 const filteredServers = computed(() => {
@@ -147,8 +147,6 @@ const customSort = (a, b, property) => {
     }
     return 0;
   }
-
-
   return valueA.localeCompare(valueB);
 };
 
@@ -156,6 +154,45 @@ const sortServers = (property) => {
   servers.value.sort((a, b) => customSort(a, b, property));
 };
 
+// Custom sorting function for databases
+const customSortDatabases = (a, b, property) => {
+  const valueA = a[property];
+  const valueB = b[property];
+  if (valueA === null) return 1;
+  if (valueB === null) return -1;
+  if (property === 'size') {
+    return valueA - valueB;
+  }
+  if (property === 'paths') {
+    return valueA[0].localeCompare(valueB[0]);
+  }
+  return valueA.localeCompare(valueB);
+};
+
+// Sorting function for databases
+const sortDatabases = (property) => {
+  databases.value.sort((a, b) => customSortDatabases(a, b, property));
+};
+
+const filteredServers = computed(() => {
+  if (!serverSearchKeyword.value) {
+    return servers.value;
+  }
+  return servers.value.filter(server => server.VMName.toLowerCase().includes(serverSearchKeyword.value.toLowerCase()));
+});
+
+const filteredDatabases = computed(() => {
+  if (!databaseSearchKeyword.value) {
+    return databases.value;
+  }
+  const keyword = databaseSearchKeyword.value.toLowerCase();
+  return databases.value.filter((database) => {
+    return (
+      database.name.toLowerCase().includes(keyword) ||
+      database.paths.join(', ').toLowerCase().includes(keyword)
+    );
+  });
+});
 </script>
 
 <style scoped>
@@ -235,14 +272,28 @@ input[type="text"] {
   scale: 105%;
   transition: ease 0.5s;
 }
-
+.dName:hover{
+  background-color: #af2525;
+  scale: 105%;
+  transition: ease 0.5s;
+}
+.dSize:hover{
+  background-color: #af2525;
+  scale: 105%;
+  transition: ease 0.5s;
+}
+.dPath:hover{
+  background-color: #af2525;
+  scale: 105%;
+  transition: ease 0.5s;
+}
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 400px;
-    max-width: 1000px;
+    max-width: 1200px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     margin-left: auto;
     margin-right: auto;
@@ -267,6 +318,7 @@ input[type="text"] {
 .styled-table th,
 .styled-table td {
     padding: 12px 15px;
+    min-width: 200px;
 }
 
 .styled-table tbody tr:nth-of-type(red) {
