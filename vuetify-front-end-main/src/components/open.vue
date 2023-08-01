@@ -32,7 +32,7 @@
             <td>{{ database.name }}</td>
             <td>{{ database.size }}</td>
             <td>
-              <span v-for="path in database.paths" :key="path">{{ path }}</span>
+              <span v-for="(path, index) in database.paths" :key="path">{{ path }}<span v-if="index-1>=database.paths.length">, </span></span>
             </td>
           </tr>
         </tbody>
