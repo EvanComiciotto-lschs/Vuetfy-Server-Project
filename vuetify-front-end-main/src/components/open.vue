@@ -5,7 +5,7 @@
       <h1 class="header" v-if="toggleDataTable.value == 'about'"></h1>
       <h1 class="header" v-else-if="toggleDataTable.value =='database'">Databases</h1>
       <h1 class="header" v-else>Servers</h1>
-      <div class="search-bar" v-if="toggleDataTable.value == 'server'">
+      <div class="search-bar" v-if="toggleDataTable.value != 'about'">
         <input type="text" v-model="searchKeyword" placeholder="Search Name" />
       </div>
       
