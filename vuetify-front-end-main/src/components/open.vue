@@ -35,12 +35,12 @@
       <table v-else="toggleDataTable" class="styled-table">
         <thead>
           <tr>
-            <th class="vm">VM Name</th>
-            <th class="stat">Status</th>
-            <th class="ip">IP</th>
-            <th class="time">Last Check-In Time</th>
-            <th class="hv">HyperVisor</th>
-            <th class="host">Hostname</th>
+            <th class="vm" @click="sortServers('VMName')">VM Name</th>
+            <th class="stat" @click="sortServers('Status')">Status</th>
+            <th class="ip" @click="sortServers('IP')">IP</th>
+            <th class="time" @click="sortServers('LastCheckInTime')">Last Check-In Time</th>
+            <th class="hv" @click="sortServers('HyperVisor')">HyperVisor</th>
+            <th class="host" @click="sortServers('Hostname')">Hostname</th>
           </tr>
         </thead>
         <tbody>
@@ -127,6 +127,30 @@ const filteredDatabases = computed(() => {
   return databases.value.filter(databases => databases.name.toLowerCase().includes(keywordTwo));
 });
 
+const customSort = (a, b, property) => {
+  const valueA = a[property];
+  const valueB = b[property];
+  if (valueA === null) return 1;
+  if (valueB === null) return -1;
+  if (property === 'IP') {
+    const ipPartsA = valueA.split('.').map(Number);
+    const ipPartsB = valueB.split('.').map(Number);
+
+    for (let i = 0; i < 4; i++) {
+      if (ipPartsA[i] < ipPartsB[i]) return -1;
+      if (ipPartsA[i] > ipPartsB[i]) return 1;
+    }
+    return 0;
+  }
+
+
+  return valueA.localeCompare(valueB);
+};
+
+const sortServers = (property) => {
+  servers.value.sort((a, b) => customSort(a, b, property));
+};
+
 </script>
 
 <style scoped>
@@ -138,6 +162,7 @@ const filteredDatabases = computed(() => {
   background-color: lime;
   /*border: 1px solid black;*/
   margin: auto;
+  
 }
 
 .offline {
@@ -204,6 +229,7 @@ input[type="text"] {
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 400px;
+    max-width: 1000px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     margin-left: auto;
     margin-right: auto;
