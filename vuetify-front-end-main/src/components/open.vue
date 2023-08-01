@@ -167,20 +167,16 @@ const filteredServers = computed(() => {
   if (!serverSearchKeyword.value) {
     return servers.value;
   }
-  return servers.value.filter(server => server.VMName.toLowerCase().includes(serverSearchKeyword.value.toLowerCase()));
+  return servers.value.filter(server => (server.VMName + server.Status + server.IP + server.HyperVisor + server.Hostname).toLowerCase().includes(serverSearchKeyword.value.toLowerCase()));
 });
+
 
 const filteredDatabases = computed(() => {
   if (!databaseSearchKeyword.value) {
     return databases.value;
   }
-  const keyword = databaseSearchKeyword.value.toLowerCase();
-  return databases.value.filter((database) => {
-    return (
-      database.name.toLowerCase().includes(keyword) ||
-      database.paths.join(', ').toLowerCase().includes(keyword)
-    );
-  });
+  const keywordTwo = databaseSearchKeyword.value.toLowerCase();
+  return databases.value.filter(database => (database.name + database.Path).toLowerCase().includes(keywordTwo));
 });
 
 const sortingOrders = {
