@@ -73,11 +73,19 @@ export default {
 </template>
 
 <style scoped>
+input {
+    width: 50%
+}
+
+input::placeholder {
+    text-align: center;
+}
 .in {
     /* border-radius: 1px !important; */
-    padding: 1px 2px !important;
+    padding: 2px 3px !important;
     outline-offset: 0 !important;
-    outline: auto 1px !important;
+    outline: auto 2px !important;
     margin: 1rem !important;
 }
+
 </style>

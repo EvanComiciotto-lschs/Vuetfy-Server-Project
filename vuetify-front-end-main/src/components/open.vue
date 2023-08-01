@@ -8,13 +8,14 @@
       <div class="search-bar" v-if="toggleDataTable.value != 'about'">
         <input type="text" v-model="searchKeyword" placeholder="Search Name" />
       </div>
+      
       <div v-if="toggleDataTable.value == 'about'">
         <aboutPage></aboutPage>
         <!--ABOUT PAGE CAN BE BUILT HERE
             OR DESIGNED IN ANOTHER COMPONENT AND IMPORTED-->
       </div>
 
-      <table v-else-if="toggleDataTable.value == 'database'" class="styled-table">
+      <table v-else-if="toggleDataTable.value === 'database'" class="styled-table">
         <thead>
           <tr>
             <th>Name</th>
@@ -26,12 +27,11 @@
           <tr v-for="database in filteredDatabases" :key="database.name">
             <td>{{ database.name }}</td>
             <td>{{ database.size }}</td>
-            <td>{{ database.paths }}</td>
+            <td>{{ database.paths.join(', ') }}</td>
           </tr>
         </tbody>
-    
-      </table>  
-
+      </table>
+      
       <table v-else="toggleDataTable" class="styled-table">
         <thead>
           <tr>
@@ -111,6 +111,7 @@ if(ong == 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJf
 } else {
   router.push('/')
 }
+
 const filteredServers = computed(() => {
   if (!searchKeyword.value) {
     return servers.value;
