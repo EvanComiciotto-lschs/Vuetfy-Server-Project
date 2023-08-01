@@ -21,9 +21,10 @@
       <table v-else-if="toggleDataTable.value === 'database'" class="styled-table">
         <thead>
           <tr>
-            <th class="dName" @click="sortDatabases('name')">Name</th>
-            <th class="dSize" @click="sortDatabases('size')">Size in GB</th>
-            <th class="dPath" @click="sortDatabases('paths')">Path</th>
+            <!-- Add click events and icons for sorting -->
+            <th class="dName" @click="sortDatabases('name')">Name {{ getSortingIcon('name') }}</th>
+            <th class="dSize" @click="sortDatabases('size')">Size in GB {{ getSortingIcon('size') }}</th>
+            <th class="dPath" @click="sortDatabases('paths')">Path {{ getSortingIcon('paths') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -36,16 +37,17 @@
           </tr>
         </tbody>
       </table>
-      
+
       <table v-else="toggleDataTable" class="styled-table">
         <thead>
           <tr>
-            <th class="vm" @click="sortServers('VMName')">VM Name</th>
-            <th class="stat" @click="sortServers('Status')">Status</th>
-            <th class="ip" @click="sortServers('IP')">IP</th>
-            <th class="time" @click="sortServers('LastCheckInTime')">Last Check-In Time</th>
-            <th class="hv" @click="sortServers('HyperVisor')">HyperVisor</th>
-            <th class="host" @click="sortServers('Hostname')">Hostname</th>
+            <!-- Add click events and icons for sorting -->
+            <th class="vm" @click="sortServers('VMName')">VM Name {{ getSortingIcon('VMName') }}</th>
+            <th class="stat" @click="sortServers('Status')">Status {{ getSortingIcon('Status') }}</th>
+            <th class="ip" @click="sortServers('IP')">IP {{ getSortingIcon('IP') }}</th>
+            <th class="time" @click="sortServers('LastCheckInTime')">Last Check-In Time {{ getSortingIcon('LastCheckInTime') }}</th>
+            <th class="hv" @click="sortServers('HyperVisor')">HyperVisor {{ getSortingIcon('HyperVisor') }}</th>
+            <th class="host" @click="sortServers('Hostname')">Hostname {{ getSortingIcon('Hostname') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -121,6 +123,51 @@ if (ong === 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgN
   router.push('/');
 }
 
+const customSortServers = (a, b, property) => {
+  const sortOrder = sortingOrders[property];
+  const valueA = a[property];
+  const valueB = b[property];
+  if (valueA === null) return 1;
+  if (valueB === null) return -1;
+  if (property === 'IP') {
+    const ipPartsA = valueA.split('.').map(Number);
+    const ipPartsB = valueB.split('.').map(Number);
+
+    for (let i = 0; i < 4; i++) {
+      if (ipPartsA[i] < ipPartsB[i]) return sortOrder === 'asc' ? -1 : 1;
+      if (ipPartsA[i] > ipPartsB[i]) return sortOrder === 'asc' ? 1 : -1;
+    }
+    return 0;
+  }
+  return sortOrder === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+};
+
+const sortServers = (property) => {
+  toggleSortingOrder(property); // Toggle the sorting order first
+  servers.value.sort((a, b) => customSortServers(a, b, property));
+};
+
+// Custom sorting function for databases
+const customSortDatabases = (a, b, property) => {
+  const sortOrder = sortingOrders[property];
+  const valueA = a[property];
+  const valueB = b[property];
+  if (valueA === null) return 1;
+  if (valueB === null) return -1;
+  if (property === 'size') {
+    return sortOrder === 'asc' ? valueA - valueB : valueB - valueA;
+  }
+  if (property === 'paths') {
+    return sortOrder === 'asc' ? valueA[0].localeCompare(valueB[0]) : valueB[0].localeCompare(valueA[0]);
+  }
+  return sortOrder === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+};
+
+const sortDatabases = (property) => {
+  toggleSortingOrder(property); // Toggle the sorting order first
+  databases.value.sort((a, b) => customSortDatabases(a, b, property));
+};
+
 const filteredServers = computed(() => {
   if (!serverSearchKeyword.value) {
     return servers.value;
@@ -137,46 +184,30 @@ const filteredDatabases = computed(() => {
   return databases.value.filter(database => (database.name + database.Path).toLowerCase().includes(keywordTwo));
 });
 
-const customSort = (a, b, property) => {
-  const valueA = a[property];
-  const valueB = b[property];
-  if (valueA === null) return 1;
-  if (valueB === null) return -1;
-  if (property === 'IP') {
-    const ipPartsA = valueA.split('.').map(Number);
-    const ipPartsB = valueB.split('.').map(Number);
-
-    for (let i = 0; i < 4; i++) {
-      if (ipPartsA[i] < ipPartsB[i]) return -1;
-      if (ipPartsA[i] > ipPartsB[i]) return 1;
-    }
-    return 0;
-  }
-  return valueA.localeCompare(valueB);
+const sortingOrders = {
+  VMName: 'asc',
+  Status: 'asc',
+  IP: 'asc',
+  LastCheckInTime: 'asc',
+  HyperVisor: 'asc',
+  Hostname: 'asc',
+  name: 'asc',
+  size: 'asc',
+  paths: 'asc',
 };
 
-const sortServers = (property) => {
-  servers.value.sort((a, b) => customSort(a, b, property));
+const getSortingIcon = (column) => {
+  // Return appropriate icon based on the sorting order
+  if (sortingOrders[column] === 'asc') {
+    return '\u25B2'; // Upward-pointing triangle
+  } else {
+    return '\u25BC'; // Downward-pointing triangle
+  }
 };
 
-// Custom sorting function for databases
-const customSortDatabases = (a, b, property) => {
-  const valueA = a[property];
-  const valueB = b[property];
-  if (valueA === null) return 1;
-  if (valueB === null) return -1;
-  if (property === 'size') {
-    return valueA - valueB;
-  }
-  if (property === 'paths') {
-    return valueA[0].localeCompare(valueB[0]);
-  }
-  return valueA.localeCompare(valueB);
-};
-
-// Sorting function for databases
-const sortDatabases = (property) => {
-  databases.value.sort((a, b) => customSortDatabases(a, b, property));
+const toggleSortingOrder = (column) => {
+  // Toggle the sorting order for the given column
+  sortingOrders[column] = sortingOrders[column] === 'asc' ? 'desc' : 'asc';
 };
 </script>
 

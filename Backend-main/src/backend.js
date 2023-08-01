@@ -32,6 +32,7 @@ app.post('/servers', function(req, res){
             curServer.IP = server.IP;
             curServer.HyperVisor = server.HyperVisor;
             curServer.Hostname = server.Hostname;
+            curServer.Status = server.Status;
           }
       } else {
         masterServerList.push(server);
