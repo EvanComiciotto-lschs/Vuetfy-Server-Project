@@ -87,7 +87,7 @@ const auth = localStorage.getItem('header');
 
 function dateToString(old_date) {
   let date = new Date(old_date);
-  return `${(date.getHours(date.getHours>12?-12:-0)).toString().padStart(2,'0')}:${date.getMinutes().toString().padStart(2,'0')}:${date.getSeconds().toString().padStart(2,'0')} ${date.getHours()>12?"PM":"AM"} ${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
+  return `${(date.getHours()%12==0?12:date.getHours()%12).toString().padStart(2,'0')}:${date.getMinutes().toString().padStart(2,'0')}:${date.getSeconds().toString().padStart(2,'0')} ${date.getHours()>=12?"PM":"AM"} ${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
 }
 
 if (ong === 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJfvZi8DO7pTghhHHTHkWdbyCvngkmXiY5ZXbsjl0XxnPGlwkVkgVo7kCgbknRN991FMdjeY6SeSf6ImylDy0DXIyfkKYclpvmWrCr2aiYaT0w6pVZAvxj1IDHKnuSMmUOQ4jHdE5qMKpvfepe5o2VDYDixXGMAYGpvNc7TdKyUUK7y3n0qiJ2AE8IGD5RdYKd2W0cpuOHwAeBZ44j1E75joAXoGl8UCaMGzLiZtMgcVvDlbCmLKfZnJEDc5tVTj0waoqYxTzzbXwCSo8QZLH2Aevt2rj' && auth === 'Bearer ' + token) {
