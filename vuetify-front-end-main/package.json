@@ -17,7 +17,9 @@
     "roboto-fontface": "*",
     "vue": "^3.2.0",
     "vuetify": "^3.3.6",
-    "webfontloader": "^1.0.0"
+    "webfontloader": "^1.0.0",
+    "vue-router": "*",
+    "axios": "*"
   },
   "devDependencies": {
     "@babel/types": "^7.21.4",

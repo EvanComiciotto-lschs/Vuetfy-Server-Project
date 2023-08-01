@@ -6,10 +6,10 @@
       <h1 class="header" v-else-if="toggleDataTable.value === 'database'">Databases</h1>
       <h1 class="header" v-else>Servers</h1>
       <div id="server-bar" v-if="toggleDataTable.value !== 'about' && toggleDataTable.value !== 'database'">
-        <input type="text" v-model="serverSearchKeyword" placeholder="Search Name" />
+        <input type="text" v-model="serverSearchKeyword" placeholder="Search Servers" />
       </div>
       <div id="database-bar" v-if="toggleDataTable.value === 'database'">
-        <input type="text" v-model="databaseSearchKeyword" placeholder="Search Name or Path" />
+        <input type="text" v-model="databaseSearchKeyword" placeholder="Search Databases" />
       </div>
       
       <div v-if="toggleDataTable.value == 'about'">
@@ -56,7 +56,7 @@
               <div class="offline" v-else></div>
             </td>
             <td>{{ server.IP }}</td>
-            <td>{{ server.LastCheckInTime }}</td>
+            <td>{{ dateToString(server.LastCheckInTime) }}</td>
             <td>{{ server.HyperVisor }}</td>
             <td>{{ server.Hostname }}</td>
           </tr>
@@ -82,6 +82,11 @@ console.log(toggleDataTable.value);
 const ong = localStorage.getItem('brotha');
 const token = localStorage.getItem('jwt');
 const auth = localStorage.getItem('header');
+
+function dateToString(old_date) {
+  let date = new Date(old_date);
+  return `${(date.getHours()%12).toString().padStart(2,'0')}:${date.getMinutes().toString().padStart(2,'0')}:${date.getSeconds().toString().padStart(2,'0')} ${date.getHours()>12?"PM":"AM"} ${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
+}
 
 if (ong === 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJfvZi8DO7pTghhHHTHkWdbyCvngkmXiY5ZXbsjl0XxnPGlwkVkgVo7kCgbknRN991FMdjeY6SeSf6ImylDy0DXIyfkKYclpvmWrCr2aiYaT0w6pVZAvxj1IDHKnuSMmUOQ4jHdE5qMKpvfepe5o2VDYDixXGMAYGpvNc7TdKyUUK7y3n0qiJ2AE8IGD5RdYKd2W0cpuOHwAeBZ44j1E75joAXoGl8UCaMGzLiZtMgcVvDlbCmLKfZnJEDc5tVTj0waoqYxTzzbXwCSo8QZLH2Aevt2rj' && auth === 'Bearer ' + token) {
   console.log('hello');
