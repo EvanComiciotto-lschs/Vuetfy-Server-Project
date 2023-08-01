@@ -120,7 +120,7 @@ const filteredServers = computed(() => {
   if (!serverSearchKeyword.value) {
     return servers.value;
   }
-  return servers.value.filter(server => server.VMName.toLowerCase().includes(serverSearchKeyword.value.toLowerCase()));
+  return servers.value.filter(server => (server.VMName + server.Status + server.IP + server.HyperVisor + server.Hostname).toLowerCase().includes(serverSearchKeyword.value.toLowerCase()));
 });
 
 
@@ -129,7 +129,7 @@ const filteredDatabases = computed(() => {
     return databases.value;
   }
   const keywordTwo = databaseSearchKeyword.value.toLowerCase();
-  return databases.value.filter(databases => databases.name.toLowerCase().includes(keywordTwo));
+  return databases.value.filter(database => (database.name + database.Path).toLowerCase().includes(keywordTwo));
 });
 
 const customSort = (a, b, property) => {
