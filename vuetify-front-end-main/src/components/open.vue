@@ -5,11 +5,13 @@
       <h1 class="header" v-if="toggleDataTable.value == 'about'"></h1>
       <h1 class="header" v-else-if="toggleDataTable.value === 'database'">Databases</h1>
       <h1 class="header" v-else>Servers</h1>
-      <div id="server-bar" v-if="toggleDataTable.value !== 'about' && toggleDataTable.value !== 'database'">
-        <input type="text" v-model="serverSearchKeyword" placeholder="Search Servers" />
-      </div>
-      <div id="database-bar" v-if="toggleDataTable.value === 'database'">
-        <input type="text" v-model="databaseSearchKeyword" placeholder="Search Databases" />
+      <div class="search">
+        <div id="server-bar" v-if="toggleDataTable.value !== 'about' && toggleDataTable.value !== 'database'">
+          <input type="text" v-model="serverSearchKeyword" placeholder="Search Servers" />
+        </div>
+        <div id="database-bar" v-if="toggleDataTable.value === 'database'">
+          <input type="text" v-model="databaseSearchKeyword" placeholder="Search Databases" />
+        </div>
       </div>
       
       <div v-if="toggleDataTable.value == 'about'">
@@ -54,8 +56,8 @@
           <tr v-for="server in filteredServers" :key="server.VMName">
             <td>{{ server.VMName }}</td>
             <td>
-              <div class="running" v-if="server.Status === 'Running'"></div>
-              <div class="offline" v-else></div>
+              <div class="status-indicator running" v-if="server.Status === 'Running'"></div>
+              <div class="status-indicator offline" v-else></div>
             </td>
             <td>{{ server.IP }}</td>
             <td>{{ dateToString(server.LastCheckInTime) }}</td>
@@ -213,12 +215,37 @@ const toggleSortingOrder = (column) => {
 
 <style scoped>
 
+@media print {
+  .search {
+    display: none !important;
+  }
+  .styled-table {
+    box-shadow: none !important;
+    margin: none !important;
+  }
+  .styled-table td {
+    min-width: 150px !important;
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+  }
+  .status-indicator {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  thead {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
 .running {
   width: 1rem;
   height: 1rem;
   border-radius: 0.5rem;
   background-color: lime;
-  /*border: 1px solid black;*/
+  border: 1px solid black;
   margin: auto;
   
 }
@@ -228,7 +255,7 @@ const toggleSortingOrder = (column) => {
   height: 1rem;
   border-radius: 0.5rem;
   background-color: red;
-  /*border: 1px solid black;*/
+  border: 1px solid black;
   margin: auto;
 }
 

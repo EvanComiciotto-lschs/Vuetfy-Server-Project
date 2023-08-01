@@ -50,20 +50,25 @@ export default {
 </template>
 
 <style>
-.messageDisplay {
-  width: 100%;
-  background-color: #00bbbb;
-  color: white;
-  display: flex;
-  flex-direction: row;
-  padding: 1rem;
-  font-weight: bold;
-}
-.time {
-  margin-right: 0.25rem;
-}
-.body {
-  flex-grow: 10;
-  text-align: left;
-}
+  .messageDisplay {
+    width: 100%;
+    background-color: #00bbbb;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    font-weight: bold;
+  }
+  @media print {
+    .messageDisplay {
+      display: none !important;
+    }
+  }
+  .time {
+    margin-right: 0.25rem;
+  }
+  .body {
+    flex-grow: 10;
+    text-align: left;
+  }
 </style>

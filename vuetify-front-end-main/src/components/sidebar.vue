@@ -65,7 +65,7 @@ export default {
 </script>
 
 <template>
-    <div class ="sidebar" :style="{width:sidebarWidth}" style="display: flex; flex-direction: column;">
+    <div class ="sidebar" :style="{width:sidebarWidth}">
         <div class="collapse-icon" @click="reloadPage" style="display: flex; flex-direction: row;">
             <a href="/home"><img class ="pic" src = "/src/assets/Aegis-Logo-Transparent-Backgrounds.png"></a>
             <span v-if="!collapsed"><p class = "label-DONTBREAK0">IT Assets</p></span>
@@ -161,9 +161,12 @@ export default {
       transition: 0.3s, ease;
       display: flex;
       flex-direction: column;
+      width: 200px;
   }
   @media print {
-    display: none !important;
+    .sidebar {
+      display: none !important;
+    }
   }
   .collapse-icon {
       position: absolute;
