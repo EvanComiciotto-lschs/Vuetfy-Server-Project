@@ -39,7 +39,7 @@ app.post('/servers', function(req, res){
       }
     });
    } else {
-    response.send("not authenticated");
+    res.status(401).send("401 Unauthorized");
   }
   console.log(masterServerList);
   console.log("the masterServerList has " + masterServerList.length + " servers.");
@@ -51,7 +51,7 @@ app.get('/servers', (req, res) => {
   console.log(req.get("User-Agent"));
   res.json(masterServerList);
   }else{
-    res.send("not authenticated");
+    res.status(401).send("401 Unauthorized");
   }
 });
 //input function (post requests to /databases)
@@ -81,7 +81,7 @@ app.post('/databases', function(req, res){
       }
     });
   } else {
-    response.send("not authenticated");
+    res.status(401).send("401 Unauthorized");
   }
   console.log(masterDBList.length);
 });
@@ -90,7 +90,7 @@ app.get('/databases', function(req, res){
   if(req.headers.auth == token){
     res.json(masterDBList);
   }else{
-    res.send("not authenticated");
+    res.status(401).send("401 Unauthorized");
   }
 });
 
@@ -167,7 +167,7 @@ app.post('/messages', function(req, res){
   notificationTime = req.body.timestamp;
   res.status(200).send("Success");
   }else{
-    res.send("not authenticated");
+    res.status(401).send("401 Unauthorized");
   }
 });
 
@@ -175,7 +175,7 @@ app.get('/messages', function(req, res){
   if(req.headers.auth == token){
     res.status(200).send(JSON.stringify({message: notificationMessage, timestamp: notificationTime }));
   }else{
-    res.send("not authenticated");
+    res.status(401).send("401 Unauthorized");
   }
 });
 
