@@ -5,8 +5,11 @@
       <h1 class="header" v-if="toggleDataTable.value == 'about'"></h1>
       <h1 class="header" v-else-if="toggleDataTable.value =='database'">Databases</h1>
       <h1 class="header" v-else>Servers</h1>
-      <div class="search-bar" v-if="toggleDataTable.value != 'about'">
-        <input type="text" v-model="searchKeyword" placeholder="Search Name" />
+      <div id="server-bar" v-if="toggleDataTable.value != 'about' && toggleDataTable.value != 'database'">
+        <input type="text" v-model="serverSearchKeyword" placeholder="Search Name" />
+      </div>
+      <div id="database-bar" v-if="toggleDataTable.value == 'database' && toggleDataTable.value !='server'">
+        <input type="text" v-model="databaseSearchKeyword" placeholder="Search Name" />
       </div>
       
       <div v-if="toggleDataTable.value == 'about'">
@@ -69,7 +72,8 @@ import toggleDataTable from './state.js';
 import notification from './notification.vue';
 import aboutPage from "./aboutPage.vue";
 import router from './router/index.js';
-const searchKeyword = ref('');
+const serverSearchKeyword = ref('');
+const databaseSearchKeyword = ref('');
 var servers = ref(null);
 var databases = ref(null);
 console.log(toggleDataTable.value);
@@ -113,18 +117,18 @@ if(ong == 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJf
 }
 
 const filteredServers = computed(() => {
-  if (!searchKeyword.value) {
+  if (!serverSearchKeyword.value) {
     return servers.value;
   }
-  return servers.value.filter(server => server.VMName.toLowerCase().includes(searchKeyword.value.toLowerCase()));
+  return servers.value.filter(server => server.VMName.toLowerCase().includes(serverSearchKeyword.value.toLowerCase()));
 });
 
 
 const filteredDatabases = computed(() => {
-  if (!searchKeyword.value) {
+  if (!databaseSearchKeyword.value) {
     return databases.value;
   }
-  const keywordTwo = searchKeyword.value.toLowerCase();
+  const keywordTwo = databaseSearchKeyword.value.toLowerCase();
   return databases.value.filter(databases => databases.name.toLowerCase().includes(keywordTwo));
 });
 
@@ -150,7 +154,7 @@ const filteredDatabases = computed(() => {
   margin: auto;
 }
 
-.search-bar {
+#server-bar {
   border: 1px solid rgb(206, 206, 206);
   background-color: #f3f5ff;
   width: 195px;
@@ -161,6 +165,14 @@ const filteredDatabases = computed(() => {
 
 input[type="text"] {
   text-align: center;
+}
+#database-bar {
+  border: 1px solid rgb(206, 206, 206);
+  background-color: #f3f5ff;
+  width: 195px;
+  margin-left: 10px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .vm:hover {
