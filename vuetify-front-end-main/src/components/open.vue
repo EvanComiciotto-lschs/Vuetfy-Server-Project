@@ -242,7 +242,7 @@ input[type="text"] {
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 400px;
-    max-width: 1000px;
+    max-width: 1200px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     margin-left: auto;
     margin-right: auto;
@@ -267,6 +267,7 @@ input[type="text"] {
 .styled-table th,
 .styled-table td {
     padding: 12px 15px;
+    min-width: 200px;
 }
 
 .styled-table tbody tr:nth-of-type(red) {
