@@ -7,7 +7,6 @@ export default {
   methods: {
     reloadPage(){
         window.location.reload();
-
     }
   },
   setup() {
@@ -101,106 +100,97 @@ export default {
 </style>
 
 <style scoped>
-.sidebar-toggler {
-    font-size: 3rem;
-    color: #708490;
-}
-.server-icon {
-    font-size: 3rem;
-    color: #708490;
-}
-.server-icon.active {
-    color: #ef3b32;
-}
-.datatable-icon {
-    font-size: 3rem;
-    color: #708490;
-}
-.datatable-icon.active {
-    color: #ef3b32;
-}
-.about-icon {
-    font-size: 3rem;
-    color: #708490;
-}
-.about-icon.active {
-    color: #ef3b32;
-}
-.icon {
-    height: 4rem;
-    width: 4rem;
-}
-.spacer {
-    flex-grow: 10;
-}
-.label-DONTBREAK {
-    color: lightgray;
-    padding-top: 2rem;
-    padding-left: 1rem;
-}
-.label-DONTBREAK2 {
-    color: lightgray;
-    padding-top: 1.5rem;
-    padding-left: 1rem;
-}
-.label-DONTBREAK0 {
-    color: lightgray;
-    padding-top: 1rem;
-    padding-left: 1rem;
-    font-weight: bold;
-}
-
-    .sidebar {
-        color: #708490;
-        background-color: var(--sidebar-bg-color);
-        float: left;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        padding: 0.5em;
-        transition: 0.3s, ease;
-        display: flex;
-        flex-direction: column;
-    }
-    .collapse-icon {
-        position: absolute;
-        top: 0;
-        padding: 0.75em;
-    }
-    .collapse-icon:hover {
-        transform: scale(115%);
-    }
-    .pic {
-        height: 50px;
-        width: 50px;
-    }
-    /* .item{
-        position: absolute;
-        top: 300px;
-        padding: 0.75em;
-        color: white;
-        
-    }
-    .item:hover{
-        transform: scale(115%);
-        transition: ease 0.2s;
-    } */
-    #dt{
-        top: 375px;
-    }
-    #dataLabel{
-        top: 375px;
-    }
-    .textLabel{
-        display: inline-block;
-        bottom:  25px;
-        left: 75px;
-        position: absolute;
-    }
-    #databasesLabel{
-        bottom: 32px;
-        position: absolute;
-    }
+  .sidebar-toggler {
+      font-size: 3rem;
+      color: #708490;
+  }
+  .server-icon {
+      font-size: 3rem;
+      color: #708490;
+  }
+  .server-icon.active {
+      color: #ef3b32;
+  }
+  .datatable-icon {
+      font-size: 3rem;
+      color: #708490;
+  }
+  .datatable-icon.active {
+      color: #ef3b32;
+  }
+  .about-icon {
+      font-size: 3rem;
+      color: #708490;
+  }
+  .about-icon.active {
+      color: #ef3b32;
+  }
+  .icon {
+      height: 4rem;
+      width: 4rem;
+  }
+  .spacer {
+      flex-grow: 10;
+  }
+  .label-DONTBREAK {
+      color: lightgray;
+      padding-top: 2rem;
+      padding-left: 1rem;
+  }
+  .label-DONTBREAK2 {
+      color: lightgray;
+      padding-top: 1.5rem;
+      padding-left: 1rem;
+  }
+  .label-DONTBREAK0 {
+      color: lightgray;
+      padding-top: 1rem;
+      padding-left: 1rem;
+      font-weight: bold;
+  }
+  .sidebar {
+      color: #708490;
+      background-color: var(--sidebar-bg-color);
+      float: left;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      padding: 0.5em;
+      transition: 0.3s, ease;
+      display: flex;
+      flex-direction: column;
+  }
+  @media print {
+    display: none !important;
+  }
+  .collapse-icon {
+      position: absolute;
+      top: 0;
+      padding: 0.75em;
+  }
+  .collapse-icon:hover {
+      transform: scale(115%);
+  }
+  .pic {
+      height: 50px;
+      width: 50px;
+  }
+  #dt{
+      top: 375px;
+  }
+  #dataLabel{
+      top: 375px;
+  }
+  .textLabel{
+      display: inline-block;
+      bottom:  25px;
+      left: 75px;
+      position: absolute;
+  }
+  #databasesLabel{
+      bottom: 32px;
+      position: absolute;
+  }
 </style>
