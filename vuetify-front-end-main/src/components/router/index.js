@@ -17,6 +17,10 @@ import { createWebHistory, createRouter } from "vue-router";
      path: "/messages",
      component: () => import('../message.vue'),
   },
+  {
+    path: "/users",
+    component: () => import('../Users.vue'),
+  }
 ]
 
 const router = createRouter({

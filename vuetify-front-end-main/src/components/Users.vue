@@ -12,5 +12,5 @@ export default {
 </script>
 
 <template>
-   
+   <p>TESTING</p>
 </template>
