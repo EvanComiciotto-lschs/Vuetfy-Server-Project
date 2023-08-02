@@ -131,8 +131,6 @@ function deleteServers(array){
   var referenceTime = new Date();
 
   referenceTime.setHours(curTime.getHours()-28);
-  //referenceTime.setHours(curTime.getHours()-4);
-  referenceTime.setMinutes(curTime.getMinutes()-10);
   referenceTime = referenceTime.toISOString().split('.')[0];
   console.log('Reference time: ' + referenceTime);
   var toDelete = [];
