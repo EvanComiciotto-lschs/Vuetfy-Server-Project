@@ -73,25 +73,29 @@ export default {
             </span>
         </div>
         <div class="spacer"></div>
-        <div class="item" :class="collapsed && 'item collapsed'" @click="redirectServers" style="display: flex; flex-direction: row;">
-            <i class="bi bi-motherboard-fill server-icon"></i>
+        <div class="item" :class="collapsed && 'item collapsed'" @click="redirectServers"
+            style="display: flex; flex-direction: row;">
+            <i class="bi bi-pc-display server-icon"></i>
             <span v-if="!collapsed">
                 <p class="label-DONTBREAK">Servers</p>
             </span>
         </div>
-        <div class="item" :class="collapsed && 'item collapsed'" @click="redirectDatabases" style="display: flex; flex-direction: row;">
+        <div class="item" :class="collapsed && 'item collapsed'" @click="redirectDatabases"
+            style="display: flex; flex-direction: row;">
             <i class="bi bi-database-fill database-icon"></i>
             <span v-if="!collapsed">
                 <p class="label-DONTBREAK">Databases</p>
             </span>
         </div>
-        <div class="item" :class="collapsed && 'item collapsed'" @click="redirectUsers" style="display: flex; flex-direction: row;">
+        <div class="item" :class="collapsed && 'item collapsed'" @click="redirectUsers"
+            style="display: flex; flex-direction: row;">
             <i class="bi bi-person-circle user-icon"></i>
             <span v-if="!collapsed">
                 <p class="label-DONTBREAK">Users</p>
             </span>
         </div>
-        <div class="item" :class="collapsed && 'item collapsed'" @click="redirectAbout" style="display: flex; flex-direction: row;">
+        <div class="item" :class="collapsed && 'item collapsed'" @click="redirectAbout"
+            style="display: flex; flex-direction: row;">
             <i class="bi bi-chat-square-text-fill about-icon"></i>
             <span v-if="!collapsed">
                 <p class="label-DONTBREAK">About</p>
@@ -99,10 +103,11 @@ export default {
         </div>
         <div class="spacer"></div>
 
-         <div class="item" :class="collapsed && 'item collapsed'" style="display: flex; flex-direction: row;">
-            <a href = "mailto:helpdesk@aiscorp.com?subject=IT Support" id = "help-icon" class = "label-DONTBREAK"><i class="bi bi-envelope help-icon"></i></a>
+        <div class="item" :class="collapsed && 'item collapsed'" style="display: flex; flex-direction: row;">
+            <a href="mailto:helpdesk@aiscorp.com?subject=IT Support" id="help-icon" class="label-DONTBREAK"><i
+                    class="bi bi-envelope help-icon"></i></a>
             <span v-if="!collapsed">
-                <a href = "mailto:helpdesk@aiscorp.com?subject=IT Support" id = "help-link"> Support</a>
+                <a href="mailto:helpdesk@aiscorp.com?subject=IT Support" id="help-link"> Support</a>
             </span>
         </div>
         <!--<div class="item" :class="collapsed && 'item collapsed'" @click="redirectHelp" style="display: flex; flex-direction: row;">
@@ -111,7 +116,8 @@ export default {
                 <p class="label-DONTBREAK">Help</p>
             </span>
         </div>-->
-        <div class="item" :class="collapsed && 'item collapsed'" @click="toggleSidebar" style="display: flex; flex-direction: row;">
+        <div class="item" :class="collapsed && 'item collapsed'" @click="toggleSidebar"
+            style="display: flex; flex-direction: row;">
             <i class="bi bi-layout-sidebar sidebar-toggler"></i>
             <span v-if="!collapsed">
                 <p class="label-DONTBREAK2">Collapse</p>
@@ -133,9 +139,11 @@ export default {
     font-size: 3rem;
     color: #708490;
 }
+
 .item {
     padding-left: 0.75rem;
 }
+
 .server-icon {
     font-size: 3rem;
     color: #708490;
@@ -260,15 +268,16 @@ export default {
     bottom: 32px;
     position: absolute;
 }
-#help-icon{
+
+#help-icon {
     color: lightgray;
     text-decoration: none;
     padding-left: .15rem;
 }
-#help-link{
+
+#help-link {
     color: lightgray;
     text-decoration: none;
     vertical-align: -3rem;
     padding-left: 1rem;
-}
-</style>
+}</style>

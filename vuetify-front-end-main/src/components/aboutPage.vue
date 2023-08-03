@@ -5,10 +5,10 @@ import notification from './notification.vue';
 export default {
     methods: {
         resizeFlowChart() {
-            document.getElementById("flowchart").classList.toggle("big-chart");
+            document.getElementById("flowchart").classList.toggle("small-chart");
         },
         resizePhoto() {
-            document.getElementById("groupPhoto").classList.toggle("big-photo");
+            document.getElementById("groupPhoto").classList.toggle("small-photo");
         }
     }
 };
@@ -16,29 +16,38 @@ export default {
 
 <template>
     <notification />
-    <p id = "heading">2023 IT Asset Project</p>
+    <p id="heading">2023 IT Asset Project</p>
     <div> </div>
-    <table id = "descriptions">
+    <table id="descriptions">
         <tr>
-            <th id = "tableHeading" colspan = "4">Core functionality: Gathers server and database information from various hosts, compiles them, and displays them on a webpage.</th>
+            <th id="tableHeading" colspan="4">Core functionality: Gathers server and database information from various
+                hosts, compiles them, and displays them on a webpage.</th>
         </tr>
-        <tr id = "headerLabels">
-            <th class = "tableLabel">Backend</th>
-            <th class = "tableLabel">Authentication</th>
-            <th class = "tableLabel">Frontend</th>
-            <th class = "talbeLabel">Distribution</th>
-        </tr>
-        <tr>
-            <td class = "description">Gathers data from a series of automated Powershell scripts that collect the data and send it to a set host in json format. The host runs a series of programs that compile each set of data into separate lists, checking for outdated information and deleting it. The backend then utilizes the get and post APIs in order to store and transmit the data to the frontend.</td>
-            <td class = "description">Something with tokens and stuff. Requires a valid username and password  to ensure information is only accessed by the intended users.</td>
-            <td class = "description">Utilizes Vue3 and fetch APIs to retrieve the data from the set host. The data is then displayed in a series of table which can be filtered through the collapsable sidebar and searched as desired.</td>
-            <td class = "description">The code is all compiled in Docker containers that are hosted and stored on a virtual server in Azure to ensure the programs can run constantly and be accessed as needed.</td>
+        <tr id="headerLabels">
+            <th class="tableLabel">Backend</th>
+            <th class="tableLabel">Authentication</th>
+            <th class="tableLabel">Frontend</th>
+            <th class="talbeLabel">Distribution</th>
         </tr>
         <tr>
-            <td class = "people">Jared, Fahd, Ethan</td>
-            <td class = "people">Stephen</td>
-            <td class = "people">Evan, Ian, Stephen, Ethan</td>
-            <td class = "people">Jared</td>
+            <td class="description">Gathers data from a series of automated Powershell scripts that collect the data and
+                send it to a set host in json format. The host runs a series of programs that compile each set of data into
+                separate lists, checking for outdated information and deleting it. The backend then utilizes the get and
+                post APIs in order to store and transmit the data to the frontend.</td>
+            <td class="description">Upon frontend fetch request, the login API checks the provided username and password. If
+                they are valid, the API will return a token that is stored in a cookie and passed to authentication API. If
+                the token is valid, the auth API allows the page to load.</td>
+            <td class="description">Utilizes Vue3 and fetch APIs to retrieve the data from the set host. The data is then
+                displayed in a series of tables which can be filtered through the collapsable sidebar and searched as
+                desired.</td>
+            <td class="description">The code is all compiled in Docker containers that are hosted and stored on a virtual
+                server in Azure to ensure the programs can run constantly and be accessed as needed.</td>
+        </tr>
+        <tr>
+            <td class="people">Jared, Fahd, Ethan</td>
+            <td class="people">Stephen</td>
+            <td class="people">Evan, Ian, Stephen, Ethan</td>
+            <td class="people">Jared</td>
         </tr>
     </table>
 
@@ -65,48 +74,52 @@ export default {
     <p>Members: Ethan Pakuris, Jared Werts, Ian Whitaker, Evan Comiciotto, Fahd Khan, and <a id = "partyModeLink" href="partymode=true">Stephen Trezza</a></p>
     <p>(From left to right as pictured)</p>-->
 
-    <div class = "row">
-        <div class = "collumn">
-            <img id = "flowchart" src="https://i.ibb.co/wrFLqF8/Microsoft-Teams-image.png"  @click="resizeFlowChart()">
+    <div class="row">
+        <div class="collumn">
+            <img id="flowchart" src="https://i.ibb.co/wrFLqF8/Microsoft-Teams-image.png" @click="resizeFlowChart()">
             <figcaption>Flowchart showing capabilities and path of data</figcaption>
         </div>
-        <div class = "collumn">
-            <img id = "groupPhoto" src="https://i.ibb.co/3CjkpCY/Intern-Group-Photo-Good.jpg" @click="resizePhoto">
+        <div class="collumn">
+            <img id="groupPhoto" src="https://i.ibb.co/3CjkpCY/Intern-Group-Photo-Good.jpg" @click="resizePhoto">
             <p>Designed by La Salle College High School class of 2024 summer interns</p>
-            <p class="internList">Members: Ethan Pakuris, Jared Werts, Ian Whitaker, Evan Comiciotto, Fahd Khan, and <a id = "stName" href="partymode=true">Stephen Trezza</a></p>
-            <p class = "finePrint">(From left to right as pictured)</p>
+            <p class="internList">Members: Ethan Pakuris, Jared Werts, Ian Whitaker, Evan Comiciotto, Fahd Khan, and <a
+                    id="stName" href="partymode=true">Stephen Trezza</a></p>
+            <p class="finePrint">(From left to right as pictured)</p>
         </div>
     </div>
-
-
 </template>
 
 
 <style scoped>
-
-table{
+table {
     width: 80%;
-    height:auto;
+    height: auto;
 }
-table, td, th{
+
+table,
+td,
+th {
     padding: 2px;
     width: 26%;
     vertical-align: top;
     border: 1px solid;
-    border-collapse:collapse;
+    border-collapse: collapse;
 }
-#heading{
-    font-weight:bold;
-    font-size:xx-large;
+
+#heading {
+    font-weight: bold;
+    font-size: xx-large;
 
     padding-top: 10px;
     padding-bottom: 50px;
 }
-#headerLabels{
-  background-color: #708490;
-  color: #27272d;
+
+#headerLabels {
+    background-color: #708490;
+    color: #27272d;
 }
-#descriptions{
+
+#descriptions {
     text-align: center;
     padding-left: 10%;
     padding-right: 10%;
@@ -116,74 +129,83 @@ table, td, th{
     table-layout: fixed;
 }
 
-th{
-    font-size:large;
+th {
+    font-size: large;
 }
-#tableHeading{
+
+#tableHeading {
     background-color: white;
     color: #27272d;
     background-color: #ef3b32;
     font-size: larger;
 }
 
-.people{
+.people {
     border-top: none;
     padding-top: 10px;
 }
-.description{
+
+.description {
     border-bottom: none;
 }
-#stName{
+
+#stName {
     color: black;
     text-decoration: none;
-    
+
 }
-p{
+
+p {
     color: black;
 }
 
-.collumn{
+.collumn {
     float: left;
     width: 50%;
     padding: 5px;
 }
-.row::after{
+
+.row::after {
     content: "";
     clear: both;
     display: table;
 }
 
 
-#flowchart{
-    width: 40%;
+#flowchart {
+    width: 80%;
     height: auto;
     margin-right: auto;
     margin-left: auto;
 }
-figcaption{
+
+figcaption {
     font-size: small;
     margin-right: auto;
 }
-.big-chart {
-    width: 80% !important;
+
+.small-chart {
+    width: 40% !important;
     margin-left: auto;
     margin-right: 0px;
 }
-.big-photo {
-    width: 80% !important;
+
+.small-photo {
+    width: 40% !important;
     margin-left: 0px;
     margin-right: auto;
 }
-#groupPhoto{
-    width: 50%;
+
+#groupPhoto {
+    width: 60%;
     height: auto;
     padding-top: 10px;
 }
-.internList{
+
+.internList {
     font-size: small;
 }
-.finePrint{
-    font-size: x-small;
-}
 
-</style>
+.finePrint {
+    font-size: x-small;
+}</style>
