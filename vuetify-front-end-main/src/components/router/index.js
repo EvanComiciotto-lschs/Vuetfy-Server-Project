@@ -28,7 +28,11 @@ import { createWebHistory, createRouter } from "vue-router";
   {
     path: "/about",
     component: () => import('../aboutPage.vue'),
-  }
+  },
+  {
+    path: "/help",
+    component: () => import('../help.vue'),
+  },
 ]
 
 const router = createRouter({

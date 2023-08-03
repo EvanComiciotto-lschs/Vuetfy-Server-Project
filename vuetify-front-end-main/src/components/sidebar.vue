@@ -17,6 +17,9 @@ export default {
         },
         redirectUsers() {
             window.location.href = "/users";
+        },
+        redirectHelp() {
+            window.location.href = "/help";
         }
     },
     setup() {
@@ -40,6 +43,10 @@ export default {
                     });
                 } else if (route == '/about') {
                     [...document.getElementsByClassName("about-icon")].forEach(element => {
+                        element.classList.add("active");
+                    });
+                } else if (route == '/help') {
+                    [...document.getElementsByClassName("help-icon")].forEach(element => {
                         element.classList.add("active");
                     });
                 }
@@ -91,6 +98,19 @@ export default {
             </span>
         </div>
         <div class="spacer"></div>
+
+         <div class="item" :class="collapsed && 'item collapsed'" style="display: flex; flex-direction: row;">
+            <a href = "mailto:helpdesk@aiscorp.com?subject=IT Assets Support" id = "help-icon" class = "label-DONTBREAK"><i class="bi bi-envelope help-icon"></i></a>
+            <span v-if="!collapsed">
+                <a href = "mailto:helpdesk@aiscorp.com?subject=IT Assets Support" id = "help-link"> Support</a>
+            </span>
+        </div>
+        <!--<div class="item" :class="collapsed && 'item collapsed'" @click="redirectHelp" style="display: flex; flex-direction: row;">
+            <i class="bi bi-question-circle-fill help-icon"></i>
+            <span v-if="!collapsed">
+                <p class="label-DONTBREAK">Help</p>
+            </span>
+        </div>-->
         <div class="item" :class="collapsed && 'item collapsed'" @click="toggleSidebar" style="display: flex; flex-direction: row;">
             <i class="bi bi-layout-sidebar sidebar-toggler"></i>
             <span v-if="!collapsed">
@@ -152,12 +172,12 @@ export default {
     color: #ef3b32;
 }
 
-.home-icon {
+.help-icon {
     font-size: 3rem;
     color: #708490;
 }
 
-.home-icon.active {
+.help-icon.active {
     color: #ef3b32;
 }
 
@@ -239,5 +259,16 @@ export default {
 #databasesLabel {
     bottom: 32px;
     position: absolute;
+}
+#help-icon{
+    color: lightgray;
+    text-decoration: none;
+    padding-left: .15rem;
+}
+#help-link{
+    color: lightgray;
+    text-decoration: none;
+    vertical-align: -3rem;
+    padding-left: 1rem;
 }
 </style>

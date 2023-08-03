@@ -1,3 +1,6 @@
+<script setup>
+import notification from './notification.vue';
+</script>
 <script>
 export default {
     methods: {
@@ -12,6 +15,7 @@ export default {
 </script>
 
 <template>
+    <notification />
     <p id = "heading">2023 IT Asset Project</p>
     <div> </div>
     <table id = "descriptions">
