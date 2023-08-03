@@ -2,8 +2,8 @@
   <img height="150" src="/src/assets/aegislogo.png">
   <form name="login-form">
     <div class="mb-3">
-      <br/>
-      <br/>
+      <br />
+      <br />
       <label for="username">Username </label>
       <input class='user' type="text" id="username" v-model="input.username" />
     </div>
@@ -17,7 +17,6 @@
 
   </form>
   <h3>{{ this.output }}</h3>
-
 </template>
 
 <script>
@@ -45,15 +44,15 @@ export default {
   methods: {
     async login() {
       try {
-        if(this.input.username == 'aegis' && this.input.password == 'aegis'){
+        if (this.input.username == 'aegis' && this.input.password == 'aegis') {
           const response = await axios.post('https://itassets.aiscorp.com:3000/login', {
             username: this.input.username,
             password: this.input.password,
           });
-          
+
           token = response.data.token;
           const res = await axios.post('https://itassets.aiscorp.com:3000/auth', {});
-          const word = res.data.code; 
+          const word = res.data.code;
           const authHeader = `Bearer ${token}`;
 
           //local storages
@@ -65,12 +64,12 @@ export default {
           // Redirect or perform other actions after successful login
           //this.$router.push('/servers')
           window.location.href = "/servers";
-        } else if (this.input.username == 'admin' && this.input.password == 'Interns2023@Aegis'){
+        } else if (this.input.username == 'admin' && this.input.password == 'Interns2023@Aegis') {
           const response = await axios.post('https://itassets.aiscorp.com:3000/login', {
             username: this.input.username,
             password: this.input.password,
           });
-          
+
           random = '5nj28T9cktIUoB6cq3nPK8aPDBWoYr8pc5ERQAoH';
           const token = response.data.token;
           const authHeader = `Bearer ${token}`;
@@ -85,12 +84,12 @@ export default {
           this.$router.push('/messages')
         } else {
           this.output = 'Put in valid username & password';
-          if(strike == 3){
+          if (strike == 3) {
             document.getElementsByClassName("user")[0].style.visibility = 'hidden';
             document.getElementsByClassName("pass")[0].style.visibility = 'hidden';
           } else {
             strike = strike + 1;
-          } 
+          }
         }
       } catch (error) {
         // Handle login error
@@ -103,28 +102,25 @@ export default {
 </script>
 
 <style scoped>
-
-.pass{
+.pass {
   border: 1px solid rgb(183, 183, 214);
   background-color: rgb(247, 251, 253);
 }
 
-.user{
+.user {
   border: 1px solid rgb(183, 183, 214);
   background-color: rgb(247, 251, 253);
 }
 
-.btn{
+.btn {
   width: 200px;
   background-color: rgb(247, 244, 244);
   border: 1px solid rgb(197, 197, 197);
 }
 
-.btn:hover{
+.btn:hover {
   color: grey;
   scale: 105%;
   transition: ease 0.5s;
 }
-
-
 </style>
