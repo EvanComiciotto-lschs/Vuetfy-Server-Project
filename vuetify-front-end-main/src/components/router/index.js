@@ -6,10 +6,6 @@ import { createWebHistory, createRouter } from "vue-router";
     component: () => import('../LoginView.vue'),
   },
   {
-    path: "/home",
-    component: () => import('../serversPage.vue'),
-  },
-  {
     path: "/partymode=true",
     component: () => import('../party.vue'),
   },
@@ -32,7 +28,11 @@ import { createWebHistory, createRouter } from "vue-router";
   {
     path: "/about",
     component: () => import('../aboutPage.vue'),
-  }
+  },
+  {
+    path: "/help",
+    component: () => import('../help.vue'),
+  },
 ]
 
 const router = createRouter({

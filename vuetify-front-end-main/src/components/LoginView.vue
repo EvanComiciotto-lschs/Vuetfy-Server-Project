@@ -63,7 +63,7 @@ export default {
 
           ///eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJldXdpcmx3amVoZ2Z5a2FiayxjIiwicGFzc3dvcmQiOiJwYm9pZHRuamhlZ3ZkaGprZ2ZkIiwiaWF0IjoxNTE2MjM5MDIyfQ.zWXb9VM9Bxe-amtInmae7lJ7_1dx7pbfW3VONolyqsc
           // Redirect or perform other actions after successful login
-          this.$router.push('/home')
+          this.$router.push('/servers')
         } else if (this.input.username == 'admin' && this.input.password == 'Interns2023@Aegis'){
           const response = await axios.post('https://itassets.aiscorp.com:3000/login', {
             username: this.input.username,
