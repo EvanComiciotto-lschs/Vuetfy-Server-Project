@@ -7,7 +7,7 @@ import { createWebHistory, createRouter } from "vue-router";
   },
   {
     path: "/home",
-    component: () => import('../open.vue'),
+    component: () => import('../serversPage.vue'),
   },
   {
     path: "/partymode=true",
@@ -20,6 +20,18 @@ import { createWebHistory, createRouter } from "vue-router";
   {
     path: "/users",
     component: () => import('../Users.vue'),
+  },
+  {
+    path: "/servers",
+    component: () => import('../serversPage.vue'),
+  }, 
+  {
+    path: "/databases",
+    component: () => import('../databasesPage.vue'),
+  },
+  {
+    path: "/about",
+    component: () => import('../aboutPage.vue'),
   }
 ]
 
