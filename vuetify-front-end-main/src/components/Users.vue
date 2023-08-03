@@ -1,5 +1,6 @@
 <template>
    <notification />
+   <b class = heading>Users</b>
   <div class="chart-container">
     {{ chartData }}
     <Doughnut id="my-chart-id" :options="chartOptions" :data="chartData" />
@@ -61,6 +62,9 @@ onMounted(async () => {
 
 
 <style scoped>
+.heading{
+    font-size: xx-large;
+ }
 .chart-container {
   max-width: 400px;
   margin: 0 auto;
