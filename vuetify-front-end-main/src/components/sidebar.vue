@@ -32,6 +32,13 @@ export default {
                 element.classList.remove("active");
             }
         });
+        [...document.getElementsByClassName("users-icon")].forEach(element => {
+            if (toggleDataTable.value == 'users') {
+                element.classList.add("active");
+            } else {
+                element.classList.remove("active");
+            }
+        });
     }
     function sidebarServers() {
         toggleDataTable.value = 'server';
@@ -49,6 +56,14 @@ export default {
       console.log(toggleDataTable.value);
         updateIcons();
     }
+    function redirectUsers() {
+      window.location.href = "/users";
+      toggleDataTable.value = "users";
+      updateIcons();
+    }
+    function redirectHome(){
+        window.location.href = "/home";
+    }
     updateIcons();
     provide('toggleDataTable', toggleDataTable);
     return {
@@ -57,7 +72,9 @@ export default {
       sidebarWidth,
       sidebarServers,
       sidebarDataTable,
-      sidebarAbout
+      sidebarAbout,
+      redirectUsers,
+      redirectHome
     };
   }
 };
@@ -71,6 +88,10 @@ export default {
             <span v-if="!collapsed"><p class = "label-DONTBREAK0">IT Assets</p></span>
         </div>
         <div class="spacer"></div>
+        <div class="item" @click="redirectHome()" style="display: flex; flex-direction: row;">
+            <i class="bi bi-house home-icon"></i>
+            <span v-if="!collapsed"><p class = "label-DONTBREAK">Home</p></span>
+        </div>
         <div class="item" @click="sidebarServers()" style="display: flex; flex-direction: row;">
             <i class="bi bi-motherboard-fill server-icon active"></i>
             <span v-if="!collapsed"><p class = "label-DONTBREAK">Servers</p></span>
@@ -82,6 +103,10 @@ export default {
         <div class="item" @click="sidebarAbout()" style="display: flex; flex-direction: row;">
             <i class="bi bi-chat-square-text-fill about-icon"></i>
             <span v-if="!collapsed"><p class = "label-DONTBREAK">About</p></span>
+        </div>
+        <div class="item" @click="redirectUsers()" style="display: flex; flex-direction: row;">
+            <i class="bi bi-person-circle user-icon"></i>
+            <span v-if="!collapsed"><p class = "label-DONTBREAK">Users</p></span>
         </div>
         <div class="spacer"></div>
         <div class="item" @click="toggleSidebar" style="display: flex; flex-direction: row;">
@@ -124,6 +149,20 @@ export default {
   }
   .about-icon.active {
       color: #ef3b32;
+  }
+  .user-icon{
+    font-size: 3rem;
+      color: #708490;
+  }
+  .user-icon.active{
+    color: #ef3b32;
+  }
+  .home-icon{
+    font-size: 3rem;
+      color: #708490;
+  }
+  .home-icon.active{
+    color: #ef3b32;
   }
   .icon {
       height: 4rem;
