@@ -22,31 +22,25 @@ const chartOptions = {
 }
 const chartData = ref<ChartData<'doughnut'>>({
   labels: ["hooray", "yipee"],
-  datasets: [{ data: [15,20], backgroundColor: ["#00ffff", "#ff0000"] }]
+  datasets: [{ data: [15,20], backgroundColor: ["#00ffff", "#ff0000",] }]
 })
 
 onMounted(async () => {
-  // let resp = await fetch('https://itassets.aiscorp.com:3000/messages', {
+  // let resp = await fetch('https://itassets.aiscorp.com:3000/users', {
   //   headers: {
   //     auth: '6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t'
   //   },
   // });
-  let resp = {
-    json: async () => {
-      return {
-        departments: {
-          dept1: 5,
-          dept2: 10,
-        }
-      }
+  let resp = await fetch('http://fkhan.aiscorp.local:3000/users', {
+    headers: {
+      auth: '6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t'
     },
-    ok: true
-  };
+  });
 
   if (resp.ok) {
     let newData: ChartData<'doughnut'> = {
       labels: [],
-      datasets: [{ data: [], backgroundColor: ["#00ffff", "#ff0000"] }]
+      datasets: [{ data: [], backgroundColor: ["#15779F", "#EF3b32","#F26522", "#27272D", "#708490"] }]
     }
 
     const data = await resp.json();
