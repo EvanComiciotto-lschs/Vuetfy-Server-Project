@@ -1,4 +1,5 @@
 <template>
+   <notification />
   <div class="chart-container">
     {{ chartData }}
     <Doughnut id="my-chart-id" :options="chartOptions" :data="chartData" />
@@ -6,6 +7,7 @@
 </template>
 
 <script lang="ts" setup>
+import notification from './notification.vue';
 import { ref, onMounted } from 'vue'
 import {
   Chart as ChartJS, ArcElement, Tooltip, Legend, ChartData
