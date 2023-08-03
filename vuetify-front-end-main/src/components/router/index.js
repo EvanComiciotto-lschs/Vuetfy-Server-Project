@@ -6,10 +6,6 @@ import { createWebHistory, createRouter } from "vue-router";
     component: () => import('../LoginView.vue'),
   },
   {
-    path: "/home",
-    component: () => import('../serversPage.vue'),
-  },
-  {
     path: "/partymode=true",
     component: () => import('../party.vue'),
   },

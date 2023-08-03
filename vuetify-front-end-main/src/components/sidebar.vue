@@ -60,7 +60,7 @@ export default {
 <template>
     <div class="sidebar" :style="{ width: sidebarWidth }">
         <div class="collapse-icon" @click="redirectServers" style="display: flex; flex-direction: row;">
-            <a href="/home"><img class="pic" src="/src/assets/Aegis-Logo-Transparent-Backgrounds.png"></a>
+            <a href="/servers"><img class="pic" src="/src/assets/Aegis-Logo-Transparent-Backgrounds.png"></a>
             <span v-if="!collapsed">
                 <p class="label-DONTBREAK0">IT Assets</p>
             </span>
