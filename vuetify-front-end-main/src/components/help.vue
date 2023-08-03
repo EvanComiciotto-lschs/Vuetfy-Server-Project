@@ -2,7 +2,7 @@
     <notification />
     <b class = heading>Help</b>
     <p>Create a ticket by emailing help desk</p>
-    <a href = "mailto:helpdesk@aiscorp.com" class = "help-link"><i class="bi bi-envelope help-icon"></i> Get help</a>
+    <a href = "mailto:helpdesk@aiscorp.com?subject=IT Support" class = "help-link"><i class="bi bi-envelope help-icon"></i> Get help</a>
  </template>
  
  <script>
