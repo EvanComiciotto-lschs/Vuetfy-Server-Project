@@ -1,4 +1,5 @@
 <template>
+   <a href = "mailto:ecomiciotto@aiscorp.com">Get helps</a>
   <div class="chart-container">
     <canvas ref="doughnutChartCanvas"></canvas>
   </div>
@@ -49,5 +50,4 @@ export default {
   margin: 0 auto;
   padding: 20px;
 }
-   <a href = "mailto:ecomiciotto@aiscorp.com">Get helps</a>
 </style>
