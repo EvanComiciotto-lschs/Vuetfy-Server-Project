@@ -40,7 +40,7 @@ onMounted(async () => {
   if (resp.ok) {
     let newData: ChartData<'doughnut'> = {
       labels: [],
-      datasets: [{ data: [], backgroundColor: ["#15779F", "#EF3b32","#F26522", "#27272D", "#708490"] }]
+      datasets: [{ data: [], backgroundColor: [ "#27272D", "#708490","#7c0606","#EF3b32","#7e7e7e"] }]
     }
 
     const data = await resp.json();
