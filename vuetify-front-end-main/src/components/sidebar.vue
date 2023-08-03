@@ -100,9 +100,9 @@ export default {
         <div class="spacer"></div>
 
          <div class="item" :class="collapsed && 'item collapsed'" style="display: flex; flex-direction: row;">
-            <a href = "mailto:helpdesk@aiscorp.com?subject=IT Assets Support" id = "help-icon" class = "label-DONTBREAK"><i class="bi bi-envelope help-icon"></i></a>
+            <a href = "mailto:helpdesk@aiscorp.com?subject=IT Support" id = "help-icon" class = "label-DONTBREAK"><i class="bi bi-envelope help-icon"></i></a>
             <span v-if="!collapsed">
-                <a href = "mailto:helpdesk@aiscorp.com?subject=IT Assets Support" id = "help-link"> Support</a>
+                <a href = "mailto:helpdesk@aiscorp.com?subject=IT Support" id = "help-link"> Support</a>
             </span>
         </div>
         <!--<div class="item" :class="collapsed && 'item collapsed'" @click="redirectHelp" style="display: flex; flex-direction: row;">
