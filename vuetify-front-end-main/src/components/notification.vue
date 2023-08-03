@@ -9,10 +9,10 @@ export default {
 
     onMounted(async () => {
       let resp = await fetch('https://itassets.aiscorp.com:3000/messages', {
-      headers: {
-        auth: '6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t'
-      },
-    });
+        headers: {
+          auth: '6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t'
+        },
+      });
       if (resp.ok) {
         const data = await resp.json();
         console.log(data)
@@ -32,8 +32,8 @@ export default {
   },
   methods: {
     hideMessage() {
-        this.messageCheck = false;
-      }
+      this.messageCheck = false;
+    }
 
   }
 };
@@ -50,25 +50,27 @@ export default {
 </template>
 
 <style>
+.messageDisplay {
+  width: 100%;
+  background-color: #00bbbb;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+@media print {
   .messageDisplay {
-    width: 100%;
-    background-color: #00bbbb;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    padding: 1rem;
-    font-weight: bold;
+    display: none !important;
   }
-  @media print {
-    .messageDisplay {
-      display: none !important;
-    }
-  }
-  .time {
-    margin-right: 0.25rem;
-  }
-  .body {
-    flex-grow: 10;
-    text-align: left;
-  }
-</style>
+}
+
+.time {
+  margin-right: 0.25rem;
+}
+
+.body {
+  flex-grow: 10;
+  text-align: left;
+}</style>
