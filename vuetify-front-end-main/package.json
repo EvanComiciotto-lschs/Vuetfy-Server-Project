@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@mdi/font": "7.0.96",
+    "axios": "*",
     "buffer": "^6.0.3",
     "fetch": "^1.1.0",
     "fs": "^0.0.1-security",
@@ -16,10 +17,10 @@
     "promises": "^0.2.5",
     "roboto-fontface": "*",
     "vue": "^3.2.0",
-    "vuetify": "^3.3.6",
-    "webfontloader": "^1.0.0",
+    "vue-chartjs": "^5.2.0",
     "vue-router": "*",
-    "axios": "*"
+    "vuetify": "^3.3.6",
+    "webfontloader": "^1.0.0"
   },
   "devDependencies": {
     "@babel/types": "^7.21.4",

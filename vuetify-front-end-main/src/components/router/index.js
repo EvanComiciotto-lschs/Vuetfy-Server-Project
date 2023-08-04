@@ -6,16 +6,32 @@ import { createWebHistory, createRouter } from "vue-router";
     component: () => import('../LoginView.vue'),
   },
   {
-    path: "/home",
-    component: () => import('../open.vue'),
-  },
-  {
     path: "/partymode=true",
     component: () => import('../party.vue'),
   },
   {
      path: "/messages",
      component: () => import('../message.vue'),
+  },
+  {
+    path: "/users",
+    component: () => import('../Users.vue'),
+  },
+  {
+    path: "/servers",
+    component: () => import('../serversPage.vue'),
+  }, 
+  {
+    path: "/databases",
+    component: () => import('../databasesPage.vue'),
+  },
+  {
+    path: "/about",
+    component: () => import('../aboutPage.vue'),
+  },
+  {
+    path: "/help",
+    component: () => import('../help.vue'),
   },
 ]
 
