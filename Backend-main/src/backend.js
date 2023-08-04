@@ -179,16 +179,20 @@ app.get('/messages', function (req, res) {
 let user_data = {
   departments: {},
   totalUsers: 0,
-  serviceAccounts:0
+  serviceAccounts: 0,
+  title: {},
+  manager: {}
 };
 
 
 
 app.post('/users', (req, res) => {
-  user_data ={
-    departments:{},
-    totalUsers:0,
-    serviceAccounts:0
+  user_data = {
+    departments: {},
+    totalUsers: 0,
+    serviceAccounts: 0,
+    title: {},
+    manager: {}
 
   };
   var reqData = req.body.users;
@@ -198,12 +202,12 @@ app.post('/users', (req, res) => {
       return;
     }
     reqData.forEach(function (user) {
-      if(user.enabled && user.ServiceAccount){
+      if (user.enabled && user.ServiceAccount) {
         user_data.serviceAccounts++;
 
       }
-      if( !user.enabled || user.ServiceAccount)return;
-      if(user.department == null){
+      if (!user.enabled || user.ServiceAccount) return;
+      if (user.department == null) {
         return;
       }
       if (user_data.departments[user.department] == undefined) {
@@ -211,6 +215,17 @@ app.post('/users', (req, res) => {
       }
       user_data.departments[user.department]++;
       user_data.totalUsers++;
+      if (user_data.title[user.title] == undefined) {
+        user_data.title[user.title] = 0;
+      }
+      user_data.title[user.title]++;
+      if (user_data.manager[user.manager] == undefined) {
+        user_data.manager[user.manager] = 0;
+      }
+      if (user.manager == null) {
+        return;
+      }
+      user_data.manager[user.manager]++;
     });
     res.status(200).send("Success");
   } else {
