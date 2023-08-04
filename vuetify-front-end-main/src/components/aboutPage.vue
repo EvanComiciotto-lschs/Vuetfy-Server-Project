@@ -38,7 +38,7 @@ export default {
                 they are valid, the API will return a token that is stored in a cookie and passed to authentication API. If
                 the token is valid, the auth API allows the page to load.</td>
             <td class="description">Utilizes Vue3 and fetch APIs to retrieve the data from the set host. The data is then
-                displayed in a series of tables which can be filtered through the collapsable sidebar and searched as
+                displayed in a series of tables which can be filtered through the collapsible sidebar and searched as
                 desired.</td>
             <td class="description">The code is all compiled in Docker containers that are hosted and stored on a virtual
                 server in Azure to ensure the programs can run constantly and be accessed as needed.</td>
