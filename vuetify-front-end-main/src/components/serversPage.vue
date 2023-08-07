@@ -25,6 +25,7 @@
                     <tr v-for="server in filteredServers" :key="server.VMName">
                         <td>{{ server.VMName }}</td>
                         <td>
+                            {{ server.Status }}
                             <div class="running" v-if="server.Status === 'Running'"></div>
                             <div class="offline" v-else></div>
                         </td>
