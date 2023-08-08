@@ -1,15 +1,8 @@
 <template>
-    <notification />
-    <b class=heading>Users by Department</b>
-    <div class="chart-container">
-        <Doughnut id="my-chart-id" :options="chartOptions" :data="chartData" />
-    </div>
-
-    <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+    <Doughnut id="my-chart-id" :options="chartOptions" :data="chartData" />
 </template>
  
 <script lang="ts" setup>
-import notification from './notification.vue';
 import { ref, onMounted } from 'vue'
 import {
     Chart as ChartJS, ArcElement, Tooltip, Legend, ChartData, Title, BarElement, CategoryScale, LinearScale
@@ -77,15 +70,3 @@ onMounted(async () => {
 });
 </script>
  
- 
-<style scoped>
-.heading {
-    font-size: xx-large;
-}
-
-.chart-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-}
-</style>

@@ -15,7 +15,7 @@
                         <th class="dName" @click="sortDatabases('name')">Name {{ getSortingIcon('name') }}</th>
                         <th class="dSize" @click="sortDatabases('size')">Size in GB {{ getSortingIcon('size') }}</th>
                         <th class="dPath" @click="sortDatabases('paths')">Path {{ getSortingIcon('paths') }}</th>
-                        <th class="dCost" @click="sortDatabases('cost')">Cost of Database {{ getSortingIcon('cost') }}</th>
+                        <th class="dCost1" @click="sortDatabases('size')">Cost of Database {{ getSortingIcon('size') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,7 +32,7 @@
         </div>
     </div>
 </template>
-  
+
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import notification from './notification.vue';
@@ -82,6 +82,7 @@ const customSortDatabases = (a, b, property) => {
     if (property === 'paths') {
         return sortOrder === 'asc' ? valueA[0].localeCompare(valueB[0]) : valueB[0].localeCompare(valueA[0]);
     }
+    if(property === 'cost')
     return sortOrder === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
 };
 
@@ -127,7 +128,7 @@ const toggleSortingOrder = (column) => {
     sortingOrders[column] = sortingOrders[column] === 'asc' ? 'desc' : 'asc';
 };
 </script>
-  
+
 <style scoped>
 .running {
     width: 1rem;
@@ -224,6 +225,12 @@ input[type="text"] {
     transition: ease 0.5s;
 }
 
+.dCost1:hover {
+    background-color: #af2525;
+    scale: 105%;
+    transition: ease 0.5s;
+}
+
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
@@ -283,14 +290,6 @@ input[type="text"] {
     font-weight: bold;
     color: #009879;
 }
-
-.dCost:hover {
-    background-color: #af2525;
-    scale: 105%;
-    transition: ease 0.5s;
-    color: #ffffff;
-}
-
 
 h3 {
     margin: 40px 0 0;
