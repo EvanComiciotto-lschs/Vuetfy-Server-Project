@@ -25,8 +25,8 @@
                     <tr v-for="server in filteredServers" :key="server.VMName">
                         <td>{{ server.VMName }}</td>
                         <td>
-                            <div class="running" v-if="server.Status === 'Running'"></div>
-                            <div class="offline" v-else></div>
+                            <div class="running" v-if="server.Status === 'Running'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ server.Status }}</div>
+                            <div class="offline" v-else>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ server.Status }}</div>
                         </td>
                         <td>{{ server.IP }}</td>
                         <td>{{ dateToString(server.LastCheckInTime) }}</td>
@@ -145,8 +145,7 @@ const toggleSortingOrder = (column) => {
     border-radius: 0.5rem;
     background-color: lime;
     /*border: 1px solid black;*/
-    margin: auto;
-
+    margin: auto; 
 }
 
 .offline {

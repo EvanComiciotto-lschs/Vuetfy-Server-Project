@@ -15,6 +15,7 @@
                         <th class="dName" @click="sortDatabases('name')">Name {{ getSortingIcon('name') }}</th>
                         <th class="dSize" @click="sortDatabases('size')">Size in GB {{ getSortingIcon('size') }}</th>
                         <th class="dPath" @click="sortDatabases('paths')">Path {{ getSortingIcon('paths') }}</th>
+                        <th class="dCost" @click="sortDatabases('cost')">Cost of Database {{ getSortingIcon('cost') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,6 +25,7 @@
                         <td>
                             <span v-for="path in database.paths" :key="path">{{ path }}</span>
                         </td>
+                        <td class="dCost">{{ calculateCost(database.size) }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -42,6 +44,10 @@ var databases = ref(null);
 const ong = localStorage.getItem('brotha');
 const token = localStorage.getItem('jwt');
 const auth = localStorage.getItem('header');
+
+const calculateCost = (sizeInGB) => {
+    return (sizeInGB * 0.13).toFixed(2); // Multiply size by 0.13 and round to 2 decimal places
+};
 
 if (ong === 'lnzJe2rnW3fssC2aGuOhkBWmukFGezDlk9yZaLtE0kdC5PZXp20EwVLU9UWibIiSFgNJfvZi8DO7pTghhHHTHkWdbyCvngkmXiY5ZXbsjl0XxnPGlwkVkgVo7kCgbknRN991FMdjeY6SeSf6ImylDy0DXIyfkKYclpvmWrCr2aiYaT0w6pVZAvxj1IDHKnuSMmUOQ4jHdE5qMKpvfepe5o2VDYDixXGMAYGpvNc7TdKyUUK7y3n0qiJ2AE8IGD5RdYKd2W0cpuOHwAeBZ44j1E75joAXoGl8UCaMGzLiZtMgcVvDlbCmLKfZnJEDc5tVTj0waoqYxTzzbXwCSo8QZLH2Aevt2rj' && auth === 'Bearer ' + token) {
     console.log('hello');
@@ -70,7 +76,7 @@ const customSortDatabases = (a, b, property) => {
     const valueB = b[property];
     if (valueA === null) return 1;
     if (valueB === null) return -1;
-    if (property === 'size') {
+    if (property === 'size' || property === 'cost') { // Include 'cost' here
         return sortOrder === 'asc' ? valueA - valueB : valueB - valueA;
     }
     if (property === 'paths') {
@@ -89,7 +95,9 @@ const filteredDatabases = computed(() => {
         return databases.value;
     }
     const keywordTwo = databaseSearchKeyword.value.toLowerCase();
-    return databases.value.filter(database => (database.name + database.Path).toLowerCase().includes(keywordTwo));
+    return databases.value.filter(database => 
+        (database.name + database.paths.join('') + calculateCost(database.size)).toLowerCase().includes(keywordTwo)
+    );
 });
 
 const sortingOrders = {
@@ -102,6 +110,7 @@ const sortingOrders = {
     name: 'asc',
     size: 'asc',
     paths: 'asc',
+    cost: 'asc',
 };
 
 const getSortingIcon = (column) => {
@@ -273,6 +282,13 @@ input[type="text"] {
 .styled-table tbody tr.active-row {
     font-weight: bold;
     color: #009879;
+}
+
+.dCost:hover {
+    background-color: #af2525;
+    scale: 105%;
+    transition: ease 0.5s;
+    color: #ffffff;
 }
 
 
