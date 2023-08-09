@@ -232,11 +232,24 @@ app.post('/users', (req, res) => {
 
 });
 
-
-
 app.get('/users', (req, res) => {
   if (req.headers.auth == token) {
     res.status(200).json(user_data);
+  } else {
+    res.status(401).send("401 Unauthorized");
+  }
+});
+
+app.get('/price', function (req, res) {
+  if (req.headers.auth == token) {
+    const url = "https://prices.azure.com/api/retail/prices?$filter=productName eq 'Standard SSD Managed Disks' and location eq 'US East' and meterName eq 'E60 Disks'";
+    (async () => {
+      const response = await fetch(url)
+      const body = await response.json();
+      var pricePerGB = 0.0768;
+      pricePerGB = body.Items[0].retailPrice / 8000;
+      res.status(200).json(pricePerGB);
+    })();
   } else {
     res.status(401).send("401 Unauthorized");
   }
