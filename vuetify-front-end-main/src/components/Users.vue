@@ -3,6 +3,7 @@
   <b class=heading>Users by Department</b>
   <div class="chart-container">
     <doughnut />
+    <div class="divider"></div>
     <bar />
   </div>
 </template>
@@ -21,5 +22,9 @@ import bar from './bargraph.vue';
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
+}
+.divider {
+  height: 5rem;
+  width: 100%;
 }
 </style>
