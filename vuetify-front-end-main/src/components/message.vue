@@ -70,6 +70,9 @@ export default {
     <div>
         <p>{{ sendMsg }}</p>
     </div>
+    <div>
+        <input class="input" type="text" v-model="message" placeholder="Update Database GB Cost">
+    </div>
 </template>
 
 <style scoped>
@@ -82,6 +85,12 @@ input::placeholder {
 }
 .in {
     /* border-radius: 1px !important; */
+    padding: 2px 3px !important;
+    outline-offset: 0 !important;
+    outline: auto 2px !important;
+    margin: 1rem !important;
+}
+.input{
     padding: 2px 3px !important;
     outline-offset: 0 !important;
     outline: auto 2px !important;

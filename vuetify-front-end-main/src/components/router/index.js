@@ -10,7 +10,7 @@ import { createWebHistory, createRouter } from "vue-router";
     component: () => import('../party.vue'),
   },
   {
-     path: "/messages",
+     path: "/admin",
      component: () => import('../message.vue'),
   },
   {
