@@ -12,6 +12,7 @@ app.use(express.urlencoded({ limit: '25mb', extended: true }));
 //declare the main lists so they can be accesssed between functions
 let masterServerList = [];
 let masterDBList = [];
+let = masterSizesList = [];
 let token = "6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t";
 //const token = localStorage.getItem('jwt');
 //input function (post requests to /servers)
@@ -33,6 +34,18 @@ app.post('/servers', function (req, res) {
           curServer.HyperVisor = server.HyperVisor;
           curServer.Hostname = server.Hostname;
           curServer.Status = server.Status;
+          curServer.Size = server.Size;
+          masterSizesList.push(server.Size);
+          if(masterSizesList.some(existingServer => existingServer.Size === server.Size)){
+            const url = "https://prices.azure.com/api/retail/prices?$filter=productName eq 'Standard SSD Managed Disks' and location eq 'US East' and meterName eq 'E60 Disks'";
+            (async () => {
+              const response = await fetch(url)
+              const body = await response.json();
+              var pricePerGB = 0.0768;
+              pricePerGB = body.Items[0].retailPrice / 8000;
+              res.status(200).json(pricePerGB);
+            })();
+          }
         }
       } else {
         masterServerList.push(server);
@@ -41,6 +54,7 @@ app.post('/servers', function (req, res) {
   } else {
     res.status(401).send("401 Unauthorized");
   }
+  console.log(masterSizesList);
   console.log(masterServerList);
   console.log("the masterServerList has " + masterServerList.length + " servers.");
 });
@@ -242,12 +256,12 @@ app.get('/users', (req, res) => {
 
 app.get('/price', function (req, res) {
   if (req.headers.auth == token) {
-    const url = "https://prices.azure.com/api/retail/prices?$filter=productName eq 'Standard SSD Managed Disks' and location eq 'US East' and meterName eq 'E60 Disks'";
+    const url = "https://prices.azure.com/api/retail/prices?$filter=serviceFamily eq 'Compute' and location eq 'US East' and armSkuName eq 'Standard_B2s' and pricetype eq 'Consumption'";
     (async () => {
       const response = await fetch(url)
       const body = await response.json();
       var pricePerGB = 0.0768;
-      pricePerGB = body.Items[0].retailPrice / 8000;
+      pricePerGB = body.Items[1].retailPrice / 8000;
       res.status(200).json(pricePerGB);
     })();
   } else {
