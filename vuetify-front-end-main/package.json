@@ -10,6 +10,7 @@
     "@mdi/font": "7.0.96",
     "axios": "*",
     "buffer": "^6.0.3",
+    "chart.js": "^4.3.3",
     "fetch": "^1.1.0",
     "fs": "^0.0.1-security",
     "node-fetch": "^3.3.1",
