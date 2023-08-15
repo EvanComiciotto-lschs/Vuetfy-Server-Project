@@ -5,14 +5,18 @@
     <doughnut />
     <div class="divider"></div>
     <b class=heading>Users per Manager</b>
-    <bar />
+    <perManager />
+    <div class="divider"></div>
+    <b class=heading>Users per Job Title</b>
+    <jobTitles />
   </div>
 </template>
 
 <script setup>
 import notification from './notification.vue';
 import doughnut from './doughnut.vue';
-import bar from './bargraph.vue';
+import perManager from './perManager.vue';
+import jobTitles from './jobTitles.vue';
 </script>
 <style scoped>
 .heading {
