@@ -12,6 +12,9 @@ export default {
         redirectDatabases() {
             window.location.href = "/databases";
         },
+        redirectCldDatabases() {
+            window.location.href = "/clddatabases";
+        },
         redirectAbout() {
             window.location.href = "/about";
         },
@@ -35,6 +38,10 @@ export default {
                     });
                 } else if (route == '/databases') {
                     [...document.getElementsByClassName("database-icon")].forEach(element => {
+                        element.classList.add("active");
+                    });
+                } else if (route == '/clddatabases') {
+                    [...document.getElementsByClassName("cloud-database-icon")].forEach(element => {
                         element.classList.add("active");
                     });
                 } else if (route == '/users') {
@@ -84,7 +91,14 @@ export default {
             style="display: flex; flex-direction: row;">
             <i class="bi bi-database-fill database-icon"></i>
             <span v-if="!collapsed">
-                <p class="label-DONTBREAK">Databases</p>
+                <p class="label-DONTBREAK">Local DB</p>
+            </span>
+        </div>
+        <div class="item" :class="collapsed && 'item collapsed'" @click="redirectCldDatabases"
+            style="display: flex; flex-direction: row;">
+            <i class="bi bi-cloud cloud-database-icon"></i>
+            <span v-if="!collapsed">
+                <p class="label-DONTBREAK">Azure DB</p>
             </span>
         </div>
         <div class="item" :class="collapsed && 'item collapsed'" @click="redirectUsers"
@@ -159,6 +173,14 @@ export default {
 }
 
 .database-icon.active {
+    color: #ef3b32;
+}
+.cloud-database-icon {
+    font-size: 3rem;
+    color: #708490;
+}
+
+.cloud-database-icon.active {
     color: #ef3b32;
 }
 
