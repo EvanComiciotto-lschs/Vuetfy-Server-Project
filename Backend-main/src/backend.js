@@ -110,7 +110,7 @@ app.post('/databases', function (req, res) {
         console.log(matchDB.paths);
         // combine the sizes
         matchDB.size += db.size;
-        masterDBList.push({ cost: (Math.ceil((db.size*pricePerGB)*100)/100) });
+        //masterDBList.push({ cost: (Math.ceil((db.size*pricePerGB)*100)/100) });
       } else {
         // Pushes everything if does not exist
         masterDBList.push({
