@@ -91,7 +91,7 @@ export default {
             style="display: flex; flex-direction: row;">
             <i class="bi bi-database-fill database-icon"></i>
             <span v-if="!collapsed">
-                <p class="label-DONTBREAK">Local DB</p>
+                <p class="label-DONTBREAK">Internal DB</p>
             </span>
         </div>
         <div class="item" :class="collapsed && 'item collapsed'" @click="redirectCldDatabases"
