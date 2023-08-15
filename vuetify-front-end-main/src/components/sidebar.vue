@@ -91,14 +91,14 @@ export default {
             style="display: flex; flex-direction: row;">
             <i class="bi bi-database-fill database-icon"></i>
             <span v-if="!collapsed">
-                <p class="label-DONTBREAK">Local Databases</p>
+                <p class="label-DONTBREAK">Local DB</p>
             </span>
         </div>
         <div class="item" :class="collapsed && 'item collapsed'" @click="redirectCldDatabases"
             style="display: flex; flex-direction: row;">
             <i class="bi bi-cloud cloud-database-icon"></i>
             <span v-if="!collapsed">
-                <p class="label-DONTBREAK">Cloud Databases</p>
+                <p class="label-DONTBREAK">Azure DB</p>
             </span>
         </div>
         <div class="item" :class="collapsed && 'item collapsed'" @click="redirectUsers"
