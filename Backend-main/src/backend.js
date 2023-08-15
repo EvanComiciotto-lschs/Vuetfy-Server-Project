@@ -110,7 +110,7 @@ app.post('/databases', function (req, res) {
         console.log(matchDB.paths);
         // combine the sizes
         matchDB.size += db.size;
-        masterDBList.push({ cost: db.size * pricePerGB });
+        masterDBList.push({ cost: (Math.ceil((db.size*pricePerGB)*100)/100) });
       } else {
         // Pushes everything if does not exist
         masterDBList.push({
@@ -118,7 +118,7 @@ app.post('/databases', function (req, res) {
           name: db.name,
           paths: [db.path],
           size: db.size,
-          cost: db.size * pricePerGB
+          cost: (Math.ceil((db.size*pricePerGB)*100)/100)
         });
       }
     });
@@ -323,5 +323,12 @@ app.get('/internalDB', function (req, res) {
     res.status(401).send("401 Unauthorized");
   }
 });
+
+async function getAzDBPrice() {
+  const url = "https://prices.azure.com/api/retail/prices?$filter=productName eq 'Standard SSD Managed Disks' and location eq 'US East' and meterName eq 'E60 Disks'";
+  const response = await fetch(url)
+  const body = await response.json();
+  pricePerGB = body.Items[0].retailPrice / 8192;
+}
 
 app.listen(3000);
