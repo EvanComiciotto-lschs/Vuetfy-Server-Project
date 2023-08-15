@@ -4,6 +4,7 @@
   <div class="chart-container">
     <doughnut />
     <div class="divider"></div>
+    <b class=heading>Users per Manager</b>
     <bar />
   </div>
 </template>
