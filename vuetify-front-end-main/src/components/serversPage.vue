@@ -13,7 +13,7 @@
                     <tr>
                         <!-- Add click events and icons for sorting -->
                         <th class="vm" @click="sortServers('VMName')">VM Name {{ getSortingIcon('VMName') }}</th>
-                        <th class="stat" @click="sortServers('Status')">Status {{ getSortingIcon('Status') }}</th>
+                        <th class="stat status_row_cell" @click="sortServers('Status')">Status {{ getSortingIcon('Status') }}</th>
                         <th class="ip" @click="sortServers('IP')">IP {{ getSortingIcon('IP') }}</th>
                         <th class="time" @click="sortServers('LastCheckInTime')">Last Check-In Time {{
                             getSortingIcon('LastCheckInTime') }}</th>
@@ -25,9 +25,9 @@
                 <tbody>
                     <tr v-for="server in filteredServers" :key="server.VMName">
                         <td>{{ server.VMName }}</td>
-                        <td>
-                            <div class="running" v-if="server.Status === 'Running'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ server.Status }}</div>
-                            <div class="offline" v-else>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ server.Status }}</div>
+                        <td class="status_row_cell">
+                            <div class="status_row" v-if="server.Status === 'Running'"><div class="running"></div><div class="status_text">{{ server.Status }}</div></div>
+                            <div class="status_row" v-else><div class="offline"></div><div class="status_text">{{ server.Status }}</div></div>
                         </td>
                         <td>{{ server.IP }}</td>
                         <td>{{ dateToString(server.LastCheckInTime) }}</td>
@@ -144,8 +144,6 @@ const toggleSortingOrder = (column) => {
     height: 1rem;
     border-radius: 0.5rem;
     background-color: lime;
-    /*border: 1px solid black;*/
-    margin: auto; 
 }
 
 .offline {
@@ -153,8 +151,21 @@ const toggleSortingOrder = (column) => {
     height: 1rem;
     border-radius: 0.5rem;
     background-color: red;
-    /*border: 1px solid black;*/
-    margin: auto;
+}
+
+.status_row_cell {
+    min-width: 0 !important;
+}
+
+.status_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.status_text {
+    padding-left: 1rem;
 }
 
 #server-bar {
