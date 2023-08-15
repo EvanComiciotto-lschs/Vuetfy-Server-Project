@@ -15,7 +15,6 @@
                         <th class="dName" @click="sortDatabases('name')">Name {{ getSortingIcon('name') }}</th>
                         <th class="dSize" @click="sortDatabases('size')">Size in GB {{ getSortingIcon('size') }}</th>
                         <th class="dPath" @click="sortDatabases('paths')">Path {{ getSortingIcon('paths') }}</th>
-                        <th class="dCost1" @click="sortDatabases('size')">Cost of Database {{ getSortingIcon('size') }}</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -19,6 +19,7 @@
                             getSortingIcon('LastCheckInTime') }}</th>
                         <th class="hv" @click="sortServers('HyperVisor')">HyperVisor {{ getSortingIcon('HyperVisor') }}</th>
                         <th class="host" @click="sortServers('Hostname')">Hostname {{ getSortingIcon('Hostname') }}</th>
+                        <th class="Cost" @click="sortServers('cost')">Cost {{ getSortingIcon('cost') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,7 @@
                         <td>{{ dateToString(server.LastCheckInTime) }}</td>
                         <td>{{ server.HyperVisor }}</td>
                         <td>{{ server.Hostname }}</td>
+                        <td>{{ server.Cost }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -118,9 +120,7 @@ const sortingOrders = {
     LastCheckInTime: 'asc',
     HyperVisor: 'asc',
     Hostname: 'asc',
-    name: 'asc',
-    size: 'asc',
-    paths: 'asc',
+    cost: 'asc',
 };
 
 const getSortingIcon = (column) => {
@@ -210,6 +210,12 @@ input[type="text"] {
 }
 
 .host:hover {
+    background-color: #af2525;
+    scale: 105%;
+    transition: ease 0.5s;
+}
+
+.Cost:hover {
     background-color: #af2525;
     scale: 105%;
     transition: ease 0.5s;
