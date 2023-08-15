@@ -12,7 +12,7 @@ app.use(express.urlencoded({ limit: '25mb', extended: true }));
 //declare the main lists so they can be accesssed between functions
 let masterServerList = [];
 let masterDBList = [];
-let = masterSizesList = [];
+let internalDBList = [];
 let token = "6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t";
 //const token = localStorage.getItem('jwt');
 //input function (post requests to /servers)
@@ -34,18 +34,6 @@ app.post('/servers', function (req, res) {
           curServer.HyperVisor = server.HyperVisor;
           curServer.Hostname = server.Hostname;
           curServer.Status = server.Status;
-          curServer.Size = server.Size;
-          masterSizesList.push(server.Size);
-          if(masterSizesList.some(existingServer => existingServer.Size === server.Size)){
-            const url = "https://prices.azure.com/api/retail/prices?$filter=productName eq 'Standard SSD Managed Disks' and location eq 'US East' and meterName eq 'E60 Disks'";
-            (async () => {
-              const response = await fetch(url)
-              const body = await response.json();
-              var pricePerGB = 0.0768;
-              pricePerGB = body.Items[0].retailPrice / 8000;
-              res.status(200).json(pricePerGB);
-            })();
-          }
         }
       } else {
         masterServerList.push(server);
@@ -54,7 +42,6 @@ app.post('/servers', function (req, res) {
   } else {
     res.status(401).send("401 Unauthorized");
   }
-  console.log(masterSizesList);
   console.log(masterServerList);
   console.log("the masterServerList has " + masterServerList.length + " servers.");
 });
@@ -144,7 +131,7 @@ function deleteServers(array) {
   var curTime = new Date();
   var referenceTime = new Date();
 
-  referenceTime.setHours(curTime.getHours()-28);
+  referenceTime.setHours(curTime.getHours() - 28);
   referenceTime = referenceTime.toISOString().split('.')[0];
   console.log('Reference time: ' + referenceTime);
   var toDelete = [];
@@ -246,6 +233,8 @@ app.post('/users', (req, res) => {
 
 });
 
+
+
 app.get('/users', (req, res) => {
   if (req.headers.auth == token) {
     res.status(200).json(user_data);
@@ -254,16 +243,40 @@ app.get('/users', (req, res) => {
   }
 });
 
-app.get('/price', function (req, res) {
+app.post('/internalDB', function (req, res) {
+  var reqData = (req.body); // store the request body
   if (req.headers.auth == token) {
-    const url = "https://prices.azure.com/api/retail/prices?$filter=serviceFamily eq 'Compute' and location eq 'US East' and armSkuName eq 'Standard_B2s' and pricetype eq 'Consumption'";
-    (async () => {
-      const response = await fetch(url)
-      const body = await response.json();
-      var pricePerGB = 0.0768;
-      pricePerGB = body.Items[1].retailPrice / 8000;
-      res.status(200).json(pricePerGB);
-    })();
+    res.send("data received");
+    internalDBListt = [];
+    reqData.forEach(function (db) {
+      // check if the database is already in the list
+      if (internalDBList.some(existingDB => existingDB.database_id === db.database_id)) {
+        // find the matching database in masterDBList
+        var matchDB = internalDBList.find(existingDB => existingDB.database_id === db.database_id);
+        console.log(db.name + " is already in the internalDBList");
+        matchDB.paths.push(db.path);
+        console.log(matchDB.paths);
+        // combine the sizes
+        matchDB.size += db.size;
+      } else {
+        // Pushes everything if does not exist
+        internalDBList.push({
+          database_id: db.database_id,
+          name: db.name,
+          paths: [db.path],
+          size: db.size
+        });
+      }
+    });
+  } else {
+    res.status(401).send("401 Unauthorized");
+  }
+  console.log(internalDBList.length);
+});
+
+app.get('/internalDB', function (req, res) {
+  if (req.headers.auth == token) {
+    res.json(internalDBList);
   } else {
     res.status(401).send("401 Unauthorized");
   }
