@@ -289,7 +289,7 @@ app.get('/users', (req, res) => {
 app.post('/internalDB', function (req, res) {
   var reqData = (req.body); // store the request body
   if (req.headers.auth == token) {
-    res.send("data received");
+    res.status(200).send("Success");
     internalDBListt = [];
     reqData.forEach(function (db) {
       // check if the database is already in the list
