@@ -4,6 +4,7 @@ var express = require('express');
 var cors = require('cors');
 var jwt = require('jsonwebtoken');
 const { json } = require('body-parser');
+const { reverse } = require('dns');
 var app = express();
 app.use(cors());
 //app.use(express.json());
@@ -12,14 +13,19 @@ app.use(express.urlencoded({ limit: '25mb', extended: true }));
 //declare the main lists so they can be accesssed between functions
 let masterServerList = [];
 let masterDBList = [];
+let masterSizesList = {};
 let internalDBList = [];
 let token = "6rqfduihfwsesuhgfweiouyw3rtfs897byw4tgoiuwy4sro9uw34t0u94t";
+let pricePerGB = 0.075;
+getAzDBPrice();
 //const token = localStorage.getItem('jwt');
 //input function (post requests to /servers)
 app.post('/servers', function (req, res) {
   var reqData = (req.body);   //store the request body
   if (req.headers.auth == token) {
-    res.send("data received");
+    let sizesList = [];
+    res.status(200).send("Success");
+    var cost = 0;
     reqData.Servers.forEach(function (server) {
       //check if the VM is already in the list
       if (masterServerList.some(existingServer => existingServer.VMName === server.VMName)) {
@@ -34,16 +40,50 @@ app.post('/servers', function (req, res) {
           curServer.HyperVisor = server.HyperVisor;
           curServer.Hostname = server.Hostname;
           curServer.Status = server.Status;
+          curServer.Size = server.Size;
+          curServer.Cost = null;
         }
       } else {
         masterServerList.push(server);
       }
+      if (!sizesList.includes(server.Size))
+        sizesList.push(server.Size);
+    });
+    sizesList.forEach(function (size) {
+      JSON.stringify(size);
+      const url = "https://prices.azure.com/api/retail/prices?$filter=serviceFamily eq 'Compute' and location eq 'US East' and armSkuName eq '" + size + "' and pricetype eq 'Consumption'";
+      fetch(url)
+        .then(response => {
+          // Check if the response status is OK (200)
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          // Parse the response JSON
+          return response.json();
+        })
+        .then(data => {
+          // Handle the data
+          let body = data;
+          let correctItem = body.Items.filter(i => !i.meterName.toLowerCase().includes("spot") && !i.meterName.toLowerCase().includes("low") && i.productName.toLowerCase().includes("windows"))[0];
+          var serverPriceHourly = correctItem.retailPrice;
+          var cost = serverPriceHourly * 24 * 30;
+          masterSizesList[size] = Math.ceil(cost * 100) / 100;
+        })
+        .then(() => {
+          for (let i = 0; i < masterServerList.length; i++) {
+            masterServerList[i]["Cost"] = masterSizesList[masterServerList[i].Size]
+          }
+        })
+        .catch(error => {
+          // Handle errors
+          console.error('Fetch error:', error);
+        });
     });
   } else {
     res.status(401).send("401 Unauthorized");
   }
-  console.log(masterServerList);
-  console.log("the masterServerList has " + masterServerList.length + " servers.");
+  //console.log(masterServerList);
+  //console.log("the masterServerList has " + masterServerList.length + " servers.");
 });
 
 //output function (get requests to /servers)
@@ -59,7 +99,6 @@ app.get('/servers', (req, res) => {
 app.post('/databases', function (req, res) {
   var reqData = (req.body); // store the request body
   if (req.headers.auth == token) {
-    res.send("data received");
     masterDBList = [];
     reqData.forEach(function (db) {
       // check if the database is already in the list
@@ -71,16 +110,19 @@ app.post('/databases', function (req, res) {
         console.log(matchDB.paths);
         // combine the sizes
         matchDB.size += db.size;
+        masterDBList.push({ cost: db.size * pricePerGB });
       } else {
         // Pushes everything if does not exist
         masterDBList.push({
           database_id: db.database_id,
           name: db.name,
           paths: [db.path],
-          size: db.size
+          size: db.size,
+          cost: db.size * pricePerGB
         });
       }
     });
+    res.status(200).send("Success");
   } else {
     res.status(401).send("401 Unauthorized");
   }
