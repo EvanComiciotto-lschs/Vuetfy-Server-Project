@@ -12,6 +12,9 @@ export default {
         redirectDatabases() {
             window.location.href = "/databases";
         },
+        redirectCldDatabases() {
+            window.location.href = "/clddatabases";
+        },
         redirectAbout() {
             window.location.href = "/about";
         },
@@ -84,7 +87,14 @@ export default {
             style="display: flex; flex-direction: row;">
             <i class="bi bi-database-fill database-icon"></i>
             <span v-if="!collapsed">
-                <p class="label-DONTBREAK">Databases</p>
+                <p class="label-DONTBREAK">Local Databases</p>
+            </span>
+        </div>
+        <div class="item" :class="collapsed && 'item collapsed'" @click="redirectCldDatabases"
+            style="display: flex; flex-direction: row;">
+            <i class="bi bi-cloud database-icon"></i>
+            <span v-if="!collapsed">
+                <p class="label-DONTBREAK">Cloud Databases</p>
             </span>
         </div>
         <div class="item" :class="collapsed && 'item collapsed'" @click="redirectUsers"

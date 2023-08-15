@@ -26,6 +26,10 @@ import { createWebHistory, createRouter } from "vue-router";
     component: () => import('../databasesPage.vue'),
   },
   {
+    path: "/clddatabases",
+    component: () => import('../cloudDB.vue'),
+  },
+  {
     path: "/about",
     component: () => import('../aboutPage.vue'),
   },
