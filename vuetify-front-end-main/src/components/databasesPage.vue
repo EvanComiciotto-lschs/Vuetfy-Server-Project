@@ -24,7 +24,7 @@
                         <td>
                             <span v-for="path in database.paths" :key="path">{{ path }}</span>
                         </td>
-                        <td class="dCost">{{ calculateCost(database.size) }}</td>
+                        <!--<td class="dCost">{{ calculateCost(database.size) }}</td>-->
                     </tr>
                 </tbody>
             </table>
