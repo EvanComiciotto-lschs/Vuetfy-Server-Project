@@ -40,6 +40,10 @@ export default {
                     [...document.getElementsByClassName("database-icon")].forEach(element => {
                         element.classList.add("active");
                     });
+                } else if (route == '/clddatabases') {
+                    [...document.getElementsByClassName("cloud-database-icon")].forEach(element => {
+                        element.classList.add("active");
+                    });
                 } else if (route == '/users') {
                     [...document.getElementsByClassName("user-icon")].forEach(element => {
                         element.classList.add("active");
@@ -92,7 +96,7 @@ export default {
         </div>
         <div class="item" :class="collapsed && 'item collapsed'" @click="redirectCldDatabases"
             style="display: flex; flex-direction: row;">
-            <i class="bi bi-cloud database-icon"></i>
+            <i class="bi bi-cloud cloud-database-icon"></i>
             <span v-if="!collapsed">
                 <p class="label-DONTBREAK">Cloud Databases</p>
             </span>
@@ -169,6 +173,14 @@ export default {
 }
 
 .database-icon.active {
+    color: #ef3b32;
+}
+.cloud-database-icon {
+    font-size: 3rem;
+    color: #708490;
+}
+
+.cloud-database-icon.active {
     color: #ef3b32;
 }
 
