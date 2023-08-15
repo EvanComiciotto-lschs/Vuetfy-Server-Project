@@ -2,7 +2,7 @@
     <div class="card text-center m-3">
         <div class="card-body">
             <notification />
-            <h1 class="header">Databases</h1>
+            <h1 class="header">Internal Databases</h1>
             <div id="database-bar">
                 <input type="text" v-model="databaseSearchKeyword" placeholder="Search Databases" />
             </div>
