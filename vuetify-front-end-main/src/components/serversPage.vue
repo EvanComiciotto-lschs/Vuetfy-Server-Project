@@ -33,7 +33,7 @@
                         <td>{{ dateToString(server.LastCheckInTime) }}</td>
                         <td>{{ server.HyperVisor }}</td>
                         <td>{{ server.Hostname }}</td>
-                        <td>{{ server.Cost }}</td>
+                        <td>{{ calculateCost(server.cost) }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -52,6 +52,10 @@ var servers = ref(null);
 const ong = localStorage.getItem('brotha');
 const token = localStorage.getItem('jwt');
 const auth = localStorage.getItem('header');
+
+const calculateCost = (sizeInGB) => {
+    return (sizeInGB * 0.13).toFixed(2); // Multiply size by 0.13 and round to 2 decimal places
+};
 
 function dateToString(old_date) {
     let date = new Date(old_date);
