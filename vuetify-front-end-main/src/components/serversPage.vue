@@ -33,7 +33,7 @@
                         <td>{{ dateToString(server.LastCheckInTime) }}</td>
                         <td>{{ server.HyperVisor }}</td>
                         <td>{{ server.Hostname }}</td>
-                        <td>{{ calculateCost(server.cost) }}</td>
+                        <td>{{ server.Cost }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -52,10 +52,6 @@ var servers = ref(null);
 const ong = localStorage.getItem('brotha');
 const token = localStorage.getItem('jwt');
 const auth = localStorage.getItem('header');
-
-const calculateCost = (sizeInGB) => {
-    return (sizeInGB * 0.13).toFixed(2); // Multiply size by 0.13 and round to 2 decimal places
-};
 
 function dateToString(old_date) {
     let date = new Date(old_date);
@@ -97,7 +93,7 @@ const customSortServers = (a, b, property) => {
             if (ipPartsA[i] > ipPartsB[i]) return sortOrder === 'asc' ? 1 : -1;
         }
         return 0;
-    }
+    } 
     return sortOrder === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
 };
 
@@ -124,6 +120,7 @@ const sortingOrders = {
     LastCheckInTime: 'asc',
     HyperVisor: 'asc',
     Hostname: 'asc',
+    size: 'asc',
     cost: 'asc',
 };
 
