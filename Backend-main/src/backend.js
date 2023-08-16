@@ -41,7 +41,7 @@ app.post('/servers', function (req, res) {
           curServer.Hostname = server.Hostname;
           curServer.Status = server.Status;
           curServer.Size = server.Size;
-          curServer.Cost = null;
+          curServer.Cost = 0;
         }
       } else {
         masterServerList.push(server);
