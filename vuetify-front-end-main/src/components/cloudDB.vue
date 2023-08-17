@@ -22,7 +22,7 @@
                     <tr v-for="database in filteredDatabases" :key="database.name">
                         <td>{{ database.name }}</td>
                         <td>{{ (database.size==0 ? "<1" : database.size) }}</td>
-                        <td>
+                        <td class="pathWrap">
                             <span v-for="path in database.paths" :key="path">{{ path }}</span>
                         </td>
                         <td class="dCost">{{ calculateCost(database.size) }}</td>
@@ -170,6 +170,10 @@ input[type="text"] {
     margin-left: auto;
     margin-right: auto;
 }
+.pathWrap {
+    display: flex;
+    flex-direction: column;
+}  
 
 .vm:hover {
     background-color: #af2525;
