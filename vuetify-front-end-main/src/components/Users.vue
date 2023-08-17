@@ -1,9 +1,9 @@
 <template>
   <notification />
   <h2 class=heading>Total Accounts</h2>
-  <div class="userNumbers"  :key="uns">
-      <p><span class ="b">Total Users: </span>{{ data.totalUsers }}</p>
-      <p><span class ="b">Service Accounts: </span>{{ data.serviceAccounts }}</p>
+  <div class="userNumbers" :key="uns">
+    <p><span class="b">Total Users: </span>{{ data.totalUsers }}</p>
+    <p><span class="b">Service Accounts: </span>{{ data.serviceAccounts }}</p>
   </div>
   <div class="divider2"></div>
   <h2 class=heading>Users by Department</h2>
@@ -40,10 +40,10 @@ const upm = ref(0);
 const upjt = ref(0);
 
 const forceRerender = () => {
-    uns.value += 1;
-    dnt.value += 1;
-    upm.value += 1;
-    upjt.value += 1;
+  uns.value += 1;
+  dnt.value += 1;
+  upm.value += 1;
+  upjt.value += 1;
 };
 
 type UsersResponse = {
@@ -106,6 +106,10 @@ onMounted(async () => {
   width: 45%;
 }
 
+.b {
+  font-weight: bold;
+}
+
 .divider {
   height: 5rem;
   width: 100%;
@@ -130,4 +134,5 @@ onMounted(async () => {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-}</style>
+}
+</style>
