@@ -290,7 +290,7 @@ app.post('/internalDB', function (req, res) {
   var reqData = (req.body); // store the request body
   if (req.headers.auth == token) {
     res.status(200).send("Success");
-    internalDBListt = [];
+    internalDBList = [];
     reqData.forEach(function (db) {
       // check if the database is already in the list
       if (internalDBList.some(existingDB => existingDB.database_id === db.database_id)) {
