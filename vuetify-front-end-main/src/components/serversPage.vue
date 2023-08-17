@@ -19,7 +19,7 @@
                             getSortingIcon('LastCheckInTime') }}</th>
                         <th class="hv" @click="sortServers('HyperVisor')">HyperVisor {{ getSortingIcon('HyperVisor') }}</th>
                         <th class="host" @click="sortServers('Hostname')">Hostname {{ getSortingIcon('Hostname') }}</th>
-                        <th class="Cost" @click="sortServers('cost')">Cost {{ getSortingIcon('cost') }}</th>
+                        <th class="Cost" @click="sortServers('Cost')">Cost {{ getSortingIcon('Cost') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -93,9 +93,17 @@ const customSortServers = (a, b, property) => {
             if (ipPartsA[i] > ipPartsB[i]) return sortOrder === 'asc' ? 1 : -1;
         }
         return 0;
-    } 
-    return sortOrder === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+    }
+
+    // Check if valueA and valueB are strings before using localeCompare
+    if (typeof valueA === 'string' && typeof valueB === 'string') {
+        return sortOrder === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+    } else {
+        // Fallback comparison using default order if localeCompare is not available
+        return sortOrder === 'asc' ? valueA - valueB : valueB - valueA;
+    }
 };
+
 
 const sortServers = (property) => {
     toggleSortingOrder(property); // Toggle the sorting order first
@@ -121,7 +129,7 @@ const sortingOrders = {
     HyperVisor: 'asc',
     Hostname: 'asc',
     size: 'asc',
-    cost: 'asc',
+    Cost: 'asc',
 };
 
 const getSortingIcon = (column) => {
